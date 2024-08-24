@@ -1,68 +1,39 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@layer base {
+    * {
+        @apply m-0 p-0 box-border;
+    }
+    body {
+        @apply font-publicSans;
+    }
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    h1,
+    h2 {
+        @apply text-darkBlue;
+    }
+    section {
+        @apply sm:px-6 lg:px-10;
+    }
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+@layer components {
+    .navLink {
+        @apply relative cursor-pointer h-full flex items-center hover:text-darkBlue before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-0 before:bg-gradient-to-r before:from-green before:to-cyan hover:before:h-1 before:transition-all before:duration-200;
+    }
+    .gradientButton {
+        @apply bg-gradient-to-r from-green to-cyan rounded-full;
+    }
+    .opacityHover {
+        @apply hover:opacity-60 transition-opacity duration-300;
+    }
+    .backgroundImage {
+        @apply bg-introMobile md:bg-introDesktop bg-no-repeat bg-cover md:bg-[length:700px] lg:bg-[length:880px] bg-[center_top_-15rem] sm:bg-[center_top_-17rem] min-[700px]:bg-[center_top_-19rem] min-[730px]:bg-[center_top_-21rem] md:bg-[right_-12rem_top] lg:bg-[right_-12rem_top_-9rem];
+    }
+    .gradientText:hover {
+        @apply bg-green bg-gradient-to-r from-green to-cyan bg-clip-text text-transparent bg-cover transition-colors cursor-pointer;
+    }
 }
