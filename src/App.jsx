@@ -1,5 +1,4 @@
 import { createTheme, MantineProvider } from "@mantine/core";
-import Navbar from "./component/navabar/Navbar";
 import { Route, Routes } from "react-router-dom";
 import WebLayout from "./component/layout/webLayout";
 import { BrowserRouter } from "react-router-dom";

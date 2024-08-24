@@ -1,9 +1,10 @@
-import { AppShell, Burger, Group, Stack, UnstyledButton } from "@mantine/core";
+import { AppShell, Stack,  } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Navbar from "../navabar/Navbar";
 import { Outlet } from "react-router-dom";
 
 function WebLayout() {
+  // eslint-disable-next-line no-unused-vars
   const [opened, { toggle }] = useDisclosure();
 
   return (
