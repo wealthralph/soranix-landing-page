@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Container, Group, Burger, Button, Paper, Transition } from "@mantine/core";
 import { useDisclosure, useClickOutside } from "@mantine/hooks";
-import companyLogo from "../assets/images/logo.svg";
+import companyLogo from "../../public/logo.svg";
 const Header = () => {
     const [opened, { toggle, close }] = useDisclosure(false);
     const clickOutsideRef = useClickOutside(() => close());
@@ -17,14 +17,14 @@ const Header = () => {
     return (
         <header className="sticky top-0 z-40 flex w-full items-center justify-between bg-gray-700 px-10 py-7 shadow-md" ref={clickOutsideRef}>
             <Container className="flex justify-between items-center m-0 px-10 h-full w-full max-w-none">
-                <img src={companyLogo} alt="company logo" />
+                <img src={companyLogo} alt="company logo" className="w-28 h-28" />
                 <Group className="hidden sm:block h-full">
                     <ul className="flex justify-center items-center h-full gap-x-3 md:gap-x-5 lg:gap-x-10 text-gray-100 font-medium">
                         <li className="navLink">Home</li>
                         <li className="navLink">About</li>
+                        <li className="navLink">Features/Performance</li>
                         <li className="navLink">Contact</li>
-                        <li className="navLink">Blog</li>
-                        <li className="navLink">Careers</li>
+                        <li className="navLink">Latest</li>
                     </ul>
                 </Group>
 
@@ -59,19 +59,19 @@ const Header = () => {
                                     className="cursor-pointer flex items-center justify-center w-full h-10"
                                     onClick={close}
                                 >
+                                    Features/Performance
+                                </li>
+                                <li
+                                    className="cursor-pointer flex items-center justify-center w-full h-10"
+                                    onClick={close}
+                                >
                                     Contact
                                 </li>
                                 <li
                                     className="cursor-pointer flex items-center justify-center w-full h-10"
                                     onClick={close}
                                 >
-                                    Blog
-                                </li>
-                                <li
-                                    className="cursor-pointer flex items-center justify-center w-full h-10"
-                                    onClick={close}
-                                >
-                                    Careers
+                                    Latest
                                 </li>
                             </ul>
                         </Paper>

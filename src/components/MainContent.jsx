@@ -145,7 +145,7 @@ const MainContent = () => {
                         Next generation digital banking
                     </h1>
                     <p className="text-gray-400 my-10 md:max-w-[390px] lg:max-w-none px-2 md:px-0">
-                        Take your financial life online. Your Easybank account will be a
+                        Take your financial life online. Your Sonarix account will be a
                         one-stop-shop for spending, saving, budgeting, investing, and much more.
                     </p>
                     <Button className="gradientButton opacityHover rounded-md  pl-6 pr-6 pt-2 pb-2 marker:selection:">Request Invite</Button>
@@ -153,7 +153,7 @@ const MainContent = () => {
             </section>
             <section className="flex flex-col justify-evenly items-center min-h-[700px]">
                 <article className="w-full mt-12 text-center xl:text-left">
-                    <h2 className="text-3xl lg:text-4xl mb-5">Why Choose Easybank?</h2>
+                    <h2 className="text-3xl lg:text-4xl mb-5">Why Choose Sonarix?</h2>
                     <p className="mb-10 max-w-[600px] mx-auto xl:mx-0 text-grayBlue">
                         We leverage Open Banking to turn your bank account into your financial hub.
                         Control your finances like never before

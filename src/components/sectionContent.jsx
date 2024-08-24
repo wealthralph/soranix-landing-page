@@ -38,7 +38,7 @@ export const articles = [
     {
         img: article1,
         author: "Claire Robinson",
-        title: "Recieve money un any currency with no fees",
+        title: "Recieve money in any currency with no fees",
         content:
             "The world is getting smaller and we're becoming more mobile. So why should you be forced to only recieve money in a single ...",
     },
@@ -47,12 +47,12 @@ export const articles = [
         author: "Wilson Hutton",
         title: "Treat yourself without worrying about money",
         content:
-            "Our simple budgeting feature allows yotu to seperate out your spending and set realistic limits each month. That means you ...",
+            "Our simple budgeting feature allows you to seperate out your spending and set realistic limits each month. That means you ...",
     },
     {
         img: article3,
         author: "Wilson Hutton",
-        title: "Take your Easybank card wherever you go",
+        title: "Take your Sonarix card wherever you go",
         content:
             "We want you to enjoy your travels. This is why we don't charge any fees on purchases while you're abroad. We'll even show you ...",
     },
