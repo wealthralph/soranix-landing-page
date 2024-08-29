@@ -1,0 +1,70 @@
+.networth_box_blur {
+  max-width: 800px;
+  width: 100%;
+  /* height: 300px; */
+  border: thin solid var(--mantine-color-default-border);
+  margin-inline: auto;
+  border-radius: var(--mantine-radius-md);
+  background-color: rgba(40, 40, 40, 0.02);
+  backdrop-filter: blur(15px);
+  box-shadow: var(--mantine-shadow-md);
+  position: relative;
+}
+
+.networth_box_blur:hover {
+  background: hsla(0, 0%, 100%, 0.01);
+
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  white-space: nowrap;
+  align-items: center;
+  gap: var(--mantine-spacing-xl);
+}
+
+.behind_text {
+  font-size: 50px;
+  font-weight: bold;
+
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    z-index: 5;
+    right: 0;
+    padding: var(--mantine-spacing-md);
+}
+
+.networth_content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: inherit;
+  padding: var(--mantine-spacing-md);
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-md);
+}
+
+/* .networth_content h1 {
+    font-size: 40px;
+    line-height: 1px;
+} */
+
+.networth_content::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-radius: inherit;
+  height: 100%;
+  /* background-color: rgba(170, 170, 170, 0.027); */
+  backdrop-filter: blur(30px);
+  box-shadow: var(--mantine-shadow-sm);
+  inset: 0;
+  z-index: 2;
+}

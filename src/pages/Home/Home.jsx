@@ -1,14 +1,19 @@
 import { Carousel } from "@mantine/carousel";
 import {
+  ActionIcon,
   Badge,
   Box,
   Button,
+  ColorSwatch,
   Container,
   Divider,
   em,
   Flex,
   Grid,
+  Group,
+  NumberFormatter,
   Paper,
+  Progress,
   SimpleGrid,
   Space,
   Stack,
@@ -18,13 +23,141 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
 import { useRef } from "react";
+import styles from "./Home.module.css";
+import {
+  IconPlus,
+  IconSettings,
+  IconSettingsAutomation,
+} from "@tabler/icons-react";
 
 const Section4 = () => {
-  return <Box>Virtual card</Box>;
+  const netWorthData = [
+    {
+      id: 1,
+      value: 25900,
+      label: "Deposit",
+      color: "orange",
+      striped: true,
+    },
+    {
+      id: 2,
+      value: 30000,
+      label: "Savings",
+      color: "indigo",
+      striped: false,
+    },
+    {
+      id: 3,
+      value: 5900,
+      label: "Debts",
+      color: "violet",
+      striped: false,
+    },
+    {
+      id: 4,
+      value: 59000,
+      label: "Investment",
+      color: "pink",
+      striped: false,
+    },
+  ];
+
+  const segments = netWorthData.map((segment) => {
+    return (
+      <Progress.Section
+        striped={segment.striped}
+        key={segment.id}
+        value={segment.value / 100}
+        label={segment.label}
+        color={segment.color}
+      />
+    );
+  });
+
+  const swatches = netWorthData.map((swatch) => {
+    return (
+      <Group key={swatch.id} gap={"3px"}>
+        <ColorSwatch size={15} color={swatch.color} />
+        <Text fz={"sm"} fw={"normal"}>
+          {swatch.label}
+        </Text>
+        <Text c={"dimmed"} fw={"lighter"}>
+          <NumberFormatter prefix="$" value={swatch.value} thousandSeparator />
+        </Text>
+      </Group>
+    );
+  });
+
+  return (
+    <Container my={200} size={"lg"}>
+      <div className={styles.cont}>
+        <Title fz={50} ta={"center"}>
+          Your networth <br /> visualized in real-time
+        </Title>
+        <div className={styles.networth_box_blur}>
+          <div className={styles.controls}>
+            <Group gap={"xs"}>
+              <ActionIcon variant="transparent" color="dark" size={"sm"}>
+                <IconPlus />
+              </ActionIcon>
+              <ActionIcon variant="transparent" color="dark" size={"sm"}>
+                <IconSettingsAutomation />
+              </ActionIcon>
+            </Group>
+          </div>
+          <div className={styles.networth_content}>
+            <Space h={30}/>
+            <Group justify="space-between" >
+              <Box>
+                <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
+                  Networth
+                </Text>
+                <Title order={1}>
+                  <NumberFormatter prefix="$" value={5000} thousandSeparator />
+                </Title>
+              </Box>
+              <Box>
+                <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
+                  Diff
+                </Text>
+                <Title c={"red.8"} order={1}>
+                  <NumberFormatter suffix="%" value={10} thousandSeparator />
+                </Title>
+              </Box>
+              <Box>
+                <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
+                  Target
+                </Text>
+                <Title order={1}>
+                  <NumberFormatter prefix="$" value={10000} thousandSeparator />
+                </Title>
+              </Box>
+            </Group>
+            <Stack>
+              <Progress.Root
+                size={35}
+                transitionDuration={500}
+                styles={{
+                  root: {
+                    // display: "flex",
+                    // alignItems: "center",
+                    gap: "3px",
+                    backgroundColor: "transparent",
+                  },
+                }}
+              >
+                {segments}
+              </Progress.Root>
+              <Group>{swatches}</Group>
+            </Stack>
+          </div>
+        </div>
+      </div>
+    </Container>
+  );
 };
 
 const Section3 = () => {
-
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
   return (
@@ -119,9 +252,9 @@ const Section3 = () => {
                       Real-time, actionable data analytics.
                     </Title>
                     <Text c={"dimmed"}>
-                      Stay one step ahead with our real-time analytics, that brings
-                      all the data across your account to life, revealing trends
-                      and patterns that allow you to make swift, informed
+                      Stay one step ahead with our real-time analytics, that
+                      brings all the data across your account to life, revealing
+                      trends and patterns that allow you to make swift, informed
                       decisions about your finances.
                     </Text>
                   </Box>
@@ -224,6 +357,8 @@ const Home = () => {
       <HeroSection />
       <Section2 />
       <Section3 />
+      <Section4 />
+
       <Space h={300} />
     </Container>
   );
