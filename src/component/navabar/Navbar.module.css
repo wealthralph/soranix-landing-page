@@ -1,8 +1,59 @@
+:root {
+  --navbar-height: 90px;
+}
+
+.navbar_root {
+  height: var(--navbar-height);
+  /* background-color: blue; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar_blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  height: calc(var(--navbar-height) - 10px);
+  position: fixed;
+  /* z-index: 1000; */
+  inset: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.151),
+    transparent
+  );
+}
+
+.navbar {
+  max-width: 1100px;
+  width: 100%;
+  margin: auto;
+  position: fixed;
+  /* padding-inline: var(--mantine-spacing-md); */
+z-index: 1000;
+  inset: 0px;
+  /* margin-bottom: var(--mantine-spacing-xl); */
+  margin-top: var(--mantine-spacing-xl);
+}
+
 .header {
+  padding: var(--mantine-spacing-xs);
+  border: thin solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-md);
+  position: relative;
+}
+
+.header::before {
+  width: 100%;
+  content: "";
   height: 100%;
-  padding-left: var(--mantine-spacing-md);
-  padding-right: var(--mantine-spacing-md);
-  border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+  position: absolute;
+  background-color: rgba(25, 26, 26, 0.205);
+  border-radius: inherit;
+  inset: 0;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  z-index: -1;
 }
 
 .link {
@@ -22,7 +73,10 @@
   }
 
   @mixin hover {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-6));
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-7)
+    );
   }
 }
 
@@ -32,15 +86,22 @@
   border-radius: var(--mantine-radius-md);
 
   @mixin hover {
-    background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+    background-color: light-dark(
+      var(--mantine-color-gray-0),
+      var(--mantine-color-dark-7)
+    );
   }
 }
 
 .dropdownFooter {
-  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-dark-7)
+  );
   margin: calc(var(--mantine-spacing-md) * -1);
   margin-top: var(--mantine-spacing-sm);
   padding: var(--mantine-spacing-md) calc(var(--mantine-spacing-md) * 2);
   padding-bottom: var(--mantine-spacing-xl);
-  border-top: rem(1px) solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+  border-top: rem(1px) solid
+    light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
 }

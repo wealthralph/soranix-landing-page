@@ -1,11 +1,11 @@
 import { createTheme, MantineProvider } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
-import WebLayout from "./component/layout/webLayout";
 import { BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import WebLayout from "./component/layout/WebLayout";
 
 const theme = createTheme({
-  primaryColor: "cyan",
+  primaryColor: "grape",
 });
 
 const App = () => {

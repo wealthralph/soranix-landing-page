@@ -14,16 +14,16 @@
 }
 
 
-/* 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+:root[data-mantine-color-scheme = 'dark']  {
+   --mantine-color-body: var(--mantine-color-dark-7);
+}
+
+:root[data-mantine-color-scheme = 'light'] {
+     --mantine-color-body: var(--mantine-color-white);
+
+}
+
+
+body{
+  background-color: light-dark(var(--mantine-color-body),darken(var(--mantine-color-dark-9), 0.07) );
+}
