@@ -14,6 +14,7 @@ import {
   NumberFormatter,
   Paper,
   Progress,
+  SegmentedControl,
   SimpleGrid,
   Space,
   Stack,
@@ -22,16 +23,324 @@ import {
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import styles from "./Home.module.css";
-import {
-  IconPlus,
-  IconSettings,
-  IconSettingsAutomation,
-} from "@tabler/icons-react";
+import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
+import { Background, BackgroundVariant, Position, ReactFlow } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+
+const Section7 = () => {
+
+const nodeDefaults = {
+  sourcePosition: Position.Right,
+  targetPosition: Position.Left,
+};
+
+const initialNodes = [
+  {
+    id: "A",
+    type: "input",
+    position: { x: 0, y: 150 },
+    data: { label: "A" },
+    ...nodeDefaults,
+  },
+  {
+    id: "B",
+    position: { x: 250, y: 0 },
+    data: { label: "B" },
+    ...nodeDefaults,
+  },
+  {
+    id: "C",
+    position: { x: 250, y: 150 },
+    data: { label: "C" },
+    ...nodeDefaults,
+  },
+  {
+    id: "D",
+    position: { x: 250, y: 300 },
+    data: { label: "D" },
+    ...nodeDefaults,
+  },
+];
+
+const initialEdges= [
+  {
+    id: "A-B",
+    source: "A",
+    target: "B",
+  },
+  {
+    id: "A-C",
+    source: "A",
+    target: "C",
+  },
+  {
+    id: "A-D",
+    source: "A",
+    target: "D",
+  },
+];
+
+
+    const [nodes, setNodes] = useState(initialNodes);
+    const [edges, setEdges] = useState(initialEdges);
+
+  return (
+    <Container size={"lg"}>
+      <Stack gap={"xl"}>
+        <Box maw={600} w={"100%"}>
+          <Stack gap={"xl"}>
+            <Box>
+              <Badge color="pink" variant="light">
+                Automations
+              </Badge>
+              <Title
+                tt={"capitalize"}
+                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+              >
+                A new home <br /> for Your Money{" "}
+              </Title>
+            </Box>
+            <Box>
+              <Title tt={"capitalize"} fz={"lg"} fw={"bold"}>
+                Your accounts from a unified point.
+              </Title>
+              <Text c={"dimmed"}>
+                Create, manage and connect all your bank accounts whether
+                personal savings or business , Soranix provides the tools you
+                need to stay organized and in control.
+              </Text>
+            </Box>
+          </Stack>
+        </Box>
+
+        <Box w={"100%"} h={400}>
+          <ReactFlow style={{backgroundColor: "transparent"}} nodes={nodes} edges={edges} fitView colorMode="dark" preventScrolling={false}>
+            {/* <Background bgColor="transparent" gap={100} /> */}
+          </ReactFlow>
+        </Box>
+      </Stack>
+    </Container>
+  );
+};
+
+const Section6 = () => {
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+
+  const [value, setValue] = useState("personal");
+
+  return (
+    <Container size={"lg"} my={100}>
+      <Stack gap={"xl"}>
+        <Box maw={600} w={"100%"}>
+          <Stack gap={"xl"}>
+            <Box>
+              <Badge color="orange" variant="light">
+                Payments
+              </Badge>
+              <Title
+                tt={"capitalize"}
+                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+              >
+                Send Money, <br /> faster and better{" "}
+              </Title>
+            </Box>
+            <Box>
+              <Text c={"dimmed"}>
+                <Text
+                  span
+                  tt={"capitalize"}
+                  fz={"lg"}
+                  fw={"bold"}
+                  c={"var(--mantine-color-text)"}
+                >
+                  Pay and get Paid.{" "}
+                </Text>{" "}
+                Our suite of payment solutions allows you to send and receive
+                money in ways that suit your lifestyle—globally and
+                effortlessly.
+              </Text>
+            </Box>
+            <SegmentedControl
+              value={value}
+              w={250}
+              size="xs"
+              onChange={setValue}
+              data={[
+                { label: "Personal", value: "personal" },
+                { label: "Business", value: "business" },
+              ]}
+            />
+          </Stack>
+        </Box>
+
+        <Carousel
+          withControls={false}
+          loop
+          withIndicators={false}
+          slideGap={"xl"}
+          align="start"
+          slideSize={{ base: "100%", sm: "100%", md: "70%" }}
+        >
+          <Carousel.Slide>
+            <Paper withBorder h={250}></Paper>
+          </Carousel.Slide>
+          <Carousel.Slide>
+            <Paper withBorder h={250}></Paper>
+          </Carousel.Slide>
+        </Carousel>
+        <Box>
+          {/* <Divider /> */}
+          <Divider />
+          <Grid py={"xs"}>
+            <Grid.Col h={400} span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
+              <Stack py={"xl"}>
+                <Box>
+                  <Title order={3} fw={"normal"}>
+                    Simple and intuitive interface
+                  </Title>
+                  <Text c={"dimmed"}>
+                    Navigate payments with an intuitive, user-friendly interface
+                  </Text>
+                </Box>
+              </Stack>
+            </Grid.Col>
+            <Grid.Col
+              h={400}
+              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+              styles={{
+                col: {
+                  borderLeft: !isMobile
+                    ? `thin solid var(--mantine-color-default-border)`
+                    : "none",
+                  borderTop: !isMobile
+                    ? "none"
+                    : `thin solid var(--mantine-color-default-border)`,
+                  paddingInlineStart: !isMobile
+                    ? "var(--mantine-spacing-xl)"
+                    : null,
+                },
+              }}
+            >
+              <Stack py={"xl"}>
+                <Box>
+                  <Title order={3} fw={"normal"}>
+                    Configure Payments Your Way{" "}
+                  </Title>
+                  <Text c={"dimmed"}>
+                    Whether you need to automate recurring payments or schedule
+                    transfers our flexible configurations have you covered.{" "}
+                  </Text>
+                </Box>
+              </Stack>
+            </Grid.Col>
+          </Grid>
+          <Divider />
+          <Grid py={"xs"}>
+            <Grid.Col
+              h={400}
+              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+              styles={{
+                col: {
+                  paddingInlineEnd: !isMobile
+                    ? "var(--mantine-spacing-xl)"
+                    : null,
+                },
+              }}
+            >
+              <Stack py={"xl"}>
+                <Box>
+                  <Title order={3} fw={"normal"}>
+                    Stylize Your Payments{" "}
+                  </Title>
+                  <Text c={"dimmed"}>
+                    Customize the look and feel of your payment interface with
+                    customizable designs and styling options creating a look
+                    that's uniquely yours.
+                  </Text>
+                </Box>
+              </Stack>
+            </Grid.Col>
+            <Grid.Col
+              h={400}
+              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+              styles={{
+                col: {
+                  borderLeft: !isMobile
+                    ? `thin solid var(--mantine-color-default-border)`
+                    : "none",
+                  borderTop: !isMobile
+                    ? "none"
+                    : `thin solid var(--mantine-color-default-border)`,
+                  paddingInlineStart: !isMobile
+                    ? "var(--mantine-spacing-xl)"
+                    : null,
+                },
+              }}
+            >
+              <Stack py={"xl"}>
+                <Box>
+                  <Title order={3} fw={"normal"}>
+                    Payment Integration
+                  </Title>
+                  <Text c={"dimmed"}>
+                    Whether you need to automate recurring payments or schedule
+                    transfers our flexible configurations have you covered.{" "}
+                  </Text>
+                </Box>
+              </Stack>
+            </Grid.Col>
+          </Grid>
+          <Divider />
+        </Box>
+      </Stack>
+    </Container>
+  );
+};
+
+const Section5 = () => {
+  return (
+    <Container size={"lg"} my={100}>
+      <Stack gap={"xl"}>
+        <Box maw={600} w={"100%"}>
+          <Stack gap={"xl"}>
+            <Box>
+              <Badge variant="light">Virtual Cards</Badge>
+              <Title
+                tt={"capitalize"}
+                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+              >
+                Seamless Spending, <br /> Virtually Anywhere{" "}
+              </Title>
+            </Box>
+            <Box>
+              <Text c={"dimmed"}>
+                <Text
+                  span
+                  tt={"capitalize"}
+                  fz={"lg"}
+                  fw={"bold"}
+                  c={"var(--mantine-color-text)"}
+                >
+                  Spend with confidence.{" "}
+                </Text>{" "}
+                Our virtual cards provide a smooth, secure way make
+                international payments whether you're shopping online or
+                in-store.
+              </Text>
+            </Box>
+          </Stack>
+        </Box>
+
+        <Paper withBorder h={500}></Paper>
+      </Stack>
+    </Container>
+  );
+};
 
 const Section4 = () => {
-  const netWorthData = [
+  const [netWorthData, setNetWorthData] = useState([
     {
       id: 1,
       value: 25900,
@@ -60,7 +369,25 @@ const Section4 = () => {
       color: "pink",
       striped: false,
     },
-  ];
+  ]);
+
+  const addRandomNetWorthData = () => {
+    const newId = netWorthData.length + 1;
+    const newValue = Math.floor(Math.random() * 100000); // Random value between 0 and 100,000
+    const newLabel = `Random Label ${newId}`; // Example label, can be customized
+    const newColor = "#" + Math.floor(Math.random() * 16777215).toString(16); // Random hex color
+    const newStriped = Math.random() > 0.5;
+
+    const newNetWorthItem = {
+      id: newId,
+      value: newValue,
+      label: newLabel,
+      color: newColor,
+      striped: newStriped,
+    };
+
+    setNetWorthData((prevData) => [...prevData, newNetWorthItem]);
+  };
 
   const segments = netWorthData.map((segment) => {
     return (
@@ -97,7 +424,12 @@ const Section4 = () => {
         <div className={styles.networth_box_blur}>
           <div className={styles.controls}>
             <Group gap={"xs"}>
-              <ActionIcon variant="transparent" color="dark" size={"sm"}>
+              <ActionIcon
+                onClick={addRandomNetWorthData}
+                variant="transparent"
+                color="dark"
+                size={"sm"}
+              >
                 <IconPlus />
               </ActionIcon>
               <ActionIcon variant="transparent" color="dark" size={"sm"}>
@@ -106,8 +438,8 @@ const Section4 = () => {
             </Group>
           </div>
           <div className={styles.networth_content}>
-            <Space h={30}/>
-            <Group justify="space-between" >
+            <Space h={30} />
+            <Group justify="space-between">
               <Box>
                 <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                   Networth
@@ -252,10 +584,9 @@ const Section3 = () => {
                       Real-time, actionable data analytics.
                     </Title>
                     <Text c={"dimmed"}>
-                      Stay one step ahead with our real-time analytics, that
-                      brings all the data across your account to life, revealing
-                      trends and patterns that allow you to make swift, informed
-                      decisions about your finances.
+                      Stay ahead with our real-time analytics, that brings all
+                      you account data, revealing trends and patterns that allow
+                      you to make swift, informed decisions about your finances.
                     </Text>
                   </Box>
                 </Stack>
@@ -358,7 +689,9 @@ const Home = () => {
       <Section2 />
       <Section3 />
       <Section4 />
-
+      <Section5 />
+      <Section6 />
+      <Section7 />
       <Space h={300} />
     </Container>
   );

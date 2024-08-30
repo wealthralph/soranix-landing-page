@@ -16,6 +16,7 @@
     "@mantine/core": "^7.12.0",
     "@mantine/hooks": "^7.12.0",
     "@tabler/icons-react": "^3.12.0",
+    "@xyflow/react": "^12.2.0",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
     "gsap": "^3.12.5",
