@@ -38,8 +38,8 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import CustomNode from "../../component/nodes/CustomNode";
-import WorkflowPanel from "../../component/nodes/WorkflowPanel";
+import CustomNode from "../../components/nodes/CustomNode";
+import WorkflowPanel from "../../components/nodes/WorkflowPanel";
 
   const nodeTypes = { customNode: CustomNode };
 
