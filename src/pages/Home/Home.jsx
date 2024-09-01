@@ -23,68 +23,79 @@ import {
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Autoplay from "embla-carousel-autoplay";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import styles from "./Home.module.css";
 import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
-import { Background, BackgroundVariant, Position, ReactFlow } from "@xyflow/react";
+import {
+  addEdge,
+  Background,
+  BackgroundVariant,
+  Controls,
+  Panel,
+  Position,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
+} from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import CustomNode from "../../component/nodes/CustomNode";
+import WorkflowPanel from "../../component/nodes/WorkflowPanel";
+
+  const nodeTypes = { customNode: CustomNode };
+
 
 const Section7 = () => {
+  const nodeDefaults = {
+    sourcePosition: Position.Right,
+    targetPosition: Position.Left,
+  };
 
-const nodeDefaults = {
-  sourcePosition: Position.Right,
-  targetPosition: Position.Left,
-};
+  const initialNodes = [
+    {
+      id: "A",
+      type: "customNode",
+      position: { x: 0, y: 150 },
+      data: { label: "Custom" },
+      ...nodeDefaults,
+    },
+    {
+      id: "B",
+      position: { x: 250, y: 150 },
+      data: { label: "B" },
+      ...nodeDefaults,
+    },
+    // {
+    //   id: "C",
+    //   position: { x: 250, y: 150 },
+    //   data: { label: "C" },
+    //   ...nodeDefaults,
+    // },
+  ];
 
-const initialNodes = [
-  {
-    id: "A",
-    type: "input",
-    position: { x: 0, y: 150 },
-    data: { label: "A" },
-    ...nodeDefaults,
-  },
-  {
-    id: "B",
-    position: { x: 250, y: 0 },
-    data: { label: "B" },
-    ...nodeDefaults,
-  },
-  {
-    id: "C",
-    position: { x: 250, y: 150 },
-    data: { label: "C" },
-    ...nodeDefaults,
-  },
-  {
-    id: "D",
-    position: { x: 250, y: 300 },
-    data: { label: "D" },
-    ...nodeDefaults,
-  },
-];
-
-const initialEdges= [
-  {
-    id: "A-B",
-    source: "A",
-    target: "B",
-  },
-  {
-    id: "A-C",
-    source: "A",
-    target: "C",
-  },
-  {
-    id: "A-D",
-    source: "A",
-    target: "D",
-  },
-];
+  const initialEdges = [
+    // {
+    //   id: "A-B",
+    //   source: "A",
+    //   target: "B",
+    //   animated: true,
+    // },
+    // {
+    //   id: "A-C",
+    //   source: "A",
+    //   target: "C",
+    // },
+  ];
 
 
-    const [nodes, setNodes] = useState(initialNodes);
-    const [edges, setEdges] = useState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+    const onConnect = useCallback(
+      (params) => setEdges((eds) => addEdge(params, eds)),
+      []
+    );
+
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
   return (
     <Container size={"lg"}>
@@ -116,9 +127,79 @@ const initialEdges= [
         </Box>
 
         <Box w={"100%"} h={400}>
-          <ReactFlow style={{backgroundColor: "transparent"}} nodes={nodes} edges={edges} fitView colorMode="dark" preventScrolling={false}>
-            {/* <Background bgColor="transparent" gap={100} /> */}
+          <ReactFlow
+            style={{ backgroundColor: "transparent" }}
+            nodes={nodes}
+            nodeTypes={nodeTypes}
+            proOptions={{ hideAttribution: true }}
+            onEdgesChange={onEdgesChange}
+            onNodesChange={onNodesChange}
+            edges={edges}
+            onConnect={onConnect}
+            fitView
+            colorMode="dark"
+
+            // preventScrolling={false}
+          >
+            <Background
+              bgColor="transparent"
+              gap={100}
+              variant={BackgroundVariant.Lines}
+              lineWidth={0.2}
+              offset={[1, 10]}
+            />
+            <Controls />
+            <Panel position="bottom-center">
+              <WorkflowPanel/>
+            </Panel>
           </ReactFlow>
+        </Box>
+        <Box>
+          <Divider />
+          <Grid m={"xs"}>
+            <Grid.Col h={400} span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
+              <Stack py={"xl"}>
+                <Box>
+                  <Title order={3} fw={"normal"}>
+                    A bank account for your every need
+                  </Title>
+                  <Text c={"dimmed"}>
+                    From savings , current to single use options , there’s an
+                    account here with your name on it.
+                  </Text>
+                </Box>
+              </Stack>
+            </Grid.Col>
+            <Grid.Col
+              h={400}
+              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+              styles={{
+                col: {
+                  borderLeft: !isMobile
+                    ? `thin solid var(--mantine-color-default-border)`
+                    : "none",
+                  borderTop: !isMobile
+                    ? "none"
+                    : `thin solid var(--mantine-color-default-border)`,
+                  paddingInlineStart: !isMobile
+                    ? "var(--mantine-spacing-xl)"
+                    : null,
+                },
+              }}
+            >
+              <Stack py={"xl"}>
+                <Box>
+                  <Title order={3} fw={"normal"}>
+                    Powerful account tools
+                  </Title>
+                  <Text c={"dimmed"}>
+                    Boost your account experience with a range of smart,
+                    easy-to-customize features .
+                  </Text>
+                </Box>
+              </Stack>
+            </Grid.Col>
+          </Grid>
         </Box>
       </Stack>
     </Container>

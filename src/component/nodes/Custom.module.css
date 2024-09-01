@@ -1,0 +1,7 @@
+.custom_node {
+    padding: var(--mantine-spacing-xs);
+    border: thin solid var(--mantine-color-default-border);
+    width: 200px;
+    height: 30px;
+    border-radius: var(--mantine-radius-sm);
+}
