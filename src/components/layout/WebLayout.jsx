@@ -2,6 +2,7 @@ import { AppShell, Stack,  } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Navbar from "../navabar/Navbar";
 import { Outlet } from "react-router-dom";
+import Footer from "../footer/Footer";
 
 // function WebLayout() {
 //   // eslint-disable-next-line no-unused-vars
@@ -42,6 +43,7 @@ const WebLayout = () => {
     <section >
       <Navbar/>
       <Outlet/>
+      <Footer/>
     </section>
   )
 }

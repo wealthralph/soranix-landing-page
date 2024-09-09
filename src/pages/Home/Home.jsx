@@ -38,10 +38,10 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import CustomNode from "../../components/nodes/CustomNode";
+import { DisplayNode, SplitNode, TriggerNode } from "../../components/nodes/CustomNode";
 import WorkflowPanel from "../../components/nodes/WorkflowPanel";
 
-  const nodeTypes = { customNode: CustomNode };
+  const nodeTypes = { triggerNode: TriggerNode , splitNode: SplitNode, displayNode: DisplayNode};
 
 
 const Section7 = () => {
@@ -53,21 +53,37 @@ const Section7 = () => {
   const initialNodes = [
     {
       id: "A",
-      type: "customNode",
+      type: "triggerNode",
       position: { x: 0, y: 150 },
-      data: { label: "Custom" },
+      data: { label: "trigger" , value: 5000},
       ...nodeDefaults,
     },
     {
       id: "B",
+      type: "splitNode",
       position: { x: 250, y: 150 },
       data: { label: "B" },
       ...nodeDefaults,
     },
+    {
+      id: "C",
+      type: "displayNode",
+      position: { x: 450, y: 250 },
+      data: { label: "C" },
+      // ...nodeDefaults,
+    },
+    {
+      id: "D",
+      type: "displayNode",
+      position: { x: 450, y: 500 },
+      data: { label: "D" },
+      ...nodeDefaults,
+    },
     // {
-    //   id: "C",
-    //   position: { x: 250, y: 150 },
-    //   data: { label: "C" },
+    //   id: "E",
+    //   type: "displayNode",
+    //   position: { x: 350, y: 250 },
+    //   data: { label: "E" },
     //   ...nodeDefaults,
     // },
   ];
@@ -91,7 +107,7 @@ const Section7 = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
     const onConnect = useCallback(
-      (params) => setEdges((eds) => addEdge(params, eds)),
+      (params) => setEdges((eds) => addEdge({...params,type:"smoothstep"}, eds)),
       []
     );
 

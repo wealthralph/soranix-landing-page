@@ -12,7 +12,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <MantineProvider
-        defaultColorScheme="auto"
+        defaultColorScheme="dark"
         theme={theme}
         classNamesPrefix="web"
       >
