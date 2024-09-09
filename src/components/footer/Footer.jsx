@@ -1,39 +1,57 @@
-import { Text, Container, ActionIcon, Group, rem } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import { Text, Container, ActionIcon, Group, rem, Grid, Badge } from '@mantine/core';
+import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconBrandDiscord, IconBrandX, IconBrandWhatsapp } from '@tabler/icons-react';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './Footer.module.css';
 
 const data = [
   {
-    title: 'About',
+    title: 'For Individuals',
     links: [
-      { label: 'Features', link: '#' },
-      { label: 'Pricing', link: '#' },
-      { label: 'Support', link: '#' },
-      { label: 'Forums', link: '#' },
+      { label: 'Accounts', link: '#' },
+      { label: 'Virtual Cards', link: '#' },
+      { label: 'Payments Links', link: '#' },
+      { label: 'Investments', link: '#' },
+      { label: 'Global Transfers', link: '#' },
+      { label: 'Flows', link: '#' },
+      { label: 'Bots', link: '#' },
+      { label: 'Sentinels', link: '#' },
     ],
   },
   {
-    title: 'Project',
+    title: 'For Business',
     links: [
-      { label: 'Contribute', link: '#' },
-      { label: 'Media assets', link: '#' },
-      { label: 'Changelog', link: '#' },
-      { label: 'Releases', link: '#' },
+      { label: 'Business Banking', link: '#' },
+      { label: 'For Personal', link: '#' },
     ],
   },
   {
-    title: 'Community',
+    title: 'Company',
     links: [
-      { label: 'Join Discord', link: '#' },
-      { label: 'Follow on Twitter', link: '#' },
-      { label: 'Email newsletter', link: '#' },
-      { label: 'GitHub discussions', link: '#' },
+      { label: 'About Us', link: '#' },
+      { label: 'Careers', link: '#', badge: "Hiring" },
+    ],
+  },
+  {
+    title: 'Legal',
+    links: [
+      { label: 'Terms of Use', link: '#' },
+      { label: 'Privacy Policy', link: '#' },
+      { label: 'Disclaimer', link: '#' },
+      { label: 'Law Enforcement', link: '#' },
+    ],
+  },
+  {
+    title: 'Support',
+    links: [
+      { label: 'Support@soranix.com', link: '#' },
+      { label: 'Contact Us', link: '#' },
+      { label: 'KYC Center', link: '#' },
     ],
   },
 ];
 
- function Footer() {
+function Footer() {
+
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
       <Text
@@ -41,17 +59,23 @@ const data = [
         className={classes.link}
         component="a"
         href={link.link}
+        size='xs'
         onClick={(event) => event.preventDefault()}
       >
-        {link.label}
+        <Group gap={'xs'}>
+          <Text inherit span>
+            {link.label}
+          </Text>
+          {link.badge && <Badge  variant='light'radius={'sm'} size='xs'>{link.badge}</Badge>}
+        </Group>
       </Text>
     ));
 
     return (
-      <div className={classes.wrapper} key={group.title}>
-        <Text className={classes.title}>{group.title}</Text>
+      <Grid.Col span={3} key={group.title}>
+        <Text size='sm'  className={classes.title_dat}>{group.title}</Text>
         {links}
-      </div>
+      </Grid.Col>
     );
   });
 
@@ -59,27 +83,29 @@ const data = [
     <footer className={classes.footer}>
       <Container className={classes.inner}>
         <div className={classes.logo}>
-          {/* <MantineLogo size={30} /> */}
           <Text size="xs" c="dimmed" className={classes.description}>
-            Build fully functional accessible web applications faster than ever
+            One Platform to manage your personal and business finances.
           </Text>
         </div>
-        <div className={classes.groups}>{groups}</div>
+        <Grid gutter={'md'}>{groups}</Grid>
       </Container>
       <Container className={classes.afterFooter}>
         <Text c="dimmed" size="sm">
-          © 2020 mantine.dev. All rights reserved.
+          © {new Date().getFullYear()} Soranix All rights reserved.
         </Text>
 
         <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">
           <ActionIcon size="lg" color="gray" variant="subtle">
-            <IconBrandTwitter style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+            <IconBrandX style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
           </ActionIcon>
           <ActionIcon size="lg" color="gray" variant="subtle">
-            <IconBrandYoutube style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+            <IconBrandWhatsapp style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
           </ActionIcon>
           <ActionIcon size="lg" color="gray" variant="subtle">
             <IconBrandInstagram style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size="lg" color="gray" variant="subtle">
+            <IconBrandDiscord style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
           </ActionIcon>
         </Group>
       </Container>

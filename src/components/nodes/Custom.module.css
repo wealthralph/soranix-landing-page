@@ -66,33 +66,41 @@ gap: 10px;
   
   .split_node_input_wrapper {
     display: flex;
+    position: relative;
+
     /* padding-inline: var(--mantine-spacing-xs); */
   }
 
   .split_node_input_container {
-    position: relative;
     display: flex;
     gap: var(--mantine-spacing-xs);
     align-items: center;
     padding-block: 2px;
     padding-inline: var(--mantine-spacing-xs);
-    transition: display 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    transition: visibility 2s ease-in-out 3s linear;
+
   }
 
   .split_node_input_delete {
     visibility: hidden;
   }
 
+  .split_node_input_container:hover{
+
+  }
+
 .split_node_input_container:hover  .split_node_input_delete{
+    
 visibility: visible;
-display: flex;
 justify-content: center;
 align-items: center;
+transition: visibility 400ms ease-in-out 1s linear;
+
 }
 
   .split_node_input_box{
     display: flex;
-    flex-grow: 1;
+    flex-grow: 0;
     align-items: center;
     gap: var(--mantine-spacing-xs);
     /* padding: 2px; */

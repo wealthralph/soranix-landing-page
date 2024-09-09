@@ -1,10 +1,9 @@
 import { Handle, Position, useHandleConnections, useNodesData, useReactFlow } from "@xyflow/react"
 import { useCallback, useEffect, useState } from "react"
 import styles from "./Custom.module.css"
-import { ActionIcon, Box, Flex, Group, Input, NumberInput, Paper, Select, Space, Stack, Text, TextInput, ThemeIcon } from "@mantine/core";
+import { ActionIcon, Box, Flex,  NumberInput, Stack, Text, ThemeIcon } from "@mantine/core";
 import CustomNodeWrapper from "./CustomNodeWrapper";
 import { IconGripVertical, IconPercentage, IconPlus, IconTrash } from "@tabler/icons-react";
-import { useHover } from "@mantine/hooks";
 
 
 export const TriggerNode = ({ data, isConnectable }) => {
@@ -111,7 +110,7 @@ export const SplitNode = ({ id, data, isConnectable }) => {
       <Handle type="target" position={Position.Left} id="hello" isConnectable={isConnectable} className={styles['react-flow__handle']}
       />
       <CustomNodeWrapper.Body>
-        <Box bg={"dark.8"} py={"xs"}>
+        <Box bg={"dark.8"} py={"xs"} w={300}>
           <Stack gap={3}>
             {percentages.map((percentage, idx) => (
               <div
@@ -132,6 +131,8 @@ export const SplitNode = ({ id, data, isConnectable }) => {
                       variant="unstyled"
                       size="xs"
                       rightSection={' '}
+                      maw={'100%'}
+                      w={'100%'}
                       value={percentage}
                       onChange={(e) => handlePercentageChange(idx, e)}
                       min={0}
@@ -181,7 +182,7 @@ export const SplitNode = ({ id, data, isConnectable }) => {
   );
 };
 
-export const DisplayNode = ({ id, data }) => {
+export const DisplayNode = () => {
   const connections = useHandleConnections({
     type: "target",
     id: "1", // Specific handle id for the connection
@@ -207,3 +208,10 @@ export const DisplayNode = ({ id, data }) => {
   );
 };
 
+export const TransferNode = ({id, data, isConnectable}) =>{
+  return (
+    <div>
+
+    </div>
+  )
+}
