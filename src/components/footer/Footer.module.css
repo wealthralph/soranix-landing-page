@@ -63,7 +63,7 @@
     }
   }
   
-  .title_dat {
+  .title {
     font-weight: 300;
     margin-bottom: calc(var(--mantine-spacing-lg) / 2);
     color: light-dark(var(--mantine-color-black), var(--mantine-color-gray-5));

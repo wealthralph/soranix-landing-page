@@ -42,8 +42,8 @@ gap: 10px;
 
 
  .react-flow__handle {
-    width: 18px;
-    height: 18px;
+    width: 12px;
+    height: 15px;
     border-radius: 3px;
     border: thin solid  var(--mantine-color-default-border);
     background-color: var(--mantine-color-gray-7);

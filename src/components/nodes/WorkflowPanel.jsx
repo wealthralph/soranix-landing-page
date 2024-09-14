@@ -1,20 +1,20 @@
-import { ActionIcon, Button, Divider, Group, Paper, Text } from "@mantine/core";
+import {  Button, Divider, Group, Paper, Text } from "@mantine/core";
 import { IconPlayerPlayFilled, IconPlus } from "@tabler/icons-react";
 
 const WorkflowPanel = () => {
   return (
-    <Paper bg={"dark.9"} withBorder p={"xs"} w={300}>
-      <Group>
+    <Paper bg={"dark.9"} withBorder p={'xs'} >
+      <Group gap={'xs'}>
         <Button
           styles={{
             section: {
               marginInline: "2px",
             },
           }}
-          size="xs"
-          variant="subtle"
+          size="compact-xs"
+          variant="light"
           color="gray"
-          leftSection={<IconPlus size={16} />}
+          leftSection={<IconPlus size={12} />}
         >
           Block
         </Button>
@@ -25,12 +25,12 @@ const WorkflowPanel = () => {
               marginInline: "2px",
             },
           }}
-          size="xs"
-          rightSection={<IconPlayerPlayFilled size={16} />}
+          size="compact-xs"
+          rightSection={<IconPlayerPlayFilled size={12} />}
         >
           Run
         </Button>
-        <Divider orientation="vertical" />
+        {/* <Divider orientation="vertical" /> */}
       </Group>
     </Paper>
   );

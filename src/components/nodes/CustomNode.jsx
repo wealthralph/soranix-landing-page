@@ -1,12 +1,12 @@
 import { Handle, Position, useHandleConnections, useNodesData, useReactFlow } from "@xyflow/react"
 import { useCallback, useEffect, useState } from "react"
 import styles from "./Custom.module.css"
-import { ActionIcon, Box, Flex,  NumberInput, Stack, Text, ThemeIcon } from "@mantine/core";
+import { ActionIcon, Box, Combobox, Flex, Group, NumberInput, Paper, Space, Stack, Text, ThemeIcon, useCombobox } from "@mantine/core";
 import CustomNodeWrapper from "./CustomNodeWrapper";
-import { IconGripVertical, IconPercentage, IconPlus, IconTrash } from "@tabler/icons-react";
+import { IconAccessPoint, IconBrackets, IconGripVertical, IconParentheses, IconPercentage, IconPlus, IconTrash } from "@tabler/icons-react";
 
 
-export const TriggerNode = ({ data, isConnectable }) => {
+export const TriggerNode = ({ isConnectable }) => {
 
   // const onChange = useCallback((evt) => {
   //     console.log(evt.current.target)
@@ -19,7 +19,7 @@ export const TriggerNode = ({ data, isConnectable }) => {
     }}>
       <Handle className={styles['react-flow__handle']} type="source" position={Position.Right} isConnectable={isConnectable} />
       <CustomNodeWrapper.Body>
-        <Box p={'xs'} bg={'dark.9'}>
+        <Box p={'xs'} bg={'dark.9'} w={300}>
           This feels good
         </Box>
       </CustomNodeWrapper.Body>
@@ -208,10 +208,123 @@ export const DisplayNode = () => {
   );
 };
 
-export const TransferNode = ({id, data, isConnectable}) =>{
-  return (
-    <div>
+export const TransferNode = ({ isConnectable }) => {
 
-    </div>
+  const groceries = ['🍎 Apples', '🍌 Bananas', '🥦 Broccoli', '🥕 Carrots', '🍫 Chocolate'];
+
+
+  const combobox = useCombobox();
+  const [value, setValue] = useState('');
+  const shouldFilterOptions = !groceries.some((item) => item === value);
+  const filteredOptions = shouldFilterOptions
+    ? groceries.filter((item) => item.toLowerCase().includes(value.toLowerCase().trim()))
+    : groceries;
+
+  const options = filteredOptions.map((item) => (
+    <Combobox.Option value={item} key={item}>
+      {item}
+    </Combobox.Option>
+  ));
+
+
+
+
+  return (
+    <CustomNodeWrapper data={{
+      type: "Transfer",
+      event: "Accounts"
+    }}>
+
+      <CustomNodeWrapper.Body>
+        <Box w={300} bg={'dark.8'} py={'xs'} style={{
+          position: "relative"
+        }}>
+          <Box px={'xs'}>
+            <Combobox
+              onOptionSubmit={(optionValue) => {
+                setValue(optionValue);
+                combobox.closeDropdown();
+              }}
+              store={combobox}
+              withinPortal={false}
+            >
+              <Combobox.Target>
+                <Paper p={4} withBorder w={'100%'} onClick={() => combobox.openDropdown()}
+                  onFocus={() => combobox.openDropdown()}
+                  onBlur={() => combobox.closeDropdown()}>
+                  <Text size="sm" c={'dimmed'}>
+                    {value ? value : "Select an Beneficiary"}
+                  </Text>
+                </Paper>
+              </Combobox.Target>
+              <Combobox.Dropdown>
+                <Combobox.Options>
+                  {options.length === 0 ? <Combobox.Empty>Nothing found</Combobox.Empty> : options}
+                </Combobox.Options>
+              </Combobox.Dropdown>
+            </Combobox>
+          </Box>
+          {/* <Space h={20} /> */}
+          <Flex justify={'space-between'} align={'baseline'}>
+            <Box p={'xs'} style={{
+              position: 'relative'
+            }}>
+              <Handle type="target" position={Position.Left} id="hello" isConnectable={isConnectable} className={styles['react-flow__handle']}
+              />
+              <Group gap={2}>
+                <ThemeIcon size={'xs'} variant="transparent" color="gray" >
+                  <IconAccessPoint size={14} />
+                </ThemeIcon>
+                <Text size="xs">Amount</Text>
+              </Group>
+            </Box>
+            <Stack gap={3} align="end">
+              <Box px={'xs'} style={{
+                position: 'relative'
+              }}>
+                <Handle type="source" position={Position.Right} id="12" isConnectable={isConnectable} className={styles['react-flow__handle']}
+                />
+                <Group gap={2}>
+                  <Text size="xs">Success</Text>
+                  <ThemeIcon size={'xs'} variant="transparent" color="gray" >
+                  <IconParentheses size={14} />
+                  </ThemeIcon>
+                </Group>
+              </Box>
+              <Box px={'xs'} style={{
+                position: 'relative'
+              }}>
+                <Handle type="source" position={Position.Right} id="12" isConnectable={isConnectable} className={styles['react-flow__handle']}
+                />
+                <Group gap={2}>
+                  <Text size="xs">Fail</Text>
+                  <ThemeIcon size={'xs'} variant="transparent" color="gray" >
+                    <IconParentheses size={14} />
+                  </ThemeIcon>
+                </Group>
+              </Box>
+            </Stack>
+          </Flex>
+        </Box>
+      </CustomNodeWrapper.Body>
+
+    </CustomNodeWrapper>
+  )
+}
+
+
+
+export const NotificationNode = () => {
+  return (
+    <CustomNodeWrapper data={{
+      type: "SMS",
+      event: "Channel"
+    }}>
+      <CustomNodeWrapper.Body>
+        <Box w={300}>
+
+        </Box>
+      </CustomNodeWrapper.Body>
+    </CustomNodeWrapper>
   )
 }
