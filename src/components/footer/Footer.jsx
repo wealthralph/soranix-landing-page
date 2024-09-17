@@ -12,6 +12,7 @@ const data = [
       { label: 'Payments Links', link: '#' },
       { label: 'Savings', link: '#' },
       { label: 'Investments', link: '#' },
+      { label: 'Plans', link: '#' },
       { label: 'Global Transfers', link: '#' },
       { label: 'Flows', link: '#' },
       { label: 'Bots', link: '#' },

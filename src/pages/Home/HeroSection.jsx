@@ -38,7 +38,7 @@ const HeroSection = () => {
               fw={"bold"}
               ref={titleRef} // Reference for animation
             >
-              One Platform for all<br /> your financial needs<br />
+              One Platform for all your financial needs
               <Highlight
                 highlight="powered by ai"
                 highlightStyles={{

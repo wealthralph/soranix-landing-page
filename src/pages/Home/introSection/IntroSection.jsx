@@ -1,9 +1,11 @@
-import { ActionIcon, Avatar, Box, Button, Code, ColorSwatch, Container, Divider, Flex, Grid, Group, Image, Indicator, Kbd, NumberFormatter, Paper, Progress, rem, SimpleGrid, Space, Stack, Text, Title } from "@mantine/core";
-import styles from "./Home.module.css"
-import { logoWhite } from "../../assets/images";
-import { IconBell, IconBellFilled, IconLayoutSidebarLeftCollapse, IconPlus, IconSearch } from "@tabler/icons-react";
+import { ActionIcon, Avatar, Box, Button, Code, ColorSwatch, Container, Divider, Flex, Grid, Group, Image,  NumberFormatter, Paper, Progress,SimpleGrid, Space, Stack, Text, Title } from "@mantine/core";
+import { logoWhite } from "../../../assets/images";
+import {  IconBellFilled, IconLayoutSidebarLeftCollapse, IconPlus, IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import { BarChart, LineChart } from "@mantine/charts";
+import { BarChart } from "@mantine/charts";
+import styles from './IntroSection.module.css'
+
+
 
 const IntroSection = () => {
   return (
@@ -25,11 +27,7 @@ const IntroSection = () => {
       <Container p={0} size={'md'}>
         <GraphicsDashboardDisplay />
       </Container>
-      {/* <SimpleGrid cols={2}>
-          <Paper h={200} withBorder radius={"md"}></Paper>
   
-          <Paper h={200} withBorder radius={"md"}></Paper>
-        </SimpleGrid> */}
     </Container>
   );
 };
@@ -184,10 +182,14 @@ const GraphicsDashboardDisplay = () => {
 
 
   return (
-    <Stack pos={'relative'} bg={'dark.9'} style={{
-      overflow: "hidden"
+    <Paper pos={'relative'}  bg={'transparent'} radius={'md'} withBorder style={{
+      overflow: "hidden",
+      // border: "none"
     }}>
-      <div className={styles.gradient_cover}></div>
+
+      <div className={styles.graphics_gradient_cover}></div>
+      <div className={styles.box_blur}>
+      <div className={styles.content}>
       <Grid p={0} gutter={0} columns={15}>
         <Grid.Col h={500} span={3} py={0}>
           <div className={styles.graphics_display_sidebar}>
@@ -203,13 +205,10 @@ const GraphicsDashboardDisplay = () => {
             <Stack p={'xs'}>
               <Paper p={'4px'} withBorder>
                 <Flex justify={'space-between'}>
-
                   <Group dir="ltr" gap={"xs"}>
                     <IconSearch size={12} />
                     <Text c={'dimmed'} size="xs">Search</Text>
-
                   </Group>
-
                   <Code color="dark.8"><Text size="8px">CTRL + K</Text></Code>                </Flex>
               </Paper>
             </Stack>
@@ -335,7 +334,10 @@ const GraphicsDashboardDisplay = () => {
           </Box>
         </Grid.Col>
       </Grid>
-    </Stack>
+      </div>
+        
+      </div>
+    </Paper>
   )
 
 }

@@ -86,7 +86,8 @@ const NetWorthSection = () => {
             Your networth <br /> visualized in real-time
           </Title>
           <div className={styles.networth_box_blur}>
-            <div className={styles.controls}>
+            
+            <div className={styles.networth_content}>
               <Group gap={"xs"}>
                 <ActionIcon
                   onClick={addRandomNetWorthData}
@@ -100,8 +101,6 @@ const NetWorthSection = () => {
                   <IconSettingsAutomation />
                 </ActionIcon>
               </Group>
-            </div>
-            <div className={styles.networth_content}>
               <Space h={30} />
               <Group justify="space-between">
                 <Box>
