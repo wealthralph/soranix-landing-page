@@ -552,7 +552,7 @@ const Graphics1Account = () => {
                     </Group>
 
                   </Box>
-                  <Box>
+                  <Box visibleFrom="md">
                     <Text c={'dimmed'} fw={600} size="10px">Savings (Agg)</Text>
 
                     <Group gap={2}>

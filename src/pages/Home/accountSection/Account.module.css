@@ -1,5 +1,5 @@
 .graphics1_wrapper {
-    height: 450px;
+    height: 500px;
     width: 100%;
     border: thin solid var(--mantine-color-dark-7);
     border-radius: var(--mantine-radius-md);
@@ -14,9 +14,9 @@
 
 .graphics1_container {
     position: absolute;
-    max-width: 80%;
+    max-width: 90%;
     width: 100%;
-    height: 540px;
+    height: 600px;
     bottom: 0px;
     background-color: var(--mantine-color-dark-9);
     border: inherit;

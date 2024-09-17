@@ -191,7 +191,7 @@ const GraphicsDashboardDisplay = () => {
       <div className={styles.box_blur}>
       <div className={styles.content}>
       <Grid p={0} gutter={0} columns={15}>
-        <Grid.Col h={500} span={3} py={0}>
+        <Grid.Col h={500} span={3} py={0} visibleFrom="md">
           <div className={styles.graphics_display_sidebar}>
             <Flex h={30} p={'xs'} align={'center'} justify={'space-between'}>
               <Group gap={'xs'}>
@@ -215,7 +215,7 @@ const GraphicsDashboardDisplay = () => {
 
           </div>
         </Grid.Col >
-        <Grid.Col h={500} span={12} m={0} py={0}>
+        <Grid.Col h={500} span={{base:15,xs: 15, sm: 15, md: 15, lg: 12}} m={0} py={0}>
           <Box>
             <Flex h={30} p={'xs'} align={'center'} justify={'space-between'}>
               <Text c={'dimmed'} order={6}></Text>
