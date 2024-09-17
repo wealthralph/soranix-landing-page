@@ -8,6 +8,8 @@
     align-items: end;
     position: relative;
     margin-top: 100px;
+    overflow-block: clip;
+    overflow-clip-margin: 100px;
 }
 
 .graphics1_container {
@@ -20,11 +22,34 @@
     border: inherit;
     border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
     border-bottom: none;
-    box-shadow: var(--mantine-shadow-sm);
+    /* box-shadow: var(--mantine-shadow-sm); */
     margin-top: 200px;
+     background-color: rgba(20, 20, 20, 0.083); 
+ backdrop-filter: blur(14px);
 
 }
 
+
+.graphics1_content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+
+}
+
+.graphics1_content::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-radius: inherit;
+    height: 100%;
+    /* backdrop-filter: blur(20px); */
+    box-shadow: var(--mantine-shadow-md);
+    inset: 0;
+    z-index: 1;
+  pointer-events: none;
+}
 
 @keyframes text-gradient-animation {
     0% {
