@@ -1,6 +1,6 @@
-import { ActionIcon, Box, ColorSwatch, Container, Group, NumberFormatter, Progress, Space, Stack, Text, Title } from "@mantine/core";
+import { ActionIcon, Box, ColorSwatch, Container, Group, NumberFormatter, Progress, SimpleGrid, Space, Stack, Text, Title } from "@mantine/core";
 import { useState } from "react";
-import styles from "./Home.module.css"
+import styles from "./NetworthSection.module.css"
 import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
 
 const NetWorthSection = () => {
@@ -80,16 +80,20 @@ const NetWorthSection = () => {
     });
   
     return (
-      <Container my={200} size={"lg"}>
-        <div className={styles.cont}>
-        <Title tt={"capitalize"} fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>
-        Your networth <br /> visualized in real-time
+      <Container mt={50} size={"lg"}>
+        <Stack gap={'xl'}>
+          <SimpleGrid cols={{ base: 1,xs:1, sm:2, md: 2 }}>
+        <Title tt={"capitalize"}  fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>
+        Your networth <br /> visualized in real time
         </Title>
-       
+<Text>Track your net worth as it evolves in real-time. Get a clear, up-to-the-minute view of your assets, liabilities, and overall financial health, all in one place.</Text>
+          </SimpleGrid>
+        <Container w={'100%'} size={'md'}>
+
           <div className={styles.networth_box_blur}>
             
             <div className={styles.networth_content}>
-              <Group gap={"xs"}>
+              <Group gap={"xs"} justify="end">
                 <ActionIcon
                   onClick={addRandomNetWorthData}
                   variant="transparent"
@@ -102,7 +106,7 @@ const NetWorthSection = () => {
                   <IconSettingsAutomation />
                 </ActionIcon>
               </Group>
-              <Space h={30} />
+              {/* <Space h={30} /> */}
               <Group justify="space-between">
                 <Box>
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
@@ -148,7 +152,8 @@ const NetWorthSection = () => {
               </Stack>
             </div>
           </div>
-        </div>
+        </Container>
+        </Stack>
       </Container>
     );
   };

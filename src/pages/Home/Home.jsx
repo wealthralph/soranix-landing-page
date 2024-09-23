@@ -1,12 +1,11 @@
 import HeroSection from "./HeroSection";
 import IntroSection from "./introSection/IntroSection";
-
-import NetWorthSection from "./NetworthSection";
 import VirtualCards from "./VirttualCards";
 import PaymentSection from "./PaymentSection";
 import AutomationSection from "./AutomationSection";
 import { Container, Space } from "@mantine/core";
 import AccountSection from "./accountSection/AccountSection";
+import NetWorthSection from "./networthSection/NetworthSection";
 
 
 const Home = () => {

@@ -1,11 +1,11 @@
 import { useGSAP } from "@gsap/react";
-import { ActionIcon, Avatar, Badge, Box, Button, ColorSwatch, Container, Divider, em, Flex, Grid, Group, Image, Menu, NumberFormatter, Overlay, Paper, rem, SimpleGrid, Space, Stack, Table, Tabs, Text, Title, useMantineTheme } from "@mantine/core";
+import { ActionIcon, Avatar, Badge, Box, Button, ColorSwatch, Container, Divider, em, Flex, Grid, Group, Image, Menu, NumberFormatter, Overlay, Paper, rem, SimpleGrid, Space, Stack, Table, Tabs, Text, ThemeIcon, Title, useMantineTheme } from "@mantine/core";
 import { useInterval, useMediaQuery, useTimeout } from "@mantine/hooks";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Account.module.css"
-import { IconArrowLeft, IconArrowNarrowDown, IconArrowNarrowUp, IconArrowRight, IconBellFilled, IconBox, IconCashRegister, IconDots, IconMessages, IconNote, IconPackage, IconPlus, IconReportAnalytics, IconSettings, IconSquareCheck, IconSun, IconTrash, IconUsers } from "@tabler/icons-react";
+import { IconArrowLeft, IconArrowNarrowDown, IconArrowNarrowUp, IconArrowRight, IconBell, IconBellFilled, IconBox, IconCashRegister, IconDots, IconMessages, IconNote, IconPackage, IconPlus, IconReportAnalytics, IconSettings, IconSquareCheck, IconSun, IconTrash, IconUsers } from "@tabler/icons-react";
 import { AreaChart, BarChart } from "@mantine/charts";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion"
 import { Carousel, CarouselSlide } from "@mantine/carousel";
@@ -110,7 +110,7 @@ const AccountSection = () => {
   }, [accountId]);
 
   return (
-    <Container pos={'unset'} size={"lg"} ref={containerRef}>
+    <Container  size={"lg"} ref={containerRef}>
       <Stack gap={"xl"} w={'100%'}>
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
@@ -213,7 +213,7 @@ const AccountSection = () => {
                 >
                   <Box>
                     <Title order={3} fw={"normal"}>
-                      Real-time, actionable analytics.
+                      Real-time, actionable analytics using AI.
                     </Title>
                     <Text c={"dimmed"}>
                       Make inforned decisions about your finances, with real-time analytics that reveal trend and patterns from all your account data.
@@ -814,9 +814,9 @@ const Graphics3AccountAnalytics = () => {
     const data = [];
     const startDate = new Date();
     const getRandomValue = (min, max) =>
-      Math.floor(Math.random() * (max - min + 1)) + min;
+      Math.floor(Math.random() * (max - min + 2)) + min;
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 7; i++) {
       const date = new Date(startDate);
       date.setDate(date.getDate() - i);
 
@@ -830,63 +830,106 @@ const Graphics3AccountAnalytics = () => {
     return data.reverse(); // Reverse to make the earliest date come first
   };
 
-  useGSAP(() => {
-    
+  const boxRef = useRef(null)
+
+  useGSAP((context, contextSafe) => {
+
+    const tl = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 3,
+      yoyo: true,
+    })
+    tl.to(boxRef.current, { y: -100, duration: 1.5, ease: "back.in" })
+
+    const handleMouseEnter = contextSafe(() => {
+      tl.pause()
+    });
+    const handleMouseLeave = contextSafe(() => {
+      tl.resume()
+    });
+
+    const currentBox = boxRef.current;
+    currentBox.addEventListener('mouseenter', handleMouseEnter);
+    currentBox.addEventListener('mouseleave', handleMouseLeave);
+
+    // Clean up event listeners on unmount
+    return () => {
+      currentBox.removeEventListener('mouseenter', handleMouseEnter);
+      currentBox.removeEventListener('mouseleave', handleMouseLeave);
+    };
+
   })
 
   useEffect(() => {
-   const interval = setInterval(() => {
-    const chartdata = generateCashflowData()
+    const interval = setInterval(() => {
+      const chartdata = generateCashflowData()
       setData(chartdata)
     }, 5000);
 
     return () => clearInterval(interval)
-  },[])
+  }, [])
 
   return (
-    <Box className={styles.graphics3_wrapper}>
-      <Box className={styles.graphics3_analytics_card_outer} pos={'relative'}>
-        <Box className={styles.graphics3_analytics_card_inner}>
-          <Stack gap={'sm'}>
-          <Text variant="gradient" gradient={{ from: 'dark.1', to: 'dark.8', deg: 70 }}>Cash Flow Analysis</Text>
-          <Group >
-            <Group gap={4}>
-            <ColorSwatch size={10} color="var(--mantine-color-teal-9)" />            
-              <Text c={'dimmed'} size="xs">Income</Text>
-            </Group>
-            <Group gap={4}>
-            <ColorSwatch size={10} color="var(--mantine-color-red-9)" />            
-              <Text c={'dimmed'} size="xs">Expense</Text>
-            </Group>
+    <Box pos={'relative'} style={{
+      overflow: "hidden"
+    }}>
+
+      <Box className={styles.graphics3_wrapper}>
+        <Box className={styles.graphics3_analytics_card_outer} >
+          <Box className={styles.graphics3_analytics_card_inner}>
+            <Stack gap={'sm'}>
+              <Flex align={'center'} justify={'space-between'}>
+                <Text variant="gradient" gradient={{ from: 'dark.1', to: 'dark.8', deg: 70 }}>Cash Flow Analysis</Text>
+                <Button color="gray" size="compact-xs" variant="outline">Weekly</Button>
+              </Flex>
+              <Group >
+                <Group gap={4}>
+                  <ColorSwatch size={10} color="var(--mantine-color-teal-9)" />
+                  <Text c={'dimmed'} size="xs">Income</Text>
+                </Group>
+                <Group gap={4}>
+                  <ColorSwatch size={10} color="var(--mantine-color-red-9)" />
+                  <Text c={'dimmed'} size="xs">Expense</Text>
+                </Group>
+              </Group>
+              <BarChart
+                h={140}
+                data={data}
+                dataKey="date"
+                type="default"
+                strokeDasharray={"10 10"}
+                xAxisProps={{
+                  padding: "no-gap",
+                  interval: "preserveStartEnd",
+                  axisLine: { stroke: "#000", strokeWidth: 0.1 },
+                }}
+                yAxisProps={{
+                  interval: "equidistantPreserveStart",
+                  orientation: "right",
+                }}
+                // withLegend
+                legendProps={{ verticalAlign: "top", height: 40 }}
+                curveType="natural"
+                gridAxis="x"
+                tickLine="x"
+                withYAxis={false}
+                withDots={false}
+                series={[
+                  { name: "credit", label: "Income", color: "teal.9" },
+                  { name: "debit", label: "Expenses", color: "red.7" },
+                ]}
+              />
+            </Stack>
+          </Box>
+        </Box>
+      </Box>
+      <Box ref={boxRef} className={styles.graphics3_analytics_alert_cont}>
+        <Box className={styles.graphics3_analytics_alert_content}>
+          <Group gap={'xs'}>
+            {/* <ThemeIcon size={'sm'} variant="transparent" ><IconBell strokeWidth={1.5} size={16} /></ThemeIcon> */}
+          <Text size="xs" fw={'bold'}>Spending Pattern</Text>
           </Group>
-          <BarChart
-          h={140}
-          data={data}
-          dataKey="date"
-          type="default"
-          strokeDasharray={"10 10"}
-          xAxisProps={{
-            padding: "no-gap",
-            interval: "preserveStartEnd",
-            axisLine: { stroke: "#000", strokeWidth: 0.1 },
-          }}
-          yAxisProps={{
-            interval: "equidistantPreserveStart",
-            orientation: "right",
-          }}
-          // withLegend
-          legendProps={{ verticalAlign: "top", height: 40 }}
-          curveType="natural"
-          gridAxis="x"
-          tickLine="x"
-          withYAxis={true}
-          withDots={false}
-          series={[
-            { name: "credit", label: "Income", color: "teal.9" },
-            { name: "debit", label: "Expenses", color: "red.7" },
-          ]}
-        />
-          </Stack>
+          <Text c={'dimmed'} maw={400} size={'xs'}>You've spent 30% of your monthly budget on dining out.</Text>
         </Box>
       </Box>
     </Box>
