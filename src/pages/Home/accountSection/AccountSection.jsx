@@ -1,23 +1,39 @@
 import { useGSAP } from "@gsap/react";
-import { ActionIcon, Avatar, Badge, Box, Button, Container, Divider, em, Flex, Grid, Group, Menu, NumberFormatter, Paper, rem, SimpleGrid, Skeleton, Space, Stack, Table, Tabs, Text, Title, useMantineTheme } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
+import { ActionIcon, Avatar, Badge, Box, Button, ColorSwatch, Container, Divider, em, Flex, Grid, Group, Image, Menu, NumberFormatter, Overlay, Paper, rem, SimpleGrid, Space, Stack, Table, Tabs, Text, Title, useMantineTheme } from "@mantine/core";
+import { useInterval, useMediaQuery, useTimeout } from "@mantine/hooks";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Account.module.css"
-import { IconArrowNarrowDown, IconArrowNarrowUp, IconBellFilled, IconBox, IconCashRegister, IconChevronDown, IconDots, IconMessages, IconNote, IconPackage, IconPlus, IconReportAnalytics, IconSettings, IconSquareCheck, IconSun, IconTrash, IconUsers } from "@tabler/icons-react";
-import { AreaChart } from "@mantine/charts";
+import { IconArrowLeft, IconArrowNarrowDown, IconArrowNarrowUp, IconArrowRight, IconBellFilled, IconBox, IconCashRegister, IconDots, IconMessages, IconNote, IconPackage, IconPlus, IconReportAnalytics, IconSettings, IconSquareCheck, IconSun, IconTrash, IconUsers } from "@tabler/icons-react";
+import { AreaChart, BarChart } from "@mantine/charts";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion"
+import { Carousel, CarouselSlide } from "@mantine/carousel";
+
 
 
 gsap.registerPlugin(ScrollTrigger)
+const BoxMotion = motion.create(Box, { forwardMotionProps: true })
+
+
 
 
 const AccountSection = () => {
+
+
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+  const [embla, setEmbla] = useState(null);
 
   const containerRef = useRef(null)
   const boxRef = useRef(null)
 
+  const scrollPrev = useCallback(() => {
+    if (embla) embla.scrollPrev()
+  }, [embla])
+
+  const scrollNext = useCallback(() => {
+    if (embla) embla.scrollNext()
+  }, [embla])
 
   useGSAP(() => {
 
@@ -34,10 +50,69 @@ const AccountSection = () => {
 
   })
 
+  const [accountId, setAccountId] = useState(null)
+
+  const accountTypesData = [
+    {
+      id: 1,
+      name: 'Deposit Account',
+    },
+    {
+      id: 2,
+      name: 'Sub Account',
+    },
+    {
+      id: 3,
+      name: 'Virtual Account',
+    },
+    {
+      id: 4,
+      name: 'Multi-Currency Account',
+    },
+    {
+      id: 5,
+      name: 'Connect Account',
+    },
+  ]
+
+  const accountTypes = accountTypesData.map((i, index) => {
+    return (
+      <CarouselSlide key={i.id} h={430}>
+
+        <BoxMotion onClick={() => setAccountId(i.id)} layoutId={i.id} className={styles.accounts_card_shrinked}>
+          <Stack h={'100%'} justify="end">
+            <Flex >
+              <Box>
+                <Title order={6} fw={'normal'}>
+                  {i.name}
+                </Title>
+              </Box>
+            </Flex>
+          </Stack>
+        </BoxMotion>
+      </CarouselSlide>
+    )
+  })
+
+  useEffect(() => {
+    if (accountId) {
+      // Disable scrolling by setting overflow to hidden
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Re-enable scrolling by resetting overflow
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cleanup on unmount or when overlay is hidden
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [accountId]);
+
   return (
-    <Container size={"lg"} ref={containerRef}>
+    <Container pos={'unset'} size={"lg"} ref={containerRef}>
       <Stack gap={"xl"} w={'100%'}>
-        <Box maw={600} w={"100%"}>
+        <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
               <Badge variant="light">Accounts</Badge>
@@ -53,27 +128,31 @@ const AccountSection = () => {
                 Your accounts from a unified point.
               </Title>
               <Text c={"dimmed"}>
-                Create, manage and connect all your bank accounts whether
-                personal savings or business , Soranix provides the tools you
+                Create, manage and connect all your bank accounts, Soranix provides the tools you
                 need to stay organized and in control.
               </Text>
             </Box>
           </Stack>
         </Box>
-
         {/* Gsap animation elements here  */}
         <Graphics1Account />
-
         {/* Gsap animation elements ends here */}
         <Box>
           <Box>
             <Divider color="dark.7" />
             <Grid m={"xs"}>
               <Grid.Col
-                h={''}
                 span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+                styles={{
+                  col: {
+                    paddingInlineEnd: !isMobile
+                      ? "var(--mantine-spacing-xl)"
+                      : null,
+                  }
+                }}
               >
-                <Stack py={"xl"}>
+                <Stack py={"xl"} h={400}
+                >
                   <Box>
                     <Title order={3} fw={"normal"}>
                       A bank account for your every need
@@ -83,6 +162,7 @@ const AccountSection = () => {
                       account here with your name on it.
                     </Text>
                   </Box>
+                  <Graphics2Account />
                 </Stack>
               </Grid.Col>
               <Grid.Col
@@ -105,11 +185,11 @@ const AccountSection = () => {
                 <Stack py={"xl"}>
                   <Box>
                     <Title order={3} fw={"normal"}>
-                      Powerful account tools
+                      Push beyond the limits of traditional banking
                     </Title>
                     <Text c={"dimmed"}>
-                      Boost your account experience with a range of smart,
-                      easy-to-customize features .
+                      Boost your banking experience with custom configurations and a range of smart
+                      features .
                     </Text>
                   </Box>
                 </Stack>
@@ -118,26 +198,31 @@ const AccountSection = () => {
           </Box>
           <Divider color="dark.7" />
           <Box>
-            <Grid p={"xs"}>
+            <Grid m={'xs'}>
               <Grid.Col
-                h={400}
                 span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+                styles={{
+                  col: {
+                    paddingInlineEnd: !isMobile
+                      ? "var(--mantine-spacing-xl)"
+                      : null,
+                  }
+                }}
               >
-                <Stack py={"xl"}>
+                <Stack py={"xl"} h={400}
+                >
                   <Box>
                     <Title order={3} fw={"normal"}>
-                      Real-time, actionable data analytics.
+                      Real-time, actionable analytics.
                     </Title>
                     <Text c={"dimmed"}>
-                      Stay ahead with our real-time analytics, that brings all
-                      you account data, revealing trends and patterns that allow
-                      you to make swift, informed decisions about your finances.
+                      Make inforned decisions about your finances, with real-time analytics that reveal trend and patterns from all your account data.
                     </Text>
                   </Box>
+                  <Graphics3AccountAnalytics />
                 </Stack>
               </Grid.Col>
               <Grid.Col
-                h={400}
                 span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
                 styles={{
                   col: {
@@ -152,21 +237,66 @@ const AccountSection = () => {
                       : null,
                   },
                 }}
-              ></Grid.Col>
+              >
+                <Stack py={"xl"} h={400}
+                >
+                  <Box>
+                    <Title order={3} fw={"normal"}>
+                      All of your transactions in one place
+                    </Title>
+                    <Text c={"dimmed"}>
+                      Make inforned decisions about your finances, with real-time analytics that reveal trend and patterns from all your account data.
+                    </Text>
+                  </Box>
+                  <Graphics3AccountAnalytics />
+                </Stack>
+              </Grid.Col>
             </Grid>
-            {/* <Divider /> */}
+            <Divider color="dark.7" />
           </Box>
-        </Box>
-        <Paper withBorder h={150} radius={"md"} bg={"transparent"}>
-          <SimpleGrid cols={2} h={"100%"}>
-            <Box></Box>
-            <Stack gap={0} h={"100%"} justify="center" p={"sm"}>
-              {/* <Text c={"dimmed"}>Account Insured</Text> */}
-              <Text size="xl">Soranix deposit account are NDIC insured </Text>
+          <Box py={'xl'}>
+            <Stack w={'100%'}>
+              <Stack maw={500} >
+                <Title order={2}>Accounts built for <br /> the new era of finance </Title>
+                {/* <Text c={'dimmed'} size="md">Our powerful suite of expense management features automates the hard work of budgeting and tracking your expenditures. </Text> */}
+              </Stack>
+              <Carousel
+                getEmblaApi={setEmbla}
+                withControls={false}
+                withIndicators={false}
+                slideSize={{ base: '336px' }}
+                slideGap="md"
+                loop
+                align="start"
+                slidesToScroll={1}>
+                {accountTypes}
+              </Carousel >
+              <Group justify="end">
+                <ActionIcon variant="light" color="gray" radius={'xl'} onClick={scrollPrev}>
+                  <IconArrowLeft strokeWidth={1.5} size={14} />
+                </ActionIcon>
+                <ActionIcon variant="light" color="gray" radius={'xl'} onClick={scrollNext}>
+                  <IconArrowRight strokeWidth={1.5} size={14} />
+                </ActionIcon>
+              </Group>
             </Stack>
-          </SimpleGrid>
-        </Paper>
+            <AnimatePresence >
+              {accountId && (
+                <BoxMotion className={styles.accounts_card_expanded_cont}>
+
+                  <BoxMotion layoutId={accountId} h={'100%'} className={styles.accounts_card_expanded}>
+                    <motion.h5>heloo</motion.h5>
+                    <motion.h2>item.title</motion.h2>
+                    <motion.button onClick={() => setAccountId(null)} >close</motion.button>
+                  </BoxMotion>
+                </BoxMotion>
+              )}
+            </AnimatePresence>
+          </Box>
+
+        </Box>
       </Stack>
+
     </Container>
   );
 };
@@ -606,3 +736,160 @@ const Graphics1Account = () => {
     </Container>
   )
 }
+
+const Graphics2Account = () => {
+
+  const cardsData = [
+
+    {
+      id: 2,
+      alias: "Nkechi Money",
+      symbol: "₦",
+      currency: "US",
+      balance: 685404
+
+    },
+    {
+      id: 1,
+      alias: "Japa ✈️ 🛬",
+      currency: "NG",
+      symbol: "₦",
+      balance: 685404
+    },
+    {
+      id: 3,
+      alias: "Vacation Account ⛱️🏖️",
+      symbol: "₦",
+      balance: 685404,
+      currency: "NG"
+    },
+  ]
+
+  const account_cards = cardsData.map(i => (
+    <Box key={i.id} className={styles.graphics2_account_card}>
+      <Stack gap={'sm'}>
+        <Flex justify={'space-between'}>
+          <Group gap={'sm'}>
+            <Avatar
+              size={'xs'}
+              src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${i.currency}.svg`}
+            />
+            <Title order={5}>
+              {i.alias}
+            </Title>
+          </Group>
+
+          <Badge>Status</Badge>
+        </Flex>
+        <Box>
+          <Text c={'dimmed'} fz={'xs'}>Balance</Text>
+          <Title order={3} fw={'bold'} >
+            <NumberFormatter prefix={i.symbol} value={i.balance} thousandSeparator />
+          </Title>
+        </Box>
+        {/* <Group>
+        {actions}
+        </Group> */}
+      </Stack>
+    </Box>
+  ))
+
+
+  return (
+    <Box className={styles.graphics2_wrapper}>
+      <Box className={styles.graphics2_account_cards_cont}>
+        {account_cards}
+      </Box>
+    </Box>
+  )
+}
+
+
+
+const Graphics3AccountAnalytics = () => {
+
+  const [data, setData] = useState([])
+
+  const generateCashflowData = () => {
+    const data = [];
+    const startDate = new Date();
+    const getRandomValue = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1)) + min;
+
+    for (let i = 0; i < 30; i++) {
+      const date = new Date(startDate);
+      date.setDate(date.getDate() - i);
+
+      data.push({
+        date: date.toISOString().split("T")[0], // Format date as 'YYYY-MM-DD'
+        credit: getRandomValue(0, 50000), // Example range for cashflow values
+        debit: getRandomValue(-50000, 2000), // Example range for cashflow values
+      });
+    }
+
+    return data.reverse(); // Reverse to make the earliest date come first
+  };
+
+  useGSAP(() => {
+    
+  })
+
+  useEffect(() => {
+   const interval = setInterval(() => {
+    const chartdata = generateCashflowData()
+      setData(chartdata)
+    }, 5000);
+
+    return () => clearInterval(interval)
+  },[])
+
+  return (
+    <Box className={styles.graphics3_wrapper}>
+      <Box className={styles.graphics3_analytics_card_outer} pos={'relative'}>
+        <Box className={styles.graphics3_analytics_card_inner}>
+          <Stack gap={'sm'}>
+          <Text variant="gradient" gradient={{ from: 'dark.1', to: 'dark.8', deg: 70 }}>Cash Flow Analysis</Text>
+          <Group >
+            <Group gap={4}>
+            <ColorSwatch size={10} color="var(--mantine-color-teal-9)" />            
+              <Text c={'dimmed'} size="xs">Income</Text>
+            </Group>
+            <Group gap={4}>
+            <ColorSwatch size={10} color="var(--mantine-color-red-9)" />            
+              <Text c={'dimmed'} size="xs">Expense</Text>
+            </Group>
+          </Group>
+          <BarChart
+          h={140}
+          data={data}
+          dataKey="date"
+          type="default"
+          strokeDasharray={"10 10"}
+          xAxisProps={{
+            padding: "no-gap",
+            interval: "preserveStartEnd",
+            axisLine: { stroke: "#000", strokeWidth: 0.1 },
+          }}
+          yAxisProps={{
+            interval: "equidistantPreserveStart",
+            orientation: "right",
+          }}
+          // withLegend
+          legendProps={{ verticalAlign: "top", height: 40 }}
+          curveType="natural"
+          gridAxis="x"
+          tickLine="x"
+          withYAxis={true}
+          withDots={false}
+          series={[
+            { name: "credit", label: "Income", color: "teal.9" },
+            { name: "debit", label: "Expenses", color: "red.7" },
+          ]}
+        />
+          </Stack>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+

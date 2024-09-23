@@ -82,9 +82,10 @@ const NetWorthSection = () => {
     return (
       <Container my={200} size={"lg"}>
         <div className={styles.cont}>
-          <Title fz={50} ta={"center"}>
-            Your networth <br /> visualized in real-time
-          </Title>
+        <Title tt={"capitalize"} fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>
+        Your networth <br /> visualized in real-time
+        </Title>
+       
           <div className={styles.networth_box_blur}>
             
             <div className={styles.networth_content}>

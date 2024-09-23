@@ -1,283 +1,268 @@
 .graphics1_wrapper {
-    height: 500px;
-    width: 100%;
-    border: thin solid var(--mantine-color-dark-7);
-    border-radius: var(--mantine-radius-md);
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    position: relative;
-    margin-top: 100px;
-    overflow-block: clip;
-    overflow-clip-margin: 100px;
+  height: 500px;
+  width: 100%;
+  border: thin solid var(--mantine-color-dark-7);
+  border-radius: var(--mantine-radius-md);
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  position: relative;
+  margin-top: 100px;
+  overflow-block: clip;
+  overflow-clip-margin: 100px;
 }
 
 .graphics1_container {
-    position: absolute;
-    max-width: 90%;
-    width: 100%;
-    height: 600px;
-    bottom: 0px;
-    background-color: var(--mantine-color-dark-9);
-    border: inherit;
-    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
-    border-bottom: none;
-    /* box-shadow: var(--mantine-shadow-sm); */
-    margin-top: 200px;
-     background-color: rgba(20, 20, 20, 0.083); 
- backdrop-filter: blur(14px);
+  position: absolute;
+  max-width: 90%;
+  width: 100%;
+  height: 600px;
+  bottom: 0px;
+  background-color: var(--mantine-color-dark-9);
+  border: inherit;
+  border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
+  border-bottom: none;
+  /* box-shadow: var(--mantine-shadow-sm); */
+  margin-top: 200px;
+  background-color: rgba(20, 20, 20, 0.083);
+  backdrop-filter: blur(14px);
 
 }
 
 
 .graphics1_content {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
 
 }
 
-.graphics1_content::before{
-    content: "";
-    position: absolute;
-    width: 100%;
-    border-radius: inherit;
-    height: 100%;
-    /* backdrop-filter: blur(20px); */
-    box-shadow: var(--mantine-shadow-md);
-    inset: 0;
-    z-index: 1;
+.graphics1_content::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-radius: inherit;
+  height: 100%;
+  /* backdrop-filter: blur(20px); */
+  box-shadow: var(--mantine-shadow-md);
+  inset: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
-@keyframes text-gradient-animation {
-    0% {
-      --c-0: hsla(1, 100%, 64%, 1);
-      --s-start-0: 17%;
-      --s-end-0: 63%;
-      --x-0: 90%;
-      --y-0: 84%;
-      --s-start-1: 7%;
-      --s-end-1: 74%;
-      --x-1: 55%;
-      --y-1: 93%;
-      --c-1: hsla(34, 100%, 60%, 1);
-      --x-2: 47%;
-      --c-2: hsla(322, 71%, 78%, 1);
-      --y-2: 92%;
-      --s-start-2: 8%;
-      --s-end-2: 63%;
-      --s-start-3: 8%;
-      --s-end-3: 88%;
-      --c-3: hsla(255, 76%, 55%, 1);
-      --x-3: 57%;
-      --y-3: 0%;
-      --y-4: 54%;
-      --s-start-4: 10%;
-      --s-end-4: 68%;
-      --x-4: 1%;
-      --c-4: hsla(328, 74%, 65%, 1);
-    }
-  
-    100% {
-      --c-0: rgba(248, 232, 245, 0.506);
-      --s-start-0: 5%;
-      --s-end-0: 57%;
-      --x-0: 97%;
-      --y-0: 83%;
-      --s-start-1: 15%;
-      --s-end-1: 88%;
-      --x-1: 52%;
-      --y-1: 84%;
-      --c-1: hsla(296, 58%, 62%, 1);
-      --x-2: 80%;
-      --c-2: hsla(356, 73%, 91%, 1);
-      --y-2: 5%;
-      --s-start-2: 5%;
-      --s-end-2: 84%;
-      --s-start-3: 10%;
-      --s-end-3: 72%;
-      --c-3: hsla(353, 81%, 59%, 1);
-      --x-3: 5%;
-      --y-3: 23%;
-      --y-4: 32%;
-      --s-start-4: 16%;
-      --s-end-4: 60%;
-      --x-4: 79%;
-      --c-4: hsla(326, 97%, 89%, 1);
-    }
-  }
-  
-  @property --c-0 {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: hsla(1, 100%, 64%, 1)
-  }
-  
-  @property --s-start-0 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 17%
-  }
-  
-  @property --s-end-0 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 63%
-  }
-  
-  @property --x-0 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 90%
-  }
-  
-  @property --y-0 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 84%
-  }
-  
-  @property --s-start-1 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 7%
-  }
-  
-  @property --s-end-1 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 74%
-  }
-  
-  @property --x-1 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 55%
-  }
-  
-  @property --y-1 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 93%
-  }
-  
-  @property --c-1 {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: hsla(34, 100%, 60%, 1)
-  }
-  
-  @property --x-2 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 47%
-  }
-  
-  @property --c-2 {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: hsla(322, 71%, 78%, 1)
-  }
-  
-  @property --y-2 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 92%
-  }
-  
-  @property --s-start-2 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 8%
-  }
-  
-  @property --s-end-2 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 63%
-  }
-  
-  @property --s-start-3 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 8%
-  }
-  
-  @property --s-end-3 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 88%
-  }
-  
-  @property --c-3 {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: hsla(255, 76%, 55%, 1)
-  }
-  
-  @property --x-3 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 57%
-  }
-  
-  @property --y-3 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 0%
-  }
-  
-  @property --y-4 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 54%
-  }
-  
-  @property --s-start-4 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 10%
-  }
-  
-  @property --s-end-4 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 68%
-  }
-  
-  @property --x-4 {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 1%
-  }
-  
-  @property --c-4 {
-    syntax: '<color>';
-    inherits: false;
-    initial-value: hsla(328, 74%, 65%, 1)
-  }
-  
-  .graphics1_wrappe {
-    --c-0: hsla(1, 100%, 64%, 1);
-    --x-0: 90%;
-    --y-0: 84%;
-    --x-1: 55%;
-    --y-1: 93%;
-    --c-1: hsla(34, 100%, 60%, 1);
-    --x-2: 47%;
-    --c-2: hsla(322, 71%, 78%, 1);
-    --y-2: 92%;
-    --c-3: hsla(255, 76%, 55%, 1);
-    --x-3: 57%;
-    --y-3: 0%;
-    --y-4: 54%;
-    --x-4: 1%;
-    --c-4: hsla(328, 74%, 65%, 1);
-    ;
-    background-color: hsla(26, 79%, 79%, 1);
-    background-image: radial-gradient(circle at var(--x-0) var(--y-0), var(--c-0) var(--s-start-0), transparent var(--s-end-0)), radial-gradient(circle at var(--x-1) var(--y-1), var(--c-1) var(--s-start-1), transparent var(--s-end-1)), radial-gradient(circle at var(--x-2) var(--y-2), var(--c-2) var(--s-start-2), transparent var(--s-end-2)), radial-gradient(circle at var(--x-3) var(--y-3), var(--c-3) var(--s-start-3), transparent var(--s-end-3)), radial-gradient(circle at var(--x-4) var(--y-4), var(--c-4) var(--s-start-4), transparent var(--s-end-4));
-    animation: text-gradient-animation 5s linear infinite alternate;
-    background-blend-mode: normal, normal, normal, normal, normal;
-  }
+.graphics2_wrapper {
+  height: 100%;
+  --base-x: 10%;
+  --base-z: 180px;
+  --y: 0;
+  --c: 40;
+  --z: 0;
+  aspect-ratio: 432 / 320;
+  max-width: 90%;
+  max-height: 100%;
+  overflow: hidden;
+  width: 100%;
+  contain: strict;
+  isolation: isolate;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  position: relative;
+  --green: #68cc58;
+  --green-dim: #68cc5840;
+  --orange: #f2994a;
+  --orange-dim: #f2994a40;
+  --red: #c52828;
+  --red-dim: #c5282840;
+  /* background-color: #68cc58; */
+}
+
+
+.graphics2_wrapper::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, darken(var(--mantine-color-dark-9), 0.07) 0, transparent 30%), linear-gradient(to right, transparent 60%, darken(var(--mantine-color-dark-9), 0.07) 100%);
+}
+
+.graphics2_account_cards_cont {
+  width: 100%;
+  height: 100%;
+  perspective: 2000px;
+  perspective-origin: 50%;
+}
+
+.graphics2_account_card {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 500px;
+  isolation: isolate;
+  contain: paint;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: var(--mantine-radius-md);
+  border: thin solid var(--mantine-color-dark-7);
+  padding: 16px;
+  background-color: rgba(41, 41, 41, 0.182);
+}
+
+.graphics2_wrapper .graphics2_account_card {
+  transform-style: preserve-3d;
+  transition: .32s ease-out;
+  transition-property: transform, background;
+  box-shadow: var(--mantine-shadow-md);
+  /* box-shadow: rgba(38, 38, 38, 0.2) 0px 8px 24px; */
+}
+
+.graphics2_wrapper .graphics2_account_card:last-child {
+  transform: translateY(35px);
+
+}
+
+.graphics2_wrapper .graphics2_account_card:nth-child(2) {
+  transform: translateX(30px) translateZ(10px);
+}
+
+.graphics2_wrapper .graphics2_account_card:first-child {
+  transform: translateY(-35px) translateX(60px) translateZ(20px);
+
+}
+
+/* .graphics2_account_card:first-child:hover{
+    transform: translateY(-50px) translateX(60px) translateZ(25px);
+} */
+
+.graphics3_wrapper {
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  --mask-bottom: linear-gradient(to bottom, #000 30%, #00000000 80%);
+  --mask-right: linear-gradient(to right, #000 40%, #00000000 90%);
+  -webkit-mask-image: var(--mask-bottom), var(--mask-right);
+  mask-image: var(--mask-bottom), var(--mask-right);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  height: 100%;
+}
+
+.graphics3_analytics_card_outer {
+  --gradientBorder-size: 1px;
+  --gradientBorder-gradient: linear-gradient(to bottom right, hsla(0, 0%, 100%, .07), transparent);
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  padding: 8px;
+  position: relative;
+}
+
+.graphics3_analytics_card_outer::before {
+  content: "";
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  padding: var(--gradientBorder-size, 1px);
+  background: var(--gradientBorder-gradient);
+  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.graphics3_analytics_card_inner {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  --gradientBorder-size: 1px;
+  --gradientBorder-gradient: linear-gradient(to bottom right, hsla(0, 0%, 100%, .17), transparent);
+  background: linear-gradient(134deg, hsla(0, 0%, 100%, .08), hsla(0, 0%, 100%, .02), hsla(0, 0%, 100%, 0) 55%);
+  border-radius: 10px;
+  height: 100%;
+  padding: var(--mantine-spacing-sm);
+}
+
+.graphics3_analytics_card_inner::before {
+  content: "";
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  padding: var(--gradientBorder-size, 1px);
+  background: var(--gradientBorder-gradient);
+  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.graphics3_analytics_card {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--mantine-radius-md);
+  border: thin solid var(--mantine-color-dark-7);
+  padding: 16px;
+  background-color: rgba(60, 60, 60, 0.182);
+}
+
+
+
+.accounts_card_expanded_cont {
+  background-color: #00000050;
+  backdrop-filter: blur(15px);
+  width: 100%;
+  height: 100dvh;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.accounts_card_expanded {
+  position: fixed;
+  inset: 5vh 0 0 0;
+  margin-inline: auto;
+  max-width: 960px;
+  background: var(--mantine-color-black);
+  z-index: 10;
+  border-radius: 30px 30px 0 0;
+  outline: none;
+  contain: strict;
+  isolation: isolate;
+  pointer-events: auto;
+  transform: none;
+  transform-origin: 50% 50% 0px;
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+.accounts_card_shrinked{
+  width: 336px;
+    aspect-ratio: 336 / 430;
+    background-color: darken(var(--mantine-color-dark-9), 0.29);
+    border-radius: var(--mantine-radius-lg);
+
+    padding: var(--mantine-spacing-lg);
+}
+
+.accounts_card_shrinked:hover {
+  filter: brightness(120%);
+}

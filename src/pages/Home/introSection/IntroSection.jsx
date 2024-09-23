@@ -10,7 +10,7 @@ import styles from './IntroSection.module.css'
 const IntroSection = () => {
   return (
     <Container size={"lg"} py={70}>
-      <SimpleGrid cols={{ base: 1, md: 2 }}>
+      <SimpleGrid cols={{ base: 1,xs:1, sm:2, md: 2 }}>
         <Title tt={"capitalize"} fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>
           Not Just Banking. <br /> this is So Much More.
         </Title>
