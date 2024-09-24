@@ -4,13 +4,14 @@
     margin-inline: auto;
     border-radius: var(--mantine-radius-md);
     background-color: rgba(40, 40, 40, 0);
-    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     position: relative;
 }
 
-.networth_box_blur:hover {
+/* .networth_box_blur:hover {
     filter: brightness(105%);
-  }
+  } */
 
 
 
@@ -35,10 +36,11 @@
     width: 100%;
     border-radius: inherit;
     height: 100%;
-    backdrop-filter: blur(20px);
-    box-shadow: var(--mantine-shadow-md);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    /* box-shadow: var(--mantine-shadow-md); */
     inset: 0;
-    z-index: 1;
+    z-index: 2;
     pointer-events: none;
 
 }
