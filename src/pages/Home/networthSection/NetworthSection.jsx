@@ -114,7 +114,7 @@ const NetWorthSection = () => {
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                     Networth
                   </Text>
-                  <Title order={1}>
+                  <Title fz={{base: 'h2',xs: 'h3', sm: "h1", md: 'h1'}}>
                     <NumberFormatter prefix="$" value={5000} thousandSeparator />
                   </Title>
                 </Box>
@@ -122,7 +122,7 @@ const NetWorthSection = () => {
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                     Diff
                   </Text>
-                  <Title c={"red.8"} order={1}>
+                  <Title fz={{base: 'h2',xs: 'h3', sm: "h1", md: 'h1'}}>
                     <NumberFormatter suffix="%" value={10} thousandSeparator />
                   </Title>
                 </Box>
@@ -130,7 +130,7 @@ const NetWorthSection = () => {
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                     Target
                   </Text>
-                  <Title order={1}>
+                  <Title fz={{base: 'h2',xs: 'h3', sm: "h1", md: 'h1'}}>
                     <NumberFormatter prefix="$" value={10000} thousandSeparator />
                   </Title>
                 </Box>

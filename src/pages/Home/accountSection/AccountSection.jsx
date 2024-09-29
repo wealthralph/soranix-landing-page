@@ -77,7 +77,7 @@ const AccountSection = () => {
 
   const accountTypes = accountTypesData.map((i, index) => {
     return (
-      <CarouselSlide key={i.id} h={430}>
+      <CarouselSlide key={i.id} >
 
         <BoxMotion onClick={() => setAccountId(i.id)} layoutId={i.id} className={styles.accounts_card_shrinked}>
           <Stack h={'100%'} justify="end">
@@ -110,9 +110,9 @@ const AccountSection = () => {
   }, [accountId]);
 
   return (
-    <Container  size={"lg"} ref={containerRef}>
+    <Container size={"lg"} ref={containerRef}>
       <Stack gap={"xl"} w={'100%'}>
-        <Box maw={500} w={"100%"}>
+        <Box maw={400} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
               <Badge variant="light">Accounts</Badge>
@@ -148,10 +148,11 @@ const AccountSection = () => {
                     paddingInlineEnd: !isMobile
                       ? "var(--mantine-spacing-xl)"
                       : null,
+                    overflow: 'hidden'
                   }
                 }}
               >
-                <Stack py={"xl"} h={400}
+                <Stack maw={450} py={"xl"} h={400}
                 >
                   <Box>
                     <Title order={3} fw={"normal"}>
@@ -166,7 +167,6 @@ const AccountSection = () => {
                 </Stack>
               </Grid.Col>
               <Grid.Col
-                h={''}
                 span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
                 styles={{
                   col: {
@@ -182,8 +182,8 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack py={"xl"}>
-                  <Box>
+                <Stack maw={450} py={"xl"}>
+                  <Box >
                     <Title order={3} fw={"normal"}>
                       Push beyond the limits of traditional banking
                     </Title>
@@ -254,23 +254,29 @@ const AccountSection = () => {
             </Grid>
             <Divider color="dark.7" />
           </Box>
-          <Box py={'xl'}>
-            <Stack w={'100%'}>
+          <Box py={'xl'} w={'100%'} >
+            <Stack w={'100%'}  >
               <Stack maw={500} >
                 <Title order={2}>Accounts built for <br /> the new era of finance </Title>
-                {/* <Text c={'dimmed'} size="md">Our powerful suite of expense management features automates the hard work of budgeting and tracking your expenditures. </Text> */}
+                <Text c={'dimmed'} size="md">Our powerful suite of expense management features automates the hard work of budgeting and tracking your expenditures. </Text>
               </Stack>
+              <Box>
+
               <Carousel
                 getEmblaApi={setEmbla}
+                bg={'grape'}
                 withControls={false}
                 withIndicators={false}
-                slideSize={{ base: '336px' }}
+                slideSize='32.333333%'              
                 slideGap="md"
                 loop
                 align="start"
-                slidesToScroll={1}>
+                slidesToScroll={isMobile ? 1 : 2}
+                initialSlide={isMobile ? 1 : 2}
+              >
                 {accountTypes}
               </Carousel >
+              </Box>
               <Group justify="end">
                 <ActionIcon variant="light" color="gray" radius={'xl'} onClick={scrollPrev}>
                   <IconArrowLeft strokeWidth={1.5} size={14} />
@@ -915,7 +921,7 @@ const Graphics3AccountAnalytics = () => {
                 withYAxis={false}
                 withDots={false}
                 series={[
-                  { name: "credit", label: "Income", color: "teal.9" },
+                  { name: "credit", label: "Income", color: "teal.7" },
                   { name: "debit", label: "Expenses", color: "red.7" },
                 ]}
               />
@@ -927,9 +933,9 @@ const Graphics3AccountAnalytics = () => {
         <Box className={styles.graphics3_analytics_alert_content}>
           <Group gap={'xs'}>
             {/* <ThemeIcon size={'sm'} variant="transparent" ><IconBell strokeWidth={1.5} size={16} /></ThemeIcon> */}
-          <Text size="xs" fw={'bold'}>Spending Pattern</Text>
+            <Text size="xs" c={'dimmed'} fw={'bold'}>Spending Pattern</Text>
           </Group>
-          <Text c={'dimmed'} maw={400} size={'xs'}>You've spent 30% of your monthly budget on dining out.</Text>
+          <Text maw={400} size={'xs'}>You've spent 30% of your monthly budget on dining out.</Text>
         </Box>
       </Box>
     </Box>

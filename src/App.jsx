@@ -11,16 +11,12 @@ const theme = createTheme({
       defaultProps: {
         bg:'dark.9',
       },
-      styles:{
-        root: {
-          border: "thin solid var(--mantine-color-dark-7)"
-        }
-      }
+  
     })
   },
   Divider: Divider.extend({
     defaultProps:{
-      color: 'dark.1'
+      color: 'dark.7'
     }
   })
 });

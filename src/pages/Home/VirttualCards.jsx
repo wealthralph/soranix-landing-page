@@ -8,7 +8,7 @@ import { Badge, Box, Container, Paper, Stack, Text, Title } from "@mantine/core"
 
 const VirtualCards = () => {
     return (
-      <Container size={"lg"} my={100}>
+      <Container w={'100%'} size={"lg"} my={100}>
         <Stack gap={"xl"}>
           <Box maw={600} w={"100%"}>
             <Stack gap={"xl"}>
@@ -32,8 +32,8 @@ const VirtualCards = () => {
                   >
                     Spend with confidence.{" "}
                   </Text>{" "}
-                  Our virtual cards provide a smooth, secure way make
-                  international payments whether you&rsquo;re shopping online or
+                  Our virtual cards provide a smooth, secure way to make
+                   payments anywhere, whether you&rsquo;re shopping online or
                   in-store.
                 </Text>
               </Box>

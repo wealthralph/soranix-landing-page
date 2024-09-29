@@ -1,0 +1,17 @@
+/* .expense_tools_slider_cont{
+    background-color: var(--mantine-color-dark-7);
+    width: max-content;
+    padding: var(--mantine);
+} */
+
+.animated_line {
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    inset: 0;
+    /* border: thin solid var(--mantine-color-dark-7); */
+    /* background-color: rgba(53, 53, 53, 0.562); */
+    border-radius: var(--mantine-radius-sm);
+    box-shadow: var(--mantine-shadow-md);
+}
