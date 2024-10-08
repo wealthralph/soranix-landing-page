@@ -11,14 +11,12 @@ const PaymentSection = () => {
     const [value, setValue] = useState("personal");
   
     return (
-      <Container size={"lg"} my={100}>
+      <Container size={"lg"} my={50}>
         <Stack gap={"xl"}>
           <Box maw={600} w={"100%"}>
             <Stack gap={"xl"}>
               <Box>
-                <Badge color="orange" variant="light">
-                  Payments
-                </Badge>
+               
                 <Title
                   tt={"capitalize"}
                   fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
@@ -42,34 +40,11 @@ const PaymentSection = () => {
                   effortlessly.
                 </Text>
               </Box>
-              <SegmentedControl
-                value={value}
-                w={250}
-                size="xs"
-                onChange={setValue}
-                data={[
-                  { label: "Personal", value: "personal" },
-                  { label: "Business", value: "business" },
-                ]}
-              />
+             
             </Stack>
           </Box>
   
-          <Carousel
-            withControls={false}
-            loop
-            withIndicators={false}
-            slideGap={"xl"}
-            align="start"
-            slideSize={{ base: "100%", sm: "100%", md: "70%" }}
-          >
-            <Carousel.Slide>
-              <Paper withBorder h={250}></Paper>
-            </Carousel.Slide>
-            <Carousel.Slide>
-              <Paper withBorder h={250}></Paper>
-            </Carousel.Slide>
-          </Carousel>
+        
           <Box>
             {/* <Divider /> */}
             <Divider />

@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-rows: auto; */
+  grid-template-areas:
+    "hiddenFees customize secure cardUi "
+    "analytics  card card cardUi  "
+    "limit  limit global  conversion "
+
+  ;
+  gap: 16px;
+  border-radius: 8px;
+}
+
+.gridItem {
+  font-family: 'M PLUS 2 Variable', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.1);
+
+  border: thin solid var(--mantine-color-dark-7);
+}
+
+.salmon {
+  grid-area: hiddenFees;
+}
+
+.bread {
+  grid-area: customize;
+  grid-column: span ;
+  overflow: hidden;
+}
+
+.broccoli {
+  grid-area: cardUi;
+}
+
+.tamago {
+  grid-area: secure;
+}
+
+.pork {
+  grid-area: card;
+}
+
+.edamame {
+  grid-area: analytics;
+}
+
+.tomato {
+  grid-area: limit;
+}
+
+.tofu {
+  grid-area: global;
+}
+
+.conversion {
+  grid-area: conversion;
+}
+
+.card {
+  padding: var(--mantine-spacing-md);
+  border: thin solid var();
+  height: 240px;
+}

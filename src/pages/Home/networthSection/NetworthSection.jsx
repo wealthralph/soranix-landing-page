@@ -91,7 +91,7 @@ const NetWorthSection = () => {
           </Title>
           <Text c={'dimmed'}>Track your net worth as it evolves in real-time. Get a clear, up-to-the-minute view of your assets, liabilities, and overall financial health, all in one place.</Text>
         </SimpleGrid>
-        <Container my={40} w={'100%'} size={'md'}>
+        <Container  my={40} w={'100%'} p={0} size={'md'}>
           <div className={styles.networth_box_blur}>
 
             <div className={styles.networth_content}>
@@ -169,7 +169,8 @@ const NetWorthSection = () => {
                     Impact Analysis
                   </Title>
                   <Text c={"dimmed"}>
-                    Get break down how your spending, savings, and transactions directly affect your net worth, giving you a clear view of how daily decisions shape your financial future.
+
+                    Get a clear view of how your daily decisions like savings, expense affect your net-worth and shape your financial future.
                   </Text>
                 </Box>
               </Stack>

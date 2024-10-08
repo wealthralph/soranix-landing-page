@@ -8,9 +8,7 @@ const theme = createTheme({
   primaryColor: "indigo",
   components: {
     Paper: Paper.extend({
-      defaultProps: {
-        bg:'dark.9',
-      },
+    
   
     })
   },
@@ -25,7 +23,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <MantineProvider
-        defaultColorScheme="dark"
+        defaultColorScheme="light"
         theme={theme}
         classNamesPrefix="web"
       >

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion"
-import { Box, Container, Divider, Flex, Grid, Group, Paper, SimpleGrid, Stack, Text, Title } from '@mantine/core'
+import { Box, Container, Divider, Flex, Grid, Group, List, Paper, rem, Space, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { useInterval } from '@mantine/hooks'
 import styles from "./ExpenseManagementSection.module.css"
+import { IconCircleCheck, IconCircleDashed } from '@tabler/icons-react'
 
 
 
@@ -15,27 +16,46 @@ const ExpenseManagementSection = () => {
   const expenseManagementData = [
     {
       id: 1,
-      title: "Budgets",
-      description: "Plan, provision, and track your spending in one place — so every dollar goes where you want it to.",
+      name: "Budgets",
+      features: [],
+      title: "Budgets That Work as Hard as You Do",
+      description: "Organize your income with custom budgets for every aspect of your life.",
       bg: "teal.9"
     },
     {
       id: 2,
-      title: "Income Source",
-      description: "Plan, provision, and track your spending in one place — so every dollar goes where you want it to.",
+      name: "Income Source",
+      title: "Connect the Dots on Your Income",
+      description: "Get a clear picture of every income source you have—whether from your job, freelance work, or investments.",
+      features: [
+        {
+          id: 1,
+          title: 'Income Groups',
+          description: "Categorize and organize different income streams."
+        },
+        {
+          id: 2,
+          title: 'Income Insight & Analytics',
+          description: 'Identify peak income periods and see how your earnings evolve month-to-month or year-to-year.'
+        }
+      ],
       bg: "pink.9"
     },
     {
       id: 3,
-      title: "Categories",
-      description: "Plan, provision, and track your spending in one place — so every dollar goes where you want it to.",
+      name: "Expense Categories",
+      title: "Expense Categories that Make Sense ",
+      description: "Break down your expenses into clear categories that help you understand your spending habits and make smarter financial choices.",
+      features: [],
       bg: "blue.9"
     },
     {
       id: 4,
-      title: "Alerts",
-      description: "Plan, provision, and track your spending in one place — so every dollar goes where you want it to.",
-      bg: "cyan.9"
+      name: "Financial  Plans",
+      title: "Expense Categories that Make Sense ",
+      description: "Break down your expenses into clear categories that help you understand your spending habits and make smarter financial choices.",
+      features: [],
+      bg: "blue.9"
     },
 
   ]
@@ -109,7 +129,7 @@ const ExpenseManagementSection = () => {
             root: { zIndex: '2' }
           }}
         >
-          {i.title}
+          {i.name}
         </Title>
       </BoxMotion>
     );
@@ -121,39 +141,63 @@ const ExpenseManagementSection = () => {
       <Stack w={'100%'} gap={'xl'} >
         <Stack>
           <Box maw={500} w={'100%'} bg={'bl'}>
-            <Title fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>Expense management tools so good, even corporations are envious.</Title>
+            <Title fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>Money management tools so good, even corporations are envious.</Title>
             <Text c={'dimmed'} size="md">Our powerful suite of expense management features automates the hard work of budgeting and tracking your expenditures. </Text>
           </Box>
           <Group gap={'xs'} bg={'dark.8'} p={'4px'} w={'max-content'} style={{ borderRadius: "var(--mantine-radius-sm)" }} className={styles.expense_tools_slider_cont} >
-            {expenseManagement}
+            {/* {expenseManagement} */}
           </Group>
         </Stack>
         <Grid gutter={'xl'}>
-          <Grid.Col  span={{ base: 12, xs: 12, sm: 4 ,md: 5, lg:5}} order={{ base: 2, xs:2, sm: 1, lg: 1 }}>
+          <Grid.Col span={{ base: 12, xs: 12, sm: 4, md: 5, lg: 5 }} order={{ base: 2, xs: 2, sm: 1, lg: 1 }}>
             <AnimatePresence mode='wait'>
-              <div>
-                {currentItem.title} 
-                {currentItem.description} 
-              </div>
+              <Stack gap={'xs'}>
+                <Title order={2}>{currentItem.title}</Title>
+                <Text>{currentItem.description}</Text>
+                <List
+                  spacing="xs"
+                  size="sm"
+                  center
+                  icon={
+                    <ThemeIcon color="teal" size={24} radius="xl">
+                      <IconCircleCheck style={{ width: rem(16), height: rem(16) }} />
+                    </ThemeIcon>
+                  }
+                >
+                  <List.Item>Clone or download repository from GitHub</List.Item>
+                  <List.Item>Install dependencies with yarn</List.Item>
+                  <List.Item>To start development server run npm start command</List.Item>              
+                  <List.Item
+                    icon={
+                      <ThemeIcon color="blue" size={24} radius="xl">
+                        <IconCircleDashed style={{ width: rem(16), height: rem(16) }} />
+                      </ThemeIcon>
+                    }
+                  >
+                    Submit a pull request once you are done
+                  </List.Item>
+                </List>
+              </Stack>
             </AnimatePresence>
           </Grid.Col>
-          <Grid.Col span={{ base: 12, xs: 12, sm: 8, md: 7 , lg: 7 }} order={{ base: 1, xs:1, sm: 2, lg: 2 }}>
-          <AnimatePresence mode='wait'>
-              <BoxMotion 
-              key={currentItem ? currentItem.id : ''}
-              initial={{ y: 10, opacity: 0 }}
+          <Grid.Col span={{ base: 12, xs: 12, sm: 8, md: 7, lg: 7 }} order={{ base: 1, xs: 1, sm: 2, lg: 2 }}>
+            <AnimatePresence mode='wait'>
+              <BoxMotion
+                key={currentItem ? currentItem.id : ''}
+                initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -10, opacity: 0 }}
                 transition={{ duration: 0.2 }}>
-                  {
-                    currentItem && <Paper bg={currentItem.bg}  h={400}>  {currentItem.title}</Paper>
-                  }
+                {
+                  currentItem && <Paper bg={currentItem.bg} h={400}>  {currentItem.name}</Paper>
+                }
               </BoxMotion>
             </AnimatePresence>
           </Grid.Col>
         </Grid>
       </Stack>
-      {/* <Divider color='dark.7' />3 */}
+      <Space h={'lg'} />
+      <Divider color='dark.7' />
     </Container>
   )
 }

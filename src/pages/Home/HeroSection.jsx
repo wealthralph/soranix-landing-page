@@ -20,8 +20,8 @@ const HeroSection = () => {
 
       // Animate the text after the title
       .fromTo(textRef.current,
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1 },
+        { y: -50, opacity: 0 },
+        { y: 0, opacity: 1, duration:0.3 },
         "-=0.5" // Overlap animations slightly by starting the text 0.5 seconds before the title ends
       );
   }, { scope: BoxRef });
@@ -31,29 +31,17 @@ const HeroSection = () => {
 
       <Container size={"lg"} >
         <Stack gap={"lg"}>
-          <Box maw={500} ref={BoxRef}>
+          <Box maw={600} ref={BoxRef}>
             <Title
               fz={{ base: 50, xs: "h1", sm: "h1", md: 50 }}
               tt={"capitalize"}
               fw={"bold"}
               ref={titleRef} // Reference for animation
             >
-              One Platform for all your financial needs
-              <Highlight
-                highlight="powered by ai"
-                highlightStyles={{
-                  backgroundImage:
-                    'linear-gradient(45deg, var(--mantine-primary-color-5), var(--mantine-color-grape-5))',
-                  fontWeight: 700,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                }}
-                inherit
-              >
-                powered by ai
-              </Highlight>
+           Take control of Your Financial future, the Modern Way. {' '}
+             
             </Title>
-            <Text ref={textRef}>
+            <Text maw={500} ref={textRef}>
               Unlock the full potential of your finances with a platform that goes beyond the basics.
             </Text>
           </Box>
@@ -62,7 +50,7 @@ const HeroSection = () => {
           </Box>
         </Stack>
         <Space h={70} />
-        <div className={styles.translucent_cont}>
+        {/* <div className={styles.translucent_cont}>
           <div className={styles.gradient}>Hello</div>
           <div className={styles.translucent_bg} >
             <Container size={'lg'} p={'xs'}>
@@ -83,8 +71,8 @@ const HeroSection = () => {
               </Grid>
             </Container>
           </div>
-        </div>
-        <Space h={70} />
+        </div> */}
+        {/* <Space h={70} /> */}
       </Container>
     </Box>
   );
