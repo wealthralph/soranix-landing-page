@@ -50,12 +50,12 @@ const VirtualCards = () => {
 
 
   return (
-    <Container w={'100%'} size={"lg"} my={100} ref={containerRef}>
+    <Container w={'100%'} size={"lg"} my={50} ref={containerRef}>
       <Stack gap={"xl"}>
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
-              <Badge variant="light">Virtual Cards</Badge>
+              <Text size="xs" ff={'monospace'}>Virtual Cards</Text>
               <Title
                 tt={"capitalize"}
                 fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
@@ -82,59 +82,7 @@ const VirtualCards = () => {
           </Stack>
         </Box>
         <CardModel />
-        <Box>
-          <Divider color="var(--mantine-color-dark-7" />
-          <Grid m={"xs"}>
-            <Grid.Col h={400} span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} style={{
-              paddingInlineEnd: !isMobile
-                ? "var(--mantine-spacing-xl)"
-                : null,
-            }}>
-              <Stack py={"xl"}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Impact Analysis
-                  </Title>
-                  <Text c={"dimmed"}>
-                    Get break down how your spending, savings, and transactions directly affect your net worth, giving you a clear view of how daily decisions shape your financial future.
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-            <Grid.Col
-              h={400}
-              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-              styles={{
-                col: {
-                  borderLeft: !isMobile
-                    ? `thin solid var(--mantine-color-dark-7)`
-                    : "none",
-                  borderTop: !isMobile
-                    ? "none"
-                    : `thin solid var(--mantine-color-dark-7)`,
-                  paddingInlineStart: !isMobile
-                    ? "var(--mantine-spacing-xl)"
-                    : null,
-                },
-              }}
-            >
-              <Stack py={"xl"}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Net-Worth Drivers
-                  </Title>
-                  <Text c={"dimmed"}>
-                    Boost your account experience with a range of smart,
-                    easy-to-customize features .
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-          </Grid>
-          <Divider color="var(--mantine-color-dark-7" />
-
-
-        </Box>
+    
 
       </Stack>
     </Container>
@@ -169,7 +117,7 @@ const CardModel = () => {
       </Canvas>
       <Flex justify={'center'}>
 
-        <Paper w={'fit-content'} radius={'md'} bg={'dark.8'} shadow="xs" p={'xs'}>
+        <Paper w={'fit-content'} radius={'md'} withBorder shadow="xs" p={'xs'}>
           <Group >
             {
               color_swatch_array

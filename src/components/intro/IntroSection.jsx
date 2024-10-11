@@ -20,7 +20,7 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
     const containerRef = useRef(null);
     const titleRef = useRef(null);
     const descRef = useRef(null);
-    const featureRefs = useRef([]); // Array to hold feature refs
+    const featureRefs = useRef([]); 
   
     useGSAP(() => {
       const tl = gsap.timeline({
@@ -40,7 +40,7 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
   
       // Description animation
       tl.to(descRef.current, {
-        duration: 4,
+        duration: 3,
         text: {
           value: desc,
           delimiter: " ",

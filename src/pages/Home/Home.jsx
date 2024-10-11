@@ -34,8 +34,7 @@ const Home = () => {
         <IntroSection part={2} title={"Track, Track, Track"} desc={'When You Can See All Your Money, You Can Keep More of It. '}/>
         <ExpenseManagementSection />
         <NetWorthSection />
-        <VirtualCards />
-        <PaymentSection />
+   
         <AutomationSection />
       {/* </Stack> */}
       <Space h={300} />

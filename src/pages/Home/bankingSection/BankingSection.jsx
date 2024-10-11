@@ -2,6 +2,7 @@ import { Badge, Container, Group, Paper, SimpleGrid, Space, Stack, Text, Title }
 import { motion } from "framer-motion";
 import AccountSection from "../accountSection/AccountSection";
 import PaymentSection from "../paymentsSection/PaymentSection";
+import VirtualCards from "../virtualCardSection/VirttualCards";
 
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
@@ -77,6 +78,7 @@ const BankingSection = () => {
         <Stack w={'100%'}>
         <AccountSection />
         <PaymentSection/>
+        <VirtualCards/>
         </Stack>
     </Container>
   )

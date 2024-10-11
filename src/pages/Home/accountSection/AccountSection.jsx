@@ -171,6 +171,8 @@ const AccountSection = () => {
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
+            <Text size="xs" ff={'monospace'}>Accounts</Text>
+
               <Title
                 tt={"capitalize"}
                 order={1}
