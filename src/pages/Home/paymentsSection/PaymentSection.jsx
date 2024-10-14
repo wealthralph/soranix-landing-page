@@ -10,6 +10,7 @@ import {
   Flex,
   Grid,
   Group,
+  Image,
   NumberFormatter,
   NumberInput,
   Paper,
@@ -29,7 +30,14 @@ import { useRef, useState } from "react";
 import styles from "./PaymentSection.module.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { avatar1, avatar2, avatar3, avatar4 } from "../../../assets/images";
+import {
+  avatar1,
+  avatar2,
+  avatar3,
+  avatar4,
+  iphoneMockup,
+  logoWhite,
+} from "../../../assets/images";
 
 const BoxMotion = motion.create(Box, { forwardMotionProps: true });
 
@@ -191,10 +199,16 @@ const Send = () => {
   return (
     <Box>
       <Grid ref={containerRef}>
-        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
+        <Grid.Col
+          span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          className={"box"}
+        >
           <SendUiAnimation />
         </Grid.Col>
-        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
+        <Grid.Col
+          span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          className={"box"}
+        >
           <Paper h={450} bg={"gray"} radius={"md"}></Paper>
         </Grid.Col>
       </Grid>
@@ -204,6 +218,7 @@ const Send = () => {
 
 const Receive = () => {
   const containerRef = useRef();
+  const mockupRef = useRef(null);
 
   useGSAP(
     () => {
@@ -219,16 +234,101 @@ const Receive = () => {
     { scope: containerRef }
   );
 
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+      tl.from(mockupRef.current, {
+        y: 250,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power1.inOut",
+        delay: 0.2,
+      });
+      tl.from(".title", {
+        y: 50,
+        opacity: 0,
+        stagger: 0.4,
+        duration: 0.5,
+        ease: "power1.inOut",
+        delay: 0.2,
+      });
+      // tl.from(".title", {
+      //   y: 150,
+      //   stagger: 0.4,
+      //   duration: 0.3,
+      //   ease: "power1.inOut",
+      //   delay: 0.2,
+      // });
+    },
+    {
+      scope: containerRef,
+    }
+  );
+
   return (
     <Box>
       <Grid ref={containerRef}>
-        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
-          <Paper h={400} bg={"gray"}></Paper>
+        <Grid.Col
+          span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          className={"box"}
+        >
+          <Box h={450} className={styles.receive_notification_ui}>
+            <Stack gap={1} align="center" mt={"md"}>
+              <Group align="end" className="title">
+                <Title
+                  className={`${styles.receive_notification_ui_title} `}
+                  fz={42}
+                >
+                  Receive More{" "}
+                </Title>
+
+                <Image
+                  srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f4b8/512.webp"
+                  h={45}
+                />
+              </Group>
+              <Group align="end" className="title">
+                <Title
+                  className={`${styles.receive_notification_ui_title} `}
+                  fz={42}
+                >
+                  Stress Less{" "}
+                </Title>
+
+                <Image
+                  srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f60e/512.webp"
+                  h={45}
+                />
+              </Group>
+            </Stack>
+            <Box ref={mockupRef} className={styles.iphone_mockup_wrapper}>
+              <Box className={styles.iphone_mockup_cont}>
+                <Box className={styles.receive_notification_alert_card}>
+                  <Group w={'100%'} h={"100%"} align="top" justify="space-between">
+                    <Group align="top">
+
+                    <Paper h={'fit-content'} bg={"dark.9"} radius={"md"} p={"sm"}>
+                      <Image src={logoWhite} h={20} />
+                    </Paper>
+                    <Box h={'fit-content'}>
+                      <Title c={'dimmed'} order={6}>Account Credited</Title>
+                      <Text c={"white"} size="xs"  >Your NGN account has been  Credited</Text>
+                    </Box>
+                    </Group>
+                      <Text size="sm" c={'white'} ff={'text'}>Just Now</Text>
+                  </Group>
+                </Box>
+                <Image src={iphoneMockup} w="auto" />
+              </Box>
+            </Box>
+          </Box>
         </Grid.Col>
-        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
-          <Paper h={400} bg={"gray"}></Paper>
+        <Grid.Col
+          span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          className={"box"}
+        >
+          <Box h={450} bg={"gray"}></Box>
         </Grid.Col>
-       
       </Grid>
     </Box>
   );
@@ -312,11 +412,9 @@ const SendUiAnimation = () => {
     }
 
     // stitch them together in a master timeline...
-    var master = gsap.timeline({ repeat: "-1",  });
-    master
-      .add(intro())
-      .add(middle(), ">") //with a gap of 2 seconds
-      // .add(conclusion());
+    var master = gsap.timeline({ repeat: "-1" });
+    master.add(intro()).add(middle(), ">"); //with a gap of 2 seconds
+    // .add(conclusion());
   });
 
   const avatars = [avatar1, avatar2, avatar3, avatar4].map((i, index) => (
