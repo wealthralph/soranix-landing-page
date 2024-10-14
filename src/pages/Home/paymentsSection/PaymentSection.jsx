@@ -191,10 +191,10 @@ const Send = () => {
   return (
     <Box>
       <Grid ref={containerRef}>
-        <Grid.Col span={6} className={"box"}>
+        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
           <SendUiAnimation />
         </Grid.Col>
-        <Grid.Col span={6} className={"box"}>
+        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
           <Paper h={450} bg={"gray"} radius={"md"}></Paper>
         </Grid.Col>
       </Grid>
@@ -222,15 +222,13 @@ const Receive = () => {
   return (
     <Box>
       <Grid ref={containerRef}>
-        <Grid.Col span={4} className={"box"}>
+        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
           <Paper h={400} bg={"gray"}></Paper>
         </Grid.Col>
-        <Grid.Col span={4} className={"box"}>
+        <Grid.Col  span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} className={"box"}>
           <Paper h={400} bg={"gray"}></Paper>
         </Grid.Col>
-        <Grid.Col span={4} className={"box"}>
-          <Paper h={400} bg={"gray"}></Paper>
-        </Grid.Col>
+       
       </Grid>
     </Box>
   );
@@ -246,7 +244,7 @@ const SendUiAnimation = () => {
   useGSAP(() => {
     function intro() {
       var tl = gsap.timeline({ defaults: { duration: 0.4 } });
-      tl.from(titleRef.current, { opacity: 0, y: 50, delay: 1 });
+      tl.from(titleRef.current, { opacity: 0, y: 50, delay: 0.3 });
       tl.from(avatarRefs.current, {
         opacity: 0,
         scale: 0.5,
@@ -287,8 +285,7 @@ const SendUiAnimation = () => {
       tl.from(".inputBox", {
         y: 50,
         opacity: 0,
-        stagger: 0.4,
-        duration: 0.5,
+        stagger: 0.2,
         ease: "power1.inOut",
         delay: 0.2,
       });
@@ -315,7 +312,7 @@ const SendUiAnimation = () => {
     }
 
     // stitch them together in a master timeline...
-    var master = gsap.timeline({ repeat: "-1", repeatDelay: 0.5 });
+    var master = gsap.timeline({ repeat: "-1",  });
     master
       .add(intro())
       .add(middle(), ">") //with a gap of 2 seconds
