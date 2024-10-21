@@ -47,8 +47,8 @@ const PaymentSection = () => {
   const [value, setValue] = useState("send");
 
   return (
-    <Container size={"lg"} my={50}>
-      <Stack gap={"xl"}>
+    <Container size={"lg"} my={50} p={0}  w={'100%'}>
+      <Stack gap={"xl"} w={'100%'} >
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
@@ -90,7 +90,7 @@ const PaymentSection = () => {
                     ? "var(--mantine-color-text-default)"
                     : "dimmed"
                 }
-                size={80}
+                fz={{ base: 45, xs: "h1", sm: "h1", md: 80 }}
               >
                 Send
               </Title>
@@ -102,7 +102,7 @@ const PaymentSection = () => {
                     ? "var(--mantine-color-text-default)"
                     : "dimmed"
                 }
-                size={80}
+                fz={{ base: 45, xs: "h1", sm: "h1", md: 80 }}
               >
                 Receive
               </Title>
@@ -121,57 +121,7 @@ const PaymentSection = () => {
             </BoxMotion>
           </AnimatePresence>
         </Stack>
-
-        <Box>
-          {/* <Divider /> */}
-          <Divider />
-          <Grid py={"xs"}>
-            <Grid.Col h={400} span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
-              <Stack py={"xl"}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Simple and intuitive interface
-                  </Title>
-                  <Text c={"dimmed"}>
-                    Navigate payments with an intuitive, user-friendly interface
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-            <Grid.Col
-              h={400}
-              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-              styles={{
-                col: {
-                  borderLeft: !isMobile
-                    ? `thin solid var(--mantine-color-default-border)`
-                    : "none",
-                  borderTop: !isMobile
-                    ? "none"
-                    : `thin solid var(--mantine-color-default-border)`,
-                  paddingInlineStart: !isMobile
-                    ? "var(--mantine-spacing-xl)"
-                    : null,
-                },
-              }}
-            >
-              <Stack py={"xl"}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Configure Payments Your Way{" "}
-                  </Title>
-                  <Text c={"dimmed"}>
-                    Whether you need to automate recurring payments or schedule
-                    transfers our flexible configurations have you covered.{" "}
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-          </Grid>
-          <Divider />
-
-          <Divider />
-        </Box>
+ 
       </Stack>
     </Container>
   );

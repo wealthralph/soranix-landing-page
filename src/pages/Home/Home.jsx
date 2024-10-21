@@ -11,6 +11,7 @@ import OsSection from "./osSection/OsSection";
 import IntroSection from "../../components/intro/IntroSection";
 import { ReactLenis, useLenis } from 'lenis/react'
 import BankingSection from "./bankingSection/BankingSection";
+import PortfolioSection from "./portfolioSection/PortfolioSection";
 
 const Home = () => {
   return (
@@ -31,7 +32,8 @@ const Home = () => {
         
         ]}/>
         <BankingSection/>
-        <IntroSection part={2} title={"Track, Track, Track"} desc={'When You Can See All Your Money, You Can Keep More of It. '}/>
+        <PortfolioSection/>
+        <IntroSection part={2} title={"Take Control of your Finances"} desc={'When You Can See All Your Money, You Can Keep More of It. '}/>
         <ExpenseManagementSection />
         <NetWorthSection />
    

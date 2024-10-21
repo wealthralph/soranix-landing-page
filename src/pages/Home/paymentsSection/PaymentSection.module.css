@@ -215,7 +215,6 @@
   position: relative;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .iphone_mockup_wrapper {
@@ -280,8 +279,7 @@
   right: 50%;
   transform: translateX(50%);
   /* max-width: 450px; */
-  width: 450px;
-  height: 70px;
+  width: 400px;
   background-color: var(--mantine-color-dark-7);
   border-radius: var(--mantine-radius-md);
   padding: var(--mantine-spacing-xs);
