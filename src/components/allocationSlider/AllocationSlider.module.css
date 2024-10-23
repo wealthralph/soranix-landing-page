@@ -1,0 +1,39 @@
+.root {
+  padding-top: 20px;
+
+}
+
+.track {
+  --thumb-width: 20px;
+  --thumb-offset: 10px;
+
+  position: relative;
+  height: 60px;
+  display: flex;
+  border: thin solid var(--mantine-color-default-border);
+}
+
+.slider_bar {
+    height: 100%;
+    background-color: blanchedalmond;
+}
+
+.thumb {
+  position: absolute;
+  background-color: var(--mantine-color-white);
+  border: 1px solid var(--mantine-color-gray-2);
+  border-radius: var(--mantine-radius-md);
+  height: 100%;
+  width: var(--thumb-width);
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mantine-color-gray-5);
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-6);
+    border-color: var(--mantine-color-dark-4);
+    color: var(--mantine-color-dark-0);
+  }
+}

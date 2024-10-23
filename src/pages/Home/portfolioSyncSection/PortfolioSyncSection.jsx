@@ -48,7 +48,7 @@ const asset = [
     symbol: "META",
     name: "Meta Platforms, Inc.",
     price: "2000.0",
-    change: -1.2,
+    change: 90.2,
     logo: meta,
   },
   {
@@ -73,7 +73,7 @@ const asset = [
     symbol: "ABNB",
     name: "Airbnb, Inc.",
     price: "136.45",
-    change: -0.5,
+    change: 0.05,
     logo: airbnb,
   },
   {
@@ -81,7 +81,7 @@ const asset = [
     symbol: "AAPL",
     name: "Apple Inc.",
     price: "235.00",
-    change: 2.2,
+    change: 200.2,
     logo: apple,
   },
   {
@@ -89,14 +89,14 @@ const asset = [
     symbol: "NFLX",
     name: "Netflix, Inc.",
     price: "763.89",
-    change: -0.3,
+    change: 0.03,
     logo: netflix,
   },
   {
     id: 8,
     symbol: "TSLA",
     price: "220.70",
-    change: -45.0,
+    change: 45.0,
     name: "Tesla, Inc.",
     logo: tesla,
   },
@@ -104,7 +104,7 @@ const asset = [
     id: 9,
     symbol: "PYPL",
     price: "80.90",
-    change: -1.7,
+    change: 75.7,
     name: "Paypal, Inc.",
     logo: paypal,
   },
@@ -135,7 +135,6 @@ const asset = [
 ];
 
 const PortfolioSyncSection = () => {
-
   const [indexAsset, setIndexAsset] = useState(asset[1]);
   const counterRef = useRef(null);
   const changeRef = useRef(null);
@@ -175,7 +174,6 @@ const PortfolioSyncSection = () => {
   }, []);
 
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
-
 
   return (
     <Container size={"lg"} w={"100%"} p={0} my={50}>
@@ -247,20 +245,22 @@ const PortfolioSyncSection = () => {
                 className={styles.asset_detail_heading}
                 p={"xl"}
               >
-                <Group gap={"xs"}>
-                  <Image h={18} src={indexAsset.logo} />
-                  <AnimatePresence mode="wait">
-                    <BoxMotion
-                      key={indexAsset ? indexAsset.id : ""}
-                      initial={{ y: 10, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: -10, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {indexAsset && <Text>{indexAsset.name}</Text>}
-                    </BoxMotion>
-                  </AnimatePresence>
-                </Group>
+                <AnimatePresence mode="wait">
+                  <BoxMotion
+                    key={indexAsset ? indexAsset.id : ""}
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {indexAsset && (
+                      <Group gap={"xs"}>
+                        <Image h={18} src={indexAsset.logo} />
+                        <Text>{indexAsset.name}</Text>
+                      </Group>
+                    )}
+                  </BoxMotion>
+                </AnimatePresence>
                 <Group align="end" gap={4}>
                   <Title order={1}> $</Title>
                   <Title order={1}>
@@ -280,7 +280,6 @@ const PortfolioSyncSection = () => {
                 height={156}
                 fill="none"
                 viewBox="0 0 564 156"
-             
               >
                 <path
                   stroke="var(--mantine-color-teal-filled)"

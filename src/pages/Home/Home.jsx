@@ -34,7 +34,7 @@ const Home = () => {
         <BankingSection/>
         <PortfolioSection/>
         <IntroSection part={2} title={"Take Control of your Finances"} desc={'When You Can See All Your Money, You Can Keep More of It. '}/>
-        <ExpenseManagementSection />
+        {/* <ExpenseManagementSection /> */}
         <NetWorthSection />
    
         <AutomationSection />

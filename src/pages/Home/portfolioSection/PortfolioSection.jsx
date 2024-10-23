@@ -1,13 +1,17 @@
-import { Badge, Container, Group, Paper, SimpleGrid, Space, Stack, Text, Title } from "@mantine/core"
+import { Badge, Box, Container, Divider, em, Grid, Group, Paper, SimpleGrid, Space, Stack, Text, Title } from "@mantine/core"
 import { motion } from "framer-motion";
 import PortfolioSyncSection from "../portfolioSyncSection/PortfolioSyncSection";
 import PortfolioManagementSection from "../portfolioManagementSection/PortfolioManagementSection";
 import PortfolioAnalysisSection from "../portfolioAnalysisSection/PortfolioAnalysisSection";
+import { useMediaQuery } from "@mantine/hooks";
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
 
 
 const PortfolioSection = () => {
+
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+
 
 
     const portfolioComponents = [
@@ -74,8 +78,8 @@ const PortfolioSection = () => {
     });
 
   return (
-    <Container size={"lg"}  w={'100%'}>
-      <Stack w={'100%'}>
+    <Container size={"lg"} w={"100%"}>
+      <Stack w={"100%"}>
         <Badge radius={"sm"} variant="dot">
           Portfolio
         </Badge>
@@ -84,7 +88,7 @@ const PortfolioSection = () => {
             tt={"capitalize"}
             fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
           >
-            Welcome to your <br /> Investment Playground.
+            Welcome to your <br /> Investment Control Center.
           </Title>
           <Stack justify="flex-end">
             <Text>
@@ -98,10 +102,66 @@ const PortfolioSection = () => {
         <Group>{portfolioComponentsMap}</Group>
       </Stack>
       <Space h={70} />
-      <Stack w={"100%"} >
-        <PortfolioSyncSection/>
-        <PortfolioManagementSection/>
-        <PortfolioAnalysisSection/>
+      <PortfolioSyncSection />
+
+      <Box>
+        <Divider />
+        <Grid m={"xs"}>
+          <Grid.Col
+            span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+            styles={{
+              col: {
+                paddingInlineEnd: !isMobile
+                  ? "var(--mantine-spacing-xl)"
+                  : null,
+                overflow: "hidden",
+              },
+            }}
+          >
+            <Stack maw={450} py={"xl"} h={400}>
+              <Box>
+                <Title order={3} fw={"normal"}>
+                  Hands-On Control for Your Investments{" "}
+                </Title>
+                <Text size="sm">
+                  Take control of your investments with powerful tools that help
+                  you manage your portfolio effortlessly.
+                </Text>
+              </Box>
+            </Stack>
+          </Grid.Col>
+          <Grid.Col
+            span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+            styles={{
+              col: {
+                borderLeft: !isMobile
+                  ? `thin solid var(--mantine-color-default-border)`
+                  : "none",
+                borderTop: !isMobile
+                  ? "none"
+                  : `thin solid var(--mantine-color-default-border)`,
+                paddingInlineStart: !isMobile
+                  ? "var(--mantine-spacing-xl)"
+                  : null,
+              },
+            }}
+          >
+            <Stack maw={450} py={"xl"}>
+              <Box>
+                <Title tt={"capitalize"} order={3} fw={"normal"}>
+                  Make sense of Your Portfolio
+                </Title>
+                <Text size="sm">
+                 Get detailed real-time analysis of every aspect of your portfolio, from growth trends to
+                  risk exposure. 
+                </Text>
+              </Box>
+            </Stack>
+          </Grid.Col>
+        </Grid>
+        <Divider />
+      </Box>
+      <Stack w={"100%"}>
       </Stack>
     </Container>
   );
