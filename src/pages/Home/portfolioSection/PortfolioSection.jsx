@@ -78,7 +78,7 @@ const PortfolioSection = () => {
     });
 
   return (
-    <Container size={"lg"} w={"100%"}>
+    <Container size={"xl"} w={"100%"}>
       <Stack w={"100%"}>
         <Badge radius={"sm"} variant="dot">
           Portfolio

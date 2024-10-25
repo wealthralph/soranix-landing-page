@@ -176,7 +176,7 @@ const PortfolioSyncSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
   return (
-    <Container size={"lg"} w={"100%"} p={0} my={50}>
+    <Container fluid  w={"100%"} p={0} my={50}>
       <Stack gap={"xl"}>
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>

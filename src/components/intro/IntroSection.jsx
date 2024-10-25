@@ -27,7 +27,7 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top",
-          pin: true,
+          // pin: true,
         },
       });
   

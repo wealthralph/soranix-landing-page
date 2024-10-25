@@ -47,7 +47,7 @@ const PaymentSection = () => {
   const [value, setValue] = useState("send");
 
   return (
-    <Container size={"lg"} my={50} p={0}  w={'100%'}>
+    <Container fluid my={50} p={0}  w={'100%'}>
       <Stack gap={"xl"} w={'100%'} >
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>

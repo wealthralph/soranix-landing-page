@@ -50,7 +50,7 @@ const VirtualCards = () => {
 
 
   return (
-    <Container w={'100%'} size={"lg"} my={50} ref={containerRef} p={0}>
+    <Container w={'100%'} fluid my={50} ref={containerRef} p={0}>
       <Stack gap={"xl"}>
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>

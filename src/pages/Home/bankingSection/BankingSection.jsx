@@ -51,7 +51,7 @@ const BankingSection = () => {
       });
 
   return (
-    <Container size={'lg'} >
+    <Container size={'xl'} >
           <Stack>
           <Badge radius={"sm"} variant="dot">
             Banking
