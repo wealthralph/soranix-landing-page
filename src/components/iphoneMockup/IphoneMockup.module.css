@@ -1,82 +1,55 @@
-/* iPhoneMockup.module.css */
+.outer_frame {
+  position: relative;
+  height: 520px;
+  border-radius: 50px;
+  border: 5px solid transparent;
+  background: linear-gradient(transparent, transparent) padding-box,
+    linear-gradient(90deg, #434343, #2c2c2c) border-box; 
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+     0 6px 20px rgba(0, 0, 0, 0.1); 
+width: 100%;
 
-.iphoneContainer {
-    position: relative;
-    width: 300px; /* Adjust the width according to your needs */
-    height: 600px; /* Adjust the height according to your needs */
-    border-radius: 40px; /* Rounded corners */
-    background: #fff; /* iPhone body color */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-    overflow: hidden; /* Hide overflow */
-  }
-  
-  .iphoneScreen {
-    position: absolute;
-    top: 20px; /* Distance from the top for the dynamic island */
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #000; /* Black screen color */
-    border-radius: 40px; /* Match the iPhone corners */
-    padding-top: 20px; /* Space for the dynamic island */
-  }
-  
-  .dynamicIsland {
-    position: absolute;
-    width: 120px; /* Width of the dynamic island */
-    height: 30px; /* Height of the dynamic island */
-    top: 0; /* Position at the top */
-    left: calc(50% - 60px); /* Center it */
-    background: rgba(255, 255, 255, 0.2); /* Light color for dynamic island */
-    border-radius: 15px; /* Rounded corners for the dynamic island */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
-  }
-  
-  .sideButton {
-    position: absolute;
-    width: 10px; /* Width of the side buttons */
-    height: 40px; /* Height of the side buttons */
-    background: #ccc; /* Color of the buttons */
-    border-radius: 5px; /* Rounded corners */
-  }
-  
-  .sideButton:nth-child(2) {
-    top: 100px; /* Adjust as needed for position */
-    left: -10px; /* Left side */
-  }
-  
-  .sideButton:nth-child(3) {
-    top: 100px; /* Adjust as needed for position */
-    right: -10px; /* Right side */
-  }
-  
-  .homeButton {
-    position: absolute;
-    width: 60px; /* Width of the home button */
-    height: 5px; /* Height of the home button */
-    background: #ccc; /* Color of the home button */
-    border-radius: 3px; /* Rounded corners */
-    bottom: 20px; /* Position at the bottom */
-    left: calc(50% - 30px); /* Center it */
-  }
-  
-  .volumeUp {
-    position: absolute;
-    width: 10px; /* Width of the volume buttons */
-    height: 20px; /* Height of the volume buttons */
-    background: #ccc; /* Color of the buttons */
-    border-radius: 5px; /* Rounded corners */
-    top: 150px; /* Position on the left side */
-    left: -10px; /* Left side */
-  }
-  
-  .volumeDown {
-    position: absolute;
-    width: 10px; /* Width of the volume buttons */
-    height: 20px; /* Height of the volume buttons */
-    background: #ccc; /* Color of the buttons */
-    border-radius: 5px; /* Rounded corners */
-    top: 180px; /* Position on the left side */
-    left: -10px; /* Left side */
-  }
-  
+}
+
+.outer_frame::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50px;
+  border: 3px groove #434343; /* Dark metallic color */
+  pointer-events: none;
+}
+
+.inner_frame {
+  border: 3px solid black;
+  border-radius: 46px;
+  height: 100%;
+  padding: 1px;
+}
+
+.screen {
+  background-color: white;
+  height: 100%;
+  border-radius: 42px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.screen_elements {
+  position: absolute;
+  inset: 0;
+  padding: var(--mantine-spacing-sm);
+  z-index: 2;
+}
+
+.dynamic_island {
+  width: 30%;
+  height: 35px;
+  border-radius: 70px;
+  background-color: var(--mantine-color-black);
+}
