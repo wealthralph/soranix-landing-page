@@ -30,7 +30,7 @@ import {
 } from "@mantine/core";
 import { useInterval, useMediaQuery, useTimeout } from "@mantine/hooks";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
+import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./Account.module.css";
 import {
@@ -58,8 +58,11 @@ import { AreaChart, BarChart } from "@mantine/charts";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import IPhoneMockup from "../../../components/iphoneMockup/IphoneMockup";
+import { logoBlack, logoSvgWhite, NG } from "../../../assets/images";
+import anime from "animejs";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(MotionPathPlugin);
 
 const BoxMotion = motion.create(Box, { forwardMotionProps: true });
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
@@ -128,9 +131,8 @@ const AccountSection = () => {
           onClick={() => setAccountId(i.id)}
           layoutId={i.id}
           className={styles.accounts_card_shrinked}
-          radius={'lg'}
+          radius={"lg"}
         >
-          
           <Stack h={"100%"} justify="end">
             <Flex>
               <Box>
@@ -145,8 +147,7 @@ const AccountSection = () => {
     );
   });
 
-
-  
+  useGSAP(() => {});
 
   useEffect(() => {
     if (accountId) {
@@ -164,31 +165,27 @@ const AccountSection = () => {
   }, [accountId]);
 
   return (
-    <Container fluid ref={containerRef} w={'100%'} >
-
+    <Container fluid ref={containerRef} w={"100%"} p={0}>
       <Stack gap={"xl"} w={"100%"}>
-      
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
-            <Text size="xs" ff={'monospace'}>Accounts</Text>
+              <Text size="xs" ff={"monospace"}>
+                Accounts
+              </Text>
 
-              <Title
-                tt={"capitalize"}
-                order={1}
-              >
+              <Title tt={"capitalize"} order={1}>
                 All Your accounts from a unified point.
               </Title>
             </Box>
             <Box>
-            
-              <Text >
-                Create, manage and connect all your bank accounts, Gain crystal-clear insight into your finances by managing all your accounts from a single interface.
+              <Text>
+                Create, manage and connect all your bank accounts, Gain
+                crystal-clear insight into your finances by managing all your
+                accounts from a single interface.
               </Text>
             </Box>
-            <Box>
-
-            </Box>
+            <Box></Box>
           </Stack>
         </Box>
         {/* Gsap animation elements here  */}
@@ -209,13 +206,14 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack maw={450} py={"xl"} h={400}>
+                <Stack maw={450} py={"xl"} h={450}>
                   <Box>
-                    <Title order={3} fw={"normal"}>
+                    <Title order={3} fw={"bold"}>
                       A bank account for your every need
                     </Title>
-                    <Text size="sm">
-                    Open accounts tailored to your goals, designed to fit seamlessly into your financial life.
+                    <Text>
+                      Open bank accounts in minutes for your every need designed
+                      to fit seamlessly into your financial life.
                     </Text>
                   </Box>
                   <Graphics2Account />
@@ -237,22 +235,24 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack maw={450} py={"xl"}>
-                  <Box>
-                    <Title tt={'capitalize'} order={3} fw={"normal"}>
-                    connect your bank accounts 
+                <Stack py={"xl"} h={450}>
+                  <Box maw={450}>
+                    <Title tt={"capitalize"} order={3} fw={"bold"}>
+                      link your bank accounts to Soranix
                     </Title>
-                    <Text size="sm">
-                    Keep an eye on all your accounts by linking them with Soranix
+                    <Text>
+                      Securely sync all your external bank accounts on Soranix
+                      to get a unified view of your balance and transactions.
                     </Text>
                   </Box>
+                  <BackgroundGrid />
                 </Stack>
               </Grid.Col>
             </Grid>
           </Box>
           <Divider />
           <Box>
-            {/* <Grid m={"xs"}>
+            <Grid m={"xs"}>
               <Grid.Col
                 span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
                 styles={{
@@ -263,15 +263,15 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack py={"xl"} h={400}>
-                  <Box>
-                    <Title order={3} fw={"normal"}>
-                      Real-time, actionable analytics using AI.
+                <Stack py={"xl"} h={450}>
+                  <Box maw={500}>
+                    <Title tt={"capitalize"} order={3} fw={"bold"}>
+                      Get paid globally. Bank without borders
                     </Title>
-                    <Text c={"dimmed"}>
-                      Make inforned decisions about your finances, with
-                      real-time analytics that reveal trend and patterns from
-                      all your account data.
+                    <Text>
+                      Looking to get paid ? Soranix lets you Manage, exchange,
+                      and hold multiple currencies effortlessly—all in one
+                      place.
                     </Text>
                   </Box>
                 </Stack>
@@ -292,82 +292,24 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack py={"xl"} h={400}>
+                <Stack py={"xl"} h={450}>
                   <Box>
-                    <Title order={3} fw={"normal"}>
-                      All of your transactions in one place
+                    <Title tt={"capitalize"} order={3} fw={"bold"}>
+                      Customize Your Banking Experience{" "}
                     </Title>
-                    <Text c={"dimmed"}>
-                      Make inforned decisions about your finances, with
-                      real-time analytics that reveal trend and patterns from
-                      all your account data.
+                    <Text>
+                      Customize your account with global or local policies. Set
+                      limits, manage transactions, and ensure your finances
+                      align with your goals
                     </Text>
                   </Box>
                 </Stack>
               </Grid.Col>
-            </Grid> */}
+            </Grid>
             <Divider />
           </Box>
           <Box py={"xl"}>
-            <Stack>
-              <Stack maw={500}>
-                <Title fw={'normal'} order={3}>
-                  Accounts built to help <br /> you manage your finances
-                </Title>
-                <Text  size="sm">
-                  Our powerful suite of expense management features automates
-                  the hard work of budgeting and tracking your expenditures.{" "}
-                </Text>
-              </Stack>
-
-              <Carousel
-                getEmblaApi={setEmbla}
-                withControls={false}
-                withIndicators={false}
-                slideSize={{ base: "336px" }}
-                slideGap="md"
-                loop
-                align="start"
-                slidesToScroll={1}
-              >
-                {accountTypes}
-              </Carousel>
-              <Group justify="end">
-                <ActionIcon
-                  variant="light"
-                  color="gray"
-                  radius={"xl"}
-                  onClick={scrollPrev}
-                >
-                  <IconArrowLeft strokeWidth={1.5} size={14} />
-                </ActionIcon>
-                <ActionIcon
-                  variant="light"
-                  color="gray"
-                  radius={"xl"}
-                  onClick={scrollNext}
-                >
-                  <IconArrowRight strokeWidth={1.5} size={14} />
-                </ActionIcon>
-              </Group>
-            </Stack>
-            <AnimatePresence>
-              {accountId && (
-                <BoxMotion className={styles.accounts_card_expanded_cont}>
-                  <BoxMotion
-                    layoutId={accountId}
-                    h={"100%"}
-                    className={styles.accounts_card_expanded}
-                  >
-                    <motion.h5>heloo</motion.h5>
-                    <motion.h2>item.title</motion.h2>
-                    <motion.button onClick={() => setAccountId(null)}>
-                      close
-                    </motion.button>
-                  </BoxMotion>
-                </BoxMotion>
-              )}
-            </AnimatePresence>
+            <Divider />
           </Box>
         </Box>
       </Stack>
@@ -525,7 +467,7 @@ const Graphics1Account = () => {
   return (
     <Container p={0} w={"100%"} size={"md"}>
       <Box className={styles.graphics1_wrapper}>
-{/* <Box pos={'absolute'}>
+        {/* <Box pos={'absolute'}>
 
       <IPhoneMockup/>
 </Box> */}
@@ -561,7 +503,7 @@ const Graphics1Account = () => {
                 </ActionIcon>
               </Group>
             </Flex>
-            <Divider  />
+            <Divider />
             <Stack p={"md"} gap={"lg"}>
               <Flex justify={"space-between"} align={"center"}>
                 <Title fz={"md"}>Accounts Overview</Title>
@@ -643,41 +585,6 @@ const Graphics1Account = () => {
                       >
                         Connect Account
                       </Menu.Item>
-
-                      <Menu.Label>Scope</Menu.Label>
-                      {/* <Menu.Divider /> */}
-                      <Menu.Item
-                        leftSection={
-                          <IconCashRegister
-                            style={{ width: rem(16), height: rem(16) }}
-                            color={theme.colors.lime[6]}
-                            stroke={1.5}
-                          />
-                        }
-                        rightSection={
-                          <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                            Ctrl + U
-                          </Text>
-                        }
-                      >
-                        Income Source
-                      </Menu.Item>
-                      <Menu.Item
-                        leftSection={
-                          <IconBox
-                            style={{ width: rem(16), height: rem(16) }}
-                            color={theme.colors.indigo[6]}
-                            stroke={1.5}
-                          />
-                        }
-                        rightSection={
-                          <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                            Ctrl + U
-                          </Text>
-                        }
-                      >
-                        Expense Category
-                      </Menu.Item>
                     </Menu.Dropdown>
                   </Menu>
                   <ActionIcon variant="subtle" size={"sm"} color="gray">
@@ -689,7 +596,7 @@ const Graphics1Account = () => {
                 <Text c={"dimmed"} fw={600} size="10px">
                   Aggregated Balance
                 </Text>
-                <Title order={3} fw={"normal"}>
+                <Title order={2} fw={"bold"}>
                   <NumberFormatter
                     prefix="₦"
                     value={6780000}
@@ -715,14 +622,14 @@ const Graphics1Account = () => {
                     },
                     {
                       date: "Mar 23",
-                      Deposit: 2756,
+                      Deposit: 1056,
                       Sub_Ledgers: 2103,
                       Virtual: 2402,
                       Savings: 2402,
                     },
                     {
                       date: "Mar 24",
-                      Deposit: 3322,
+                      Deposit: 5322,
                       Sub_Ledgers: 986,
                       Virtual: 1821,
                       Savings: 1821,
@@ -751,12 +658,12 @@ const Graphics1Account = () => {
                     iconType: "diamond",
                     iconSize: 10,
                   }}
-                  fillOpacity={0.8}
+                  fillOpacity={0.5}
                   series={[
                     { name: "Deposit", color: "orange.8" },
-                    { name: "Sub_Ledgers", color: "teal.8" },
-                    { name: "Virtual", color: "indigo.8" },
-                    { name: "Savings", color: "yellow.8" },
+                    // { name: "Sub_Ledgers", color: "teal.8" },
+                    // { name: "Virtual", color: "indigo.8" },
+                    // { name: "Savings", color: "yellow.8" },
                   ]}
                 />
               </Box>
@@ -828,24 +735,23 @@ const Graphics1Account = () => {
                 </Group>
               </Box>
 
-              <Tabs variant="outline" defaultValue="first">
+              {/* <Tabs variant="outline" defaultValue="first">
                 <Tabs.List>
                   <Tabs.Tab value="first">Accounts</Tabs.Tab>
-                  <Tabs.Tab disabled value="second">
-                    Analytics
-                  </Tabs.Tab>
+            
                   <Tabs.Tab disabled value="third">
                     Events
                   </Tabs.Tab>
                 </Tabs.List>
-              </Tabs>
+              </Tabs> */}
               {/* Accounts Table display */}
 
               <Box>
                 <Stack gap={0}>
+                  <Divider />
                   <Table.ScrollContainer minWidth={500}>
-                    <Table  withColumnBorders>
-                      <Table.Thead>
+                    <Table withColumnBorders>
+                      <Table.Thead bg={"gray.0"}>
                         <Table.Tr>
                           <Table.Th fz={"xs"}>Alias</Table.Th>
                           <Table.Th fz={"xs"}>Type</Table.Th>
@@ -872,21 +778,21 @@ const Graphics2Account = () => {
   const cardsData = [
     {
       id: 2,
-      alias: "Nkechi Money",
+      alias: "Rent Account",
       symbol: "₦",
-      currency: "US",
+      currency: "NG",
       balance: 685404,
     },
     {
       id: 1,
-      alias: "Japa ✈️ 🛬",
+      alias: "Japa Account ✈️ 🛬",
       currency: "NG",
       symbol: "₦",
       balance: 685404,
     },
     {
       id: 3,
-      alias: "Vacation Account ⛱️🏖️",
+      alias: "Main Account ⛱️🏖️",
       symbol: "₦",
       balance: 685404,
       currency: "NG",
@@ -898,10 +804,7 @@ const Graphics2Account = () => {
       <Stack gap={"sm"}>
         <Flex justify={"space-between"}>
           <Group gap={"sm"}>
-            <Avatar
-              size={"xs"}
-              src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${i.currency}.svg`}
-            />
+            <Avatar size={"xs"} src={NG} />
             <Title order={5}>{i.alias}</Title>
           </Group>
 
@@ -1076,3 +979,48 @@ const Graphics3AccountAnalytics = () => {
     </Box>
   );
 };
+
+
+const BackgroundGrid = () => {
+
+  const strobeRef = useRef(null);
+  const containerRef = useRef(null);
+
+
+  // useGSAP(() => {
+
+  //   // gsap.set(strobeRef.current, {xPercent:-50, yPercent: -50,transformOrigin: "50% 50%" })
+  //   gsap.to(strobeRef.current, {
+  //     motionPath: {
+  //       path: "#p3",
+  //       align: "#p3",
+  //       autoRotate: true,
+  //       alignOrigin: [0.5, 0.5],
+  //       curviness: 2,
+  //       type: "cubic",
+  //     },
+  //     duration: 4,
+  //     ease: "power1.in",
+  //     repeat: -1,
+  //     yoyo: true,
+  //   });
+
+
+  // })
+
+
+  return (
+    <Box pos="relative" ref={containerRef}>
+    
+    </Box>
+  );
+};
+
+//  <Title order={3} fw={"normal"}>
+//                       Real-time, actionable analytics using AI.
+//                     </Title>
+//                     <Text c={"dimmed"}>
+//                       Make inforned decisions about your finances, with
+//                       real-time analytics that reveal trend and patterns from
+//                       all your account data.
+//                     </Text>

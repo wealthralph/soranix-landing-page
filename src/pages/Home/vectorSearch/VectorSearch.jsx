@@ -1,8 +1,12 @@
 import { Box, Container, Stack, Text, Title } from "@mantine/core";
+import gsap from "gsap";
+import { TextPlugin } from "gsap/all";
+
+gsap.registerPlugin(TextPlugin);
 
 const VectorSearch = () => {
   return (
-    <Container fluid my={50} p={0}>
+    <Container size={"xl"} my={50}>
       <Stack gap={"xl"}>
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
@@ -14,7 +18,8 @@ const VectorSearch = () => {
                 tt={"capitalize"}
                 fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
               >
-                Redefine the way you spend Money{" "}
+                Search & Filter Through Your Financial data, using natural
+                language{" "}
               </Title>
             </Box>
             <Box>
@@ -28,11 +33,9 @@ const VectorSearch = () => {
                 >
                   All Your Income, One View.{" "}
                 </Text>{" "} */}
-                If you feel like your money slips through your fingers faster
-                than you can earn it, you’re not alone. This tool helps you get
-                a handle on your spending, giving you a clear breakdown of your
-                expenses. No more guessing, no more stress—just smarter spending
-                habits that stick.
+                Looking for answers in your finances shouldn’t be hard work.
+                Simply type a question, and get instant insights across
+                accounts, investments, transactions and more.
               </Text>
             </Box>
           </Stack>

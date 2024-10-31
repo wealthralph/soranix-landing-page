@@ -29,7 +29,7 @@ const HeroSection = () => {
   return (
     <Box >
 
-      <Container size={"lg"} >
+      <Container size={"xl"} >
         <Stack gap={"lg"}>
           <Box maw={600} ref={BoxRef}>
             <Title

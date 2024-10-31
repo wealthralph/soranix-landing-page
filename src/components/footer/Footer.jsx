@@ -1,7 +1,8 @@
-import { Text, Container, ActionIcon, Group, rem, Grid, Badge } from '@mantine/core';
+import { Text, Container, ActionIcon, Group, rem, Grid, Badge, Image } from '@mantine/core';
 import { IconBrandInstagram, IconBrandDiscord, IconBrandX, IconBrandWhatsapp, IconBrandFacebook } from '@tabler/icons-react';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './Footer.module.css';
+import { logoBlack, logoWhite } from '../../assets/images';
 
 const data = [
   {
@@ -19,19 +20,19 @@ const data = [
       { label: 'Sentinels', link: '#' },
     ],
   },
-  {
-    title: 'For Business',
-    links: [
-      { label: 'Business Banking', link: '#' },
-      { label: 'Account Payable', link: '#' },
-      { label: 'Advanced Controls', link: '#' },
-      { label: 'Accounting', link: '#' },
-      { label: 'Expense Management', link: '#' },
-      { label: 'Corporate Cards', link: '#' },
-      { label: 'Invoice', link: '#' },
-      { label: 'Commerce', link: '#' , badge: "Soon"},     
-    ],
-  },
+  // {
+  //   title: 'For Business',
+  //   links: [
+  //     { label: 'Business Banking', link: '#' },
+  //     { label: 'Account Payable', link: '#' },
+  //     { label: 'Advanced Controls', link: '#' },
+  //     { label: 'Accounting', link: '#' },
+  //     { label: 'Expense Management', link: '#' },
+  //     { label: 'Corporate Cards', link: '#' },
+  //     { label: 'Invoice', link: '#' },
+  //     { label: 'Commerce', link: '#' , badge: "Soon"},     
+  //   ],
+  // },
   {
     title: 'Platform',
     links: [
@@ -94,6 +95,7 @@ function Footer() {
         component="a"
         href={link.link}
         size='xs'
+        c={'dimmed'}
         onClick={(event) => event.preventDefault()}
       >
         <Group gap={'xs'} mb={3}>
@@ -108,7 +110,7 @@ function Footer() {
 
     return (
       <Grid.Col span={{base:6, sm:4, md: 4, lg: 3}} key={group.title}>
-        <Text size='sm' mb={3} className={classes.title}>{group.title}</Text>
+        <Text size='sm' mb={3} fw={500} className={classes.title}>{group.title}</Text>
         {links}
       </Grid.Col>
     );
@@ -116,16 +118,18 @@ function Footer() {
 
   return (
     <footer className={classes.footer}>
-      <Container className={classes.inner}>
+      <Container className={classes.inner} size={'xl'}>
         <div className={classes.logo}>
-          <Text size="xs" c="dimmed" className={classes.description}>
-            One Platform to manage your personal and business finances.
+          <Image src={logoBlack} h={30} w={30} />
+          
+          <Text size="xs" c="dimmed" className={classes.description} my={'lg'}>
+            The Operating System for personal finance management.
           </Text>
         </div>
         <Grid gutter={'md'}>{groups}</Grid>
       </Container>
 
-      <Container className={classes.afterFooter}>
+      <Container className={classes.afterFooter} size={'xl'}>
         <Text c="dimmed" size="sm">
           © {new Date().getFullYear()} Soranix All rights reserved.
         </Text>
@@ -148,7 +152,7 @@ function Footer() {
           </ActionIcon>
         </Group>
       </Container>
-      <Container>
+      <Container size={'xl'}>
 
         <Text size='sm' c={'dimmed'}>Soranix is a financial technology company, not a bank. Banking services are provided by licensed banking partners. Canadian services are offered by Aboki Finance Inc with registered address at 1285 West Broadway Suite 600 Vancouver BC V6H 3X8. Canada. Aboki Finance Inc. is regulated by FINTRAC. US services are offered by Soranix Inc. with its registered address at 651 N Broad St, Suite 206 Middletown DE 19709 US. Soranix Inc is regulated by FinCEN. Copyright © Soranix Inc. 2023.</Text>
       </Container>

@@ -1,4 +1,6 @@
 import logoWhite from "./logo-white.png"
+import logoSvgWhite from "./Soranix-white.svg"
+import logoBlack from "./logo-black.png"
 import avatar1 from "./avatar_1.png"
 import avatar2 from "./avatar_2.jpg"
 import avatar3 from "./avatar_3.jpg"
@@ -16,6 +18,7 @@ import paypal from "./paypal-logo.png"
 import airbnb from "./airbnb-logo.png"
 import tesla from "./tesla-logo.png"
 import apple from "./Apple-logo.png"
+import NG from "./NG.svg"
 
 export {
     logoWhite,
@@ -35,5 +38,8 @@ export {
     paypal,
     airbnb,
     tesla,
-    apple
+    apple,
+    logoBlack,
+    NG,
+    logoSvgWhite
 }

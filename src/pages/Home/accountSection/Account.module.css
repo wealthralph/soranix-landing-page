@@ -10,7 +10,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  --mask-bottom: linear-gradient(to bottom, #000 40%, #00000000 80%);
+  --mask-bottom: linear-gradient(to bottom, #000 70%, #00000000 90%);
   --mask-right: linear-gradient(to right, #000 40%, #00000000 90%);
   -webkit-mask-image: var(--mask-bottom);
   mask-image: var(--mask-bottom);
@@ -21,25 +21,22 @@
 .graphics1_container {
   /* position: absolute; */
   max-width: 100%;
-  height: 500px;
+  /* height: 500px; */
   width: 100%;
   border: thin solid var(--mantine-color-default-border);
   /* bottom: 0px; */
   border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
   border-bottom: none;
   /* box-shadow: var(--mantine-shadow-sm); */
-  background-color: rgba(220, 220, 220, 0.083);
+  /* background-color: rgba(220, 220, 220, 0.083); */
   /* backdrop-filter: blur(14px); */
-
 }
-
 
 .graphics1_content {
   width: 100%;
   height: 100%;
   position: relative;
   z-index: 0;
-
 }
 
 .graphics1_content::before {
@@ -81,7 +78,6 @@
   --red-dim: #c5282840;
 }
 
-
 .graphics2_wrapper::after {
   content: "";
   pointer-events: none;
@@ -89,7 +85,16 @@
   overflow: hidden;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to bottom, var(--mantine-color-body) 0, transparent 30%), linear-gradient(to right, transparent 60%, darken(var(--mantine-color-body), 0) 100%);
+  background: linear-gradient(
+      to bottom,
+      var(--mantine-color-body) 0,
+      transparent 30%
+    ),
+    linear-gradient(
+      to right,
+      transparent 60%,
+      darken(var(--mantine-color-body), 0) 100%
+    );
 }
 
 .graphics2_account_cards_cont {
@@ -123,7 +128,7 @@
 
 .graphics2_wrapper .graphics2_account_card {
   transform-style: preserve-3d;
-  transition: .32s ease-out;
+  transition: 0.32s ease-out;
   transition-property: transform, background;
   /* box-shadow: var(--mantine-shadow-md); */
   /* box-shadow: rgba(38, 38, 38, 0.2) 0px 8px 24px; */
@@ -141,9 +146,17 @@
   transform: translateY(-35px) translateX(60px) translateZ(20px);
 }
 
-/* .graphics2_account_card:first-child:hover{
-    transform: translateY(-50px) translateX(60px) translateZ(25px);
-} */
+.graphics2_account_card:first-child:hover {
+  transform: translateY(-50px) translateX(60px) translateZ(25px);
+}
+
+.graphics2_account_card:last-child:hover {
+  transform: translateY(50px) translateX(0px) translateZ(2px);
+}
+
+.graphics2_account_card:nth-child(2):hover {
+  transform: translateY(-20px) translateX(30px) translateZ(2px);
+}
 
 .graphics3_wrapper {
   pointer-events: none;
@@ -163,7 +176,11 @@
 
 .graphics3_analytics_card_outer {
   --gradientBorder-size: 1px;
-  --gradientBorder-gradient: linear-gradient(to bottom right, hsla(0, 0%, 100%, .07), transparent);
+  --gradientBorder-gradient: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 100%, 0.07),
+    transparent
+  );
   width: 100%;
   height: 100%;
   border-radius: 18px;
@@ -188,7 +205,8 @@
   border-radius: inherit;
   padding: var(--gradientBorder-size, 1px);
   background: var(--gradientBorder-gradient);
-  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask: linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
   mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -200,8 +218,17 @@
   overflow: hidden;
   isolation: isolate;
   --gradientBorder-size: 1px;
-  --gradientBorder-gradient: linear-gradient(to bottom right, hsla(0, 0%, 80%, .17), transparent);
-  background: linear-gradient(134deg, hsla(0, 0%, 100%, .08), hsla(0, 0%, 100%, .02), hsla(0, 0%, 100%, 0) 55%);
+  --gradientBorder-gradient: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 80%, 0.17),
+    transparent
+  );
+  background: linear-gradient(
+    134deg,
+    hsla(0, 0%, 100%, 0.08),
+    hsla(0, 0%, 100%, 0.02),
+    hsla(0, 0%, 100%, 0) 55%
+  );
   border-radius: 10px;
   height: 100%;
   padding: var(--mantine-spacing-sm);
@@ -221,12 +248,12 @@
   border-radius: inherit;
   padding: var(--gradientBorder-size, 1px);
   background: var(--gradientBorder-gradient);
-  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask: linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
   mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
-
 
 .graphics3_analytics_alert_cont {
   width: 100%;
@@ -276,7 +303,7 @@
 .accounts_card_shrinked {
   width: 336px;
   aspect-ratio: 336 / 430;
-  
+
   /* height: 100%; */
   /* background-color: darken(var(--mantine-color-dark-9), 0.29); */
   border-radius: var(--mantine-radius-lg);
@@ -286,4 +313,18 @@
 
 .accounts_card_shrinked:hover {
   /* filter: brightness(120%); */
+}
+
+.connect_rect {
+  /* fill: rgba(255, 255, 255, 0.068); */
+  stroke: #81818133;
+  stroke: var(--mantine-color-default-border);
+  stroke-width: 1;
+  /* filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.507)); */
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.connect_rect:hover {
+  /* fill: rgba(255, 255, 255, 0.15); */
 }

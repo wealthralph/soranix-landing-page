@@ -17,14 +17,18 @@ const BankingSection = () => {
         },
         {
           id: 2,
-          title: "Payments",
+          title: "Savings",
         },
         {
           id: 3,
-          title: "Cards",
+          title: "Payments",
         },
         {
           id: 4,
+          title: "Cards",
+        },
+        {
+          id: 5,
           title: "Bills",
         },
       ];

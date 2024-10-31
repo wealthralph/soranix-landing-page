@@ -4,6 +4,7 @@ import {
   Container,
   Divider,
   Flex,
+  Grid,
   Highlight,
   SimpleGrid,
   Space,
@@ -16,14 +17,14 @@ import { useEffect, useRef } from "react";
 
 const OsSection = () => {
   return (
-    <Container size={"lg"} w={"100%"}>
+    <Container size={"xl"} w={"100%"}>
       <Stack w={"100%"} gap={"xl"}>
         <SimpleGrid cols={{ base: 1, xs: 1, sm: 2, md: 2 }}>
           <Title
             tt={"capitalize"}
             fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
           >
-            The Operating system for your personal finance{" "}
+            The Operating system for <br /> your personal finance{" "}
           </Title>
           <Stack justify="flex-end" maw={500}>
             <Text>
@@ -44,18 +45,80 @@ const OsSection = () => {
 export default OsSection;
 
 const OsLayers = () => {
+  const canvasRef = useRef(null);
 
-    const canvasRef = useRef(null);
+  const primitives = [
+    {
+      id: 1,
+      name: "Accounts",
+      icon: " ",
+    },
+    {
+      id: 2,
+      name: "Virtual Cards",
+      icon: " ",
+    },
+    {
+      id: 3,
+      name: "Payments",
+      icon: " ",
+    },
+    {
+      id: 4,
+      name: "Bills & Utility",
+      icon: " ",
+    },
+    {
+      id: 5,
+      name: "Savings",
+      icon: " ",
+    },
+    // {
+    //   id: 6,
+    //   name: "Savings",
+    //   icon: " ",
+    // },
+  ].map((i) => <Box key={i.id} className={styles.primitives_cont}></Box>);
 
-  
-
+  const tools = [
+    {
+      id: 1,
+      name: "Portfolio",
+      icon: " ",
+    },
+    {
+      id: 2,
+      name: "Money Management",
+      icon: " ",
+    },
+    {
+      id: 3,
+      name: "Automation",
+      icon: " ",
+    },
+  ].map((i) => <Box key={i.id} className={styles.tools_cont}></Box>);
 
   return (
-    <Container p={0} size={"md"} w={"100%"}>
-        {/* <canvas ref={canvasRef} style={{display: "block"}}/> */}
+    <Container p={0} size={"lg"} w={"100%"}>
+      {/* <canvas ref={canvasRef} style={{display: "block"}}/> */}
       <Box className={styles.os_display_wrapper}>
         <Box className={styles.os_display_outer}>
-          <Box className={styles.os_display_inner}></Box>
+          <Box className={styles.os_display_inner}>
+            <Center>
+              <Title>Soranix Primitives</Title>
+            </Center>
+
+            <Stack gap={"xl"}>
+              {/* primitives */}
+              <SimpleGrid cols={primitives.length}>{primitives}</SimpleGrid>
+
+              {/* Soranix AI */}
+              <Box className={styles.soranix_ai_cont}></Box>
+            </Stack>
+
+            {/* Soranix AI */}
+            <SimpleGrid cols={tools.length}>{tools}</SimpleGrid>
+          </Box>
         </Box>
       </Box>
     </Container>

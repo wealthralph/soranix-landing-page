@@ -8,10 +8,13 @@ import NetWorthSection from "./networthSection/NetworthSection";
 import PaymentSection from "./paymentsSection/PaymentSection";
 import OsSection from "./osSection/OsSection";
 import IntroSection from "../../components/intro/IntroSection";
-import { ReactLenis, useLenis } from 'lenis/react'
+import { ReactLenis, useLenis } from "lenis/react";
 import BankingSection from "./bankingSection/BankingSection";
 import PortfolioSection from "./portfolioSection/PortfolioSection";
 import MoneyManagementSection from "./moneyManagementSection/MoneyManagementSection";
+import VectorSearch from "./vectorSearch/VectorSearch";
+import AnalyticsSection from "./analyticsSection/AnalyticsSection";
+import SoranixAiSection from "./soranixAiSection/SoranixAiSection";
 
 const Home = () => {
   return (
@@ -80,9 +83,28 @@ const Home = () => {
           },
         ]}
       />
-      {/* <NetWorthSection /> */}
-
-      {/* <AutomationSection /> */}
+      <VectorSearch />
+      <NetWorthSection />
+      <AnalyticsSection />
+      <IntroSection
+        part={4}
+        title={"Stress free finance"}
+        desc={
+          ""
+        }
+        features={[
+          {
+            name: "Soranix AI",
+            color: "var(--mantine-color-blue-6)",
+          },
+          {
+            name: "Automation",
+            color: "var(--mantine-color-orange-6)",
+          },
+        ]}
+      />
+      <SoranixAiSection/>
+      <AutomationSection />
       {/* </Stack> */}
       <Space h={300} />
     </Container>

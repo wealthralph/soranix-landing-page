@@ -1,4 +1,4 @@
-import { ActionIcon, Box, ColorSwatch, Container, Divider, em, Grid, Group, NumberFormatter, Progress, SimpleGrid,  Stack, Text, Title } from "@mantine/core";
+import { ActionIcon, Box, ColorSwatch, Container, Divider, em, Grid, Group, NumberFormatter, Progress,  Stack, Text, Title } from "@mantine/core";
 import { useState } from "react";
 import styles from "./NetworthSection.module.css"
 import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
@@ -83,17 +83,33 @@ const NetWorthSection = () => {
   });
 
   return (
-    <Container mt={50} size={"lg"}>
-      <Stack gap={'xl'}>
-        <SimpleGrid cols={{ base: 1, xs: 1, sm: 2, md: 2 }}>
-          <Title tt={"capitalize"} fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}>
-            Your networth <br /> visualized in real time
-          </Title>
-          <Text c={'dimmed'}>Track your net worth as it evolves in real-time. Get a clear, up-to-the-minute view of your assets, liabilities, and overall financial health, all in one place.</Text>
-        </SimpleGrid>
-        <Container  my={40} w={'100%'} p={0} size={'md'}>
+    <Container mt={50} size={"xl"}>
+      <Stack gap={"xl"}>
+ 
+        <Box maw={500} w={"100%"}>
+          <Stack gap={"xl"}>
+            <Box>
+              <Text size="xs" ff={"monospace"}>
+                Networth
+              </Text>
+              <Title
+                tt={"capitalize"}
+                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+              >
+                Your networth <br /> visualized in real time
+              </Title>
+            </Box>
+            <Box>
+              <Text>
+                Track your net worth as it evolves in real-time. Get a clear,
+                up-to-the-minute view of your assets, liabilities, and overall
+                financial health, all in one place.
+              </Text>
+            </Box>
+          </Stack>
+        </Box>
+        <Container my={40} w={"100%"} p={0} size={"md"}>
           <div className={styles.networth_box_blur}>
-
             <div className={styles.networth_content}>
               <Group gap={"xs"} justify="end">
                 <ActionIcon
@@ -114,15 +130,19 @@ const NetWorthSection = () => {
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                     Networth
                   </Text>
-                  <Title fz={{base: 'h2',xs: 'h3', sm: "h1", md: 'h1'}}>
-                    <NumberFormatter prefix="$" value={5000} thousandSeparator />
+                  <Title fz={{ base: "h2", xs: "h3", sm: "h1", md: "h1" }}>
+                    <NumberFormatter
+                      prefix="$"
+                      value={5000}
+                      thousandSeparator
+                    />
                   </Title>
                 </Box>
                 <Box>
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                     Diff
                   </Text>
-                  <Title fz={{base: 'h2',xs: 'h3', sm: "h1", md: 'h1'}}>
+                  <Title fz={{ base: "h2", xs: "h3", sm: "h1", md: "h1" }}>
                     <NumberFormatter suffix="%" value={10} thousandSeparator />
                   </Title>
                 </Box>
@@ -130,8 +150,12 @@ const NetWorthSection = () => {
                   <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
                     Target
                   </Text>
-                  <Title fz={{base: 'h2',xs: 'h3', sm: "h1", md: 'h1'}}>
-                    <NumberFormatter prefix="$" value={10000} thousandSeparator />
+                  <Title fz={{ base: "h2", xs: "h3", sm: "h1", md: "h1" }}>
+                    <NumberFormatter
+                      prefix="$"
+                      value={10000}
+                      thousandSeparator
+                    />
                   </Title>
                 </Box>
               </Group>
@@ -156,21 +180,26 @@ const NetWorthSection = () => {
           </div>
         </Container>
         <Box>
-          <Divider color="var(--mantine-color-dark-7" />
+          <Divider />
           <Grid m={"xs"}>
-            <Grid.Col h={400} span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }} style={{
-              paddingInlineEnd: !isMobile
-                ? "var(--mantine-spacing-xl)"
-                : null,
-            }}>
+            <Grid.Col
+              h={400}
+              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+              style={{
+                paddingInlineEnd: !isMobile
+                  ? "var(--mantine-spacing-xl)"
+                  : null,
+              }}
+            >
               <Stack py={"xl"}>
                 <Box>
                   <Title order={3} fw={"normal"}>
                     Impact Analysis
                   </Title>
-                  <Text c={"dimmed"}>
-
-                    Get a clear view of how your daily decisions like savings, expense affect your net-worth and shape your financial future.
+                  <Text >
+                    Get a clear view of how your daily decisions like savings,
+                    expense affect your net-worth and shape your financial
+                    future.
                   </Text>
                 </Box>
               </Stack>
@@ -181,11 +210,11 @@ const NetWorthSection = () => {
               styles={{
                 col: {
                   borderLeft: !isMobile
-                    ? `thin solid var(--mantine-color-dark-7)`
+                    ? `thin solid var(--mantine-color-default-border)`
                     : "none",
                   borderTop: !isMobile
                     ? "none"
-                    : `thin solid var(--mantine-color-dark-7)`,
+                    : `thin solid var(--mantine-color-default-border)`,
                   paddingInlineStart: !isMobile
                     ? "var(--mantine-spacing-xl)"
                     : null,
@@ -197,7 +226,7 @@ const NetWorthSection = () => {
                   <Title order={3} fw={"normal"}>
                     Net-Worth Drivers
                   </Title>
-                  <Text c={"dimmed"}>
+                  <Text >
                     Boost your account experience with a range of smart,
                     easy-to-customize features .
                   </Text>
@@ -205,8 +234,7 @@ const NetWorthSection = () => {
               </Stack>
             </Grid.Col>
           </Grid>
-          <Divider color="var(--mantine-color-dark-7" />
-
+          <Divider />
         </Box>
       </Stack>
     </Container>
