@@ -1,0 +1,25 @@
+.account_display {
+  border-radius: var(--mantine-radius-md);
+  padding: var(--mantine-spacing-sm);
+  border: thin solid var(--mantine-color-default-border);
+
+  box-shadow: var(--mantine-shadow-sm);
+}
+
+.badge {
+    background-color: green;
+    color: red;
+}
+
+.dot_button {
+  all: unset;
+  height: 6px;
+  width: 6px;
+  border-radius: var(--mantine-radius-xl);
+  appearance: none;
+  border: thin solid var(--mantine-color-default-border);
+}
+
+.dot_button[data-selected="true"] {
+  background-color: black;
+}

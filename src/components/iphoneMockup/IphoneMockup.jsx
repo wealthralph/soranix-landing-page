@@ -15,10 +15,8 @@ const IPhoneMockup = ({children}) => {
     const now = new Date();
     let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, "0");
-    const seconds = String(now.getSeconds()).padStart(2, "0");
     const ampm = hours >= 12 ? "pm" : "am";
 
-    // Convert to 12-hour format
     hours = hours % 12 || 12;
 
     setTime(`${hours}:${minutes}${ampm}`);
@@ -34,7 +32,7 @@ const IPhoneMockup = ({children}) => {
     <Box className={styles.outer_frame}>
       <Box className={styles.inner_frame}>
         <Box className={styles.screen}>
-          <Box>{children}</Box>
+          <Box className={styles.screen_content}>{children}</Box>
           <Box className={styles.screen_elements}>
             <Group justify="space-around" align="center">
               <Text fw={"normal"}>{time}</Text>

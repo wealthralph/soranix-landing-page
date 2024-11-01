@@ -2,7 +2,7 @@ import { Text, Container, ActionIcon, Group, rem, Grid, Badge, Image } from '@ma
 import { IconBrandInstagram, IconBrandDiscord, IconBrandX, IconBrandWhatsapp, IconBrandFacebook } from '@tabler/icons-react';
 // import { MantineLogo } from '@mantinex/mantine-logo';
 import classes from './Footer.module.css';
-import { logoBlack, logoWhite } from '../../assets/images';
+import { logoBlack } from '../../assets/images';
 
 const data = [
   {

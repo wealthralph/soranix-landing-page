@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import AccountSection from "../accountSection/AccountSection";
 import PaymentSection from "../paymentsSection/PaymentSection";
 import VirtualCards from "../virtualCardSection/VirttualCards";
-import PortfolioSection from "../portfolioSection/PortfolioSection";
+import SavingsSection from "../savingsSection/SavingsSection";
 
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
@@ -82,6 +82,7 @@ const BankingSection = () => {
         <Space h={70}/>
         <Stack w={'100%'}>
         <AccountSection />
+        <SavingsSection />
         <PaymentSection/>
         <VirtualCards/>
         </Stack>

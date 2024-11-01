@@ -1,11 +1,100 @@
+.graphics1_web,
+.graphics1_mobile {
+  padding: var(--mantine-spacing-xl);
+  /* border: thin solid var(--mantine-color-default-border); */
+  overflow: hidden;
+  border-radius: var(--mantine-radius-lg);
+  position: relative;
+}
+
+.graphics1_web {
+  background-color: hsla(79, 98%, 66%, 1);
+  background-image: radial-gradient(
+      circle at 94% 95%,
+      hsla(170, 88%, 68%, 1) 3%,
+      transparent 76%
+    ),
+    radial-gradient(
+      circle at 89% 34%,
+      hsla(263, 96%, 51%, 1) 1%,
+      transparent 86%
+    ),
+    radial-gradient(
+      circle at 86% 50%,
+      hsla(318, 80%, 65%, 1) 7%,
+      transparent 76%
+    ),
+    radial-gradient(
+      circle at 89% 79%,
+      hsla(248, 76%, 53%, 1) 7%,
+      transparent 87%
+    ),
+    radial-gradient(
+      circle at 15% 44%,
+      hsla(4, 74%, 80%, 1) 15%,
+      transparent 81%
+    ),
+    radial-gradient(
+      circle at 99% 20%,
+      hsla(75, 88%, 92%, 1) 1%,
+      transparent 68%
+    );
+  background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
+}
+
+.graphics1_mobile {
+  background-color: hsla(161, 77%, 83%, 1);
+  background-image: radial-gradient(
+      circle at 7% 81%,
+      hsla(172, 91%, 91%, 1) 16%,
+      transparent 53%
+    ),
+    radial-gradient(circle at 5% 1%, hsla(238, 76%, 61%, 1) 7%, transparent 84%),
+    radial-gradient(
+      circle at 39% 52%,
+      hsla(137, 93%, 64%, 1) 6%,
+      transparent 68%
+    ),
+    radial-gradient(
+      circle at 11% 29%,
+      hsla(201, 97%, 75%, 1) 8%,
+      transparent 74%
+    ),
+    radial-gradient(
+      circle at 90% 50%,
+      hsla(106, 94%, 89%, 1) 2%,
+      transparent 85%
+    );
+  background-blend-mode: normal, normal, normal, normal, normal;
+}
+
+.graphics1_mobile_mockup {
+  --mask-bottom: linear-gradient(to bottom, #000 70%, #00000000 90%);
+  --mask-right: linear-gradient(to right, #000 40%, #00000000 90%);
+  -webkit-mask-image: var(--mask-bottom);
+  mask-image: var(--mask-bottom);
+  -webkit-mask-composite: source-in;
+  width: 95%;
+  mask-composite: intersect;
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: translateX(-50%);
+  transition: top 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  display: flex;
+  justify-content: center;
+  pointer-events: all;
+  
+}
+
 .graphics1_wrapper {
   /* height: 500px; */
-  width: 100%;
+  width: 95%;
   border-radius: var(--mantine-radius-md);
   display: flex;
   justify-content: center;
   align-items: end;
-  position: relative;
+  position: absolute;
   pointer-events: all;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -16,6 +105,18 @@
   mask-image: var(--mask-bottom);
   -webkit-mask-composite: source-in;
   mask-composite: intersect;
+  right: 50%;
+  top: 50px;
+  transform: translateX(50%);
+  background-color: white;
+  transition: top 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  will-change: auto;
+}
+
+.graphics1_wrapper:hover,
+.graphics1_mobile_mockup:hover {
+  top: 15px;
+  transform-origin: bottom;
 }
 
 .graphics1_container {
@@ -28,7 +129,7 @@
   border-radius: var(--mantine-radius-md) var(--mantine-radius-md) 0 0;
   border-bottom: none;
   /* box-shadow: var(--mantine-shadow-sm); */
-  /* background-color: rgba(220, 220, 220, 0.083); */
+
   /* backdrop-filter: blur(14px); */
 }
 
@@ -313,18 +414,4 @@
 
 .accounts_card_shrinked:hover {
   /* filter: brightness(120%); */
-}
-
-.connect_rect {
-  /* fill: rgba(255, 255, 255, 0.068); */
-  stroke: #81818133;
-  stroke: var(--mantine-color-default-border);
-  stroke-width: 1;
-  /* filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.507)); */
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-}
-
-.connect_rect:hover {
-  /* fill: rgba(255, 255, 255, 0.15); */
 }

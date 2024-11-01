@@ -12,36 +12,25 @@ import {
   Flex,
   Grid,
   Group,
-  Image,
   Menu,
   NumberFormatter,
-  Overlay,
   Paper,
   rem,
-  SimpleGrid,
-  Space,
   Stack,
   Table,
-  Tabs,
   Text,
-  ThemeIcon,
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import { useInterval, useMediaQuery, useTimeout } from "@mantine/hooks";
+import { useMediaQuery } from "@mantine/hooks";
 import gsap from "gsap";
 import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Account.module.css";
 import {
-  IconArrowLeft,
   IconArrowNarrowDown,
   IconArrowNarrowUp,
-  IconArrowRight,
-  IconBell,
   IconBellFilled,
-  IconBox,
-  IconCashRegister,
   IconDots,
   IconMessages,
   IconNote,
@@ -56,10 +45,10 @@ import {
 } from "@tabler/icons-react";
 import { AreaChart, BarChart } from "@mantine/charts";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { Carousel, CarouselSlide } from "@mantine/carousel";
+import { NG } from "../../../assets/images";
 import IPhoneMockup from "../../../components/iphoneMockup/IphoneMockup";
-import { logoBlack, logoSvgWhite, NG } from "../../../assets/images";
-import anime from "animejs";
+import AccountScreen from "../../../components/mockupScreens/accountScreen/AccountScreen";
+import { Carousel } from "@mantine/carousel";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(MotionPathPlugin);
@@ -69,100 +58,64 @@ const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
 
 const AccountSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
-  const [embla, setEmbla] = useState(null);
 
   const containerRef = useRef(null);
   const boxRef = useRef(null);
 
-  const scrollPrev = useCallback(() => {
-    if (embla) embla.scrollPrev();
-  }, [embla]);
-
-  const scrollNext = useCallback(() => {
-    if (embla) embla.scrollNext();
-  }, [embla]);
-
   useGSAP(() => {
-    gsap.to(boxRef.current, {
+    gsap.from(".graphics1", {
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top center",
-        toggleActions: "restart pause resume pause",
+        start: "top top",
       },
-      x: 400,
-      duration: 2,
-      ease: "power2.inOut",
+      y: 50,
+      opacity: 0,
+      stagger: 0.4,
+      duration: 0.5,
+      ease: "power1.inOut",
+      delay: 0.2,
     });
   });
 
-  const [accountId, setAccountId] = useState(null);
+  const webBox = (
+    <Box h={450} className={`${styles.graphics1_web} `}>
+      <Graphics1Account />
+    </Box>
+  );
 
-  const accountTypesData = [
-    {
-      id: 1,
-      name: "Deposit Account",
-    },
-    {
-      id: 2,
-      name: "Sub Account",
-    },
-    {
-      id: 3,
-      name: "Virtual Account",
-    },
-    {
-      id: 4,
-      name: "Multi-Currency Account",
-    },
-    {
-      id: 5,
-      name: "Connect Account",
-    },
-    {
-      id: 6,
-      name: "Savings Account",
-    },
-  ];
+  const mobileBox = (
+    <Box h={450} className={`${styles.graphics1_mobile} `}>
+      <Box className={styles.graphics1_mobile_mockup}>
+        <IPhoneMockup>
+          <AccountScreen />
+        </IPhoneMockup>
+      </Box>
+    </Box>
+  );
 
-  const accountTypes = accountTypesData.map((i, index) => {
-    return (
-      <CarouselSlide key={i.id}>
-        <PaperMotion
-          onClick={() => setAccountId(i.id)}
-          layoutId={i.id}
-          className={styles.accounts_card_shrinked}
-          radius={"lg"}
-        >
-          <Stack h={"100%"} justify="end">
-            <Flex>
-              <Box>
-                <Title order={6} fw={"normal"}>
-                  {i.name}
-                </Title>
-              </Box>
-            </Flex>
-          </Stack>
-        </PaperMotion>
-      </CarouselSlide>
-    );
-  });
-
-  useGSAP(() => {});
-
-  useEffect(() => {
-    if (accountId) {
-      // Disable scrolling by setting overflow to hidden
-      document.body.style.overflow = "hidden";
-    } else {
-      // Re-enable scrolling by resetting overflow
-      document.body.style.overflow = "auto";
+  const renderGraphics = () => {
+    if (isMobile) {
+      return (
+        <Carousel slideGap={'sm'} slideSize={"94%"} withControls={false}>
+          <Carousel.Slide>{webBox}</Carousel.Slide>
+          <Carousel.Slide>{mobileBox}</Carousel.Slide>
+        </Carousel>
+      );
     }
 
-    // Cleanup on unmount or when overlay is hidden
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [accountId]);
+    return (
+      <Box>
+        <Grid>
+          <Grid.Col span={7} className="graphics1">
+            {webBox}
+          </Grid.Col>
+          <Grid.Col span={5} className="graphics1">
+            {mobileBox}
+          </Grid.Col>
+        </Grid>
+      </Box>
+    );
+  };
 
   return (
     <Container fluid ref={containerRef} w={"100%"} p={0}>
@@ -189,7 +142,8 @@ const AccountSection = () => {
           </Stack>
         </Box>
         {/* Gsap animation elements here  */}
-        <Graphics1Account />
+        {renderGraphics()}
+
         {/* Gsap animation elements ends here */}
         <Box>
           <Box>
@@ -306,9 +260,6 @@ const AccountSection = () => {
                 </Stack>
               </Grid.Col>
             </Grid>
-            <Divider />
-          </Box>
-          <Box py={"xl"}>
             <Divider />
           </Box>
         </Box>
@@ -464,17 +415,17 @@ const Graphics1Account = () => {
     </Table.Tr>
   ));
 
+  const iosButtons = ["teal", "yellow", "red"].map((i) => (
+    <ColorSwatch withShadow size={9} color={i} key={i} />
+  ));
+
   return (
     <Container p={0} w={"100%"} size={"md"}>
       <Box className={styles.graphics1_wrapper}>
-        {/* <Box pos={'absolute'}>
-
-      <IPhoneMockup/>
-</Box> */}
         <Box className={styles.graphics1_container}>
           <Box className={styles.graphics1_content}>
             <Flex h={30} p={"xs"} align={"center"} justify={"space-between"}>
-              <Text c={"dimmed"} order={6}></Text>
+              <Group gap={"xs"}>{iosButtons}</Group>
 
               <Group gap={"xs"} align="center">
                 <ActionIcon
@@ -529,11 +480,6 @@ const Graphics1Account = () => {
                             stroke={1.5}
                           />
                         }
-                        rightSection={
-                          <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                            Ctrl + P
-                          </Text>
-                        }
                       >
                         Deposit Account
                       </Menu.Item>
@@ -544,11 +490,6 @@ const Graphics1Account = () => {
                             color={theme.colors.pink[6]}
                             stroke={1.5}
                           />
-                        }
-                        rightSection={
-                          <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                            Ctrl + T
-                          </Text>
                         }
                       >
                         Sub Account
@@ -561,11 +502,6 @@ const Graphics1Account = () => {
                             stroke={1.5}
                           />
                         }
-                        rightSection={
-                          <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                            Ctrl + U
-                          </Text>
-                        }
                       >
                         Virtual Account
                       </Menu.Item>
@@ -577,13 +513,19 @@ const Graphics1Account = () => {
                             stroke={1.5}
                           />
                         }
-                        rightSection={
-                          <Text size="xs" tt="uppercase" fw={700} c="dimmed">
-                            Ctrl + U
-                          </Text>
+                      >
+                        Linked Account
+                      </Menu.Item>
+                      <Menu.Item
+                        leftSection={
+                          <IconUsers
+                            style={{ width: rem(16), height: rem(16) }}
+                            color={theme.colors.cyan[6]}
+                            stroke={1.5}
+                          />
                         }
                       >
-                        Connect Account
+                        Multi-Currency Account
                       </Menu.Item>
                     </Menu.Dropdown>
                   </Menu>
@@ -980,12 +922,9 @@ const Graphics3AccountAnalytics = () => {
   );
 };
 
-
 const BackgroundGrid = () => {
-
   const strobeRef = useRef(null);
   const containerRef = useRef(null);
-
 
   // useGSAP(() => {
 
@@ -1005,15 +944,9 @@ const BackgroundGrid = () => {
   //     yoyo: true,
   //   });
 
-
   // })
 
-
-  return (
-    <Box pos="relative" ref={containerRef}>
-    
-    </Box>
-  );
+  return <Box pos="relative" ref={containerRef}></Box>;
 };
 
 //  <Title order={3} fw={"normal"}>
@@ -1024,3 +957,18 @@ const BackgroundGrid = () => {
 //                       real-time analytics that reveal trend and patterns from
 //                       all your account data.
 //                     </Text>
+
+// useEffect(() => {
+//   if (accountId) {
+//     // Disable scrolling by setting overflow to hidden
+//     document.body.style.overflow = "hidden";
+//   } else {
+//     // Re-enable scrolling by resetting overflow
+//     document.body.style.overflow = "auto";
+//   }
+
+//   // Cleanup on unmount or when overlay is hidden
+//   return () => {
+//     document.body.style.overflow = "auto";
+//   };
+// }, [accountId]);

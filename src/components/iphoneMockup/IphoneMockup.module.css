@@ -9,7 +9,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
      0 6px 20px rgba(0, 0, 0, 0.1); 
 width: 100%;
-
+pointer-events: all;
 }
 
 .outer_frame::before {
@@ -45,11 +45,19 @@ width: 100%;
   inset: 0;
   padding: var(--mantine-spacing-sm);
   z-index: 2;
+  pointer-events: none;
+}
+
+.screen_content {
+  width: 100%;
+  padding-top: 50px;
+  padding-inline: var(--mantine-spacing-sm);
+  user-select: none;
 }
 
 .dynamic_island {
   width: 30%;
-  height: 35px;
+  height: 32px;
   border-radius: 70px;
   background-color: var(--mantine-color-black);
 }
