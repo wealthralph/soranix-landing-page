@@ -26,7 +26,7 @@ import fbn from "./fbn.png"
 import sterling from "./sterling.png"
 import wema from "./wema.png"
 import re from "./re.avif"
-import linked from "./linked.png"
+import account_config from "./account_config.png"
 
 export {
     logoWhite,
@@ -57,5 +57,5 @@ export {
     sterling,
     wema,
     re,
-    linked
+    account_config
 }
