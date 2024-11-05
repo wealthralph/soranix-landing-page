@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Center,
+  Checkbox,
   ColorSwatch,
   Container,
   CopyButton,
@@ -21,6 +22,7 @@ import {
   NumberFormatter,
   Paper,
   rem,
+  Select,
   Stack,
   Switch,
   Table,
@@ -267,7 +269,7 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack py={"xl"} h={450} style={{overflow: "hidden"}}>
+                <Stack py={"xl"} h={450} style={{ overflow: "hidden" }}>
                   <Box maw={500}>
                     <Title tt={"capitalize"} order={3} fw={"bold"}>
                       Customize Your Banking Experience{" "}
@@ -826,24 +828,26 @@ const AccountCustomizationGraphics = () => {
       icon: <IconSettings size={18} />,
       description: "Manage your account settings",
     },
-  ]
-  
+  ];
+
   const customizationsRender = customizations.map((i, index) => {
     return (
       <Box key={i.id}>
-        <Group px={'sm'} py={'xs'}>
-          <IconChevronDown size={16} color="var(--mantine-color-dimmed)"/>
-          <Text c={'dimmed'} size="sm">{i.title}</Text>
+        <Group px={"sm"} py={"xs"}>
+          <IconChevronDown size={16} color="var(--mantine-color-dimmed)" />
+          <Text c={"dimmed"} size="sm">
+            {i.title}
+          </Text>
         </Group>
-        {
-          index+1 !== customizations.length && <Divider/>
-        }
+        {index + 1 !== customizations.length && <Divider />}
       </Box>
-    )
-  })
+    );
+  });
+
+  const permissions = ["View Balance", "Create Transfer", "Update Account"];
 
   return (
-    <Box w={"100%"} p={"lg"} pos={'relative'}>
+    <Box w={"100%"} p={"lg"} pos={"relative"}>
       <Paper
         maw={500}
         h={"100%"}
@@ -854,15 +858,13 @@ const AccountCustomizationGraphics = () => {
         radius={"lg"}
         p={5}
       >
-        <Paper h={"100%"} radius={"md"}>
+        <Paper h={"100%"} radius={"lg"}>
           <Box p={"xs"}>
             <Group justify="space-between" align="start">
-              <Box >
-                <Title order={6} >
-                  Main Account
-                </Title>
+              <Box>
+                <Title order={6}>Main Account</Title>
                 <Group gap={3}>
-                  <Text tt={"capitalize"} size="xs" c={'dimmed'}>
+                  <Text tt={"capitalize"} size="xs" c={"dimmed"}>
                     00034237611
                   </Text>
                   <CopyButton>
@@ -870,19 +872,43 @@ const AccountCustomizationGraphics = () => {
                   </CopyButton>
                 </Group>
               </Box>
-              <Badge radius={'md'} color="teal">
+              <Badge radius={"md"} color="teal">
                 Active
               </Badge>
             </Group>
           </Box>
           <Divider />
-          <Stack gap={0} >
-            {customizationsRender}
-          </Stack>
+          <Stack gap={0}>{customizationsRender}</Stack>
         </Paper>
       </Paper>
-      <Paper pos={'absolute'} shadow="sm" bottom={0}  right={0} w={300} h={150} bg={'white'}>
-
+      <Paper
+        pos={"absolute"}
+        shadow="sm"
+        bottom={0}
+        right={0}
+        w={300}
+        h={150}
+        bg={"white"}
+        p={"sm"}
+        withBorder
+        radius={'md'}
+      >
+        <Stack>
+          <Group>
+          <Title order={5} fw={"normal"}>
+            Flow Permissions
+          </Title>
+     
+          </Group>
+          <Stack gap={'xs'}>
+            {permissions.map((i) => (
+              <Group key={i} align="center">
+                <Checkbox checked size="xs" />
+                <Text size="sm">{i}</Text>
+              </Group>
+            ))}
+          </Stack>
+        </Stack>
       </Paper>
     </Box>
   );
