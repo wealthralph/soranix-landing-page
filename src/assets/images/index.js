@@ -19,6 +19,14 @@ import airbnb from "./airbnb-logo.png"
 import tesla from "./tesla-logo.png"
 import apple from "./Apple-logo.png"
 import NG from "./NG.svg"
+import sendImage from "./send_image.jpg"
+import gtb from "./gtb.png"
+import zenith from "./zenith-bank.png"
+import fbn from "./fbn.png"
+import sterling from "./sterling.png"
+import wema from "./wema.png"
+import re from "./re.avif"
+import linked from "./linked.png"
 
 export {
     logoWhite,
@@ -41,5 +49,13 @@ export {
     apple,
     logoBlack,
     NG,
-    logoSvgWhite
+    logoSvgWhite,
+    sendImage,
+    gtb,
+    zenith,
+    fbn,
+    sterling,
+    wema,
+    re,
+    linked
 }

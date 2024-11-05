@@ -204,7 +204,7 @@ const PortfolioSyncSection = () => {
                 </Text>
                 <Highlight
                   span
-                  highlight={["stocks", "ETfs", "Crypto"]}
+                  highlight={["stocks", "ETfs", ""]}
                   highlightStyles={{
                     backgroundImage:
                       "linear-gradient(45deg, var(--mantine-color-cyan-5), var(--mantine-color-indigo-5))",
@@ -213,7 +213,7 @@ const PortfolioSyncSection = () => {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Bring all your investments from Stocks, ETfs , Crypto and
+                  Bring all your investments from Stocks, ETfs  and
                   across different platforms to Soranix giving you a unified
                   view of your investments .
                 </Highlight>

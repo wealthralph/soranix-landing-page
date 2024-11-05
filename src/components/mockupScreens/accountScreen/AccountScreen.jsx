@@ -1,6 +1,5 @@
 import {
   ActionIcon,
-  Anchor,
   Avatar,
   Badge,
   Box,
@@ -15,24 +14,20 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { avatar1, avatar2, NG } from "../../../assets/images";
+import { avatar1,  NG } from "../../../assets/images";
 import {
   IconArrowDown,
-  IconArrowRight,
   IconArrowUp,
   IconBellFilled,
-  IconCaretRight,
   IconChevronRight,
   IconCopy,
-  IconPlus,
   IconQuestionMark,
   IconSettings,
-  IconSettingsBolt,
-} from "@tabler/icons-react";
-import SlotCounter from "react-slot-counter";
-import { Carousel } from "@mantine/carousel";
+} from "@tabler/icons-react";import { Carousel } from "@mantine/carousel";
 import styles from "./AccountScreen.module.css";
 import { useCallback, useEffect, useState } from "react";
+
+// Todo implement the Linked account screen
 
 const AccountScreen = () => {
   const [embla, setEmbla] = useState(null);
@@ -41,7 +36,7 @@ const AccountScreen = () => {
   const [accountsData, setAccountsData] = useState([
     {
       id: 1,
-      name: "Main Account",
+    name: "Main Account",
       balance: "30000",
       accountNumber: "1234567890",
       type: "Deposit",

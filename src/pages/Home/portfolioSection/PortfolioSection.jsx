@@ -8,6 +8,8 @@ import { useMediaQuery } from "@mantine/hooks";
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
 
 
+
+
 const PortfolioSection = () => {
 
     const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -35,7 +37,7 @@ const PortfolioSection = () => {
         id: 3,
         title: (
           <Text ta={"center"}>
-            Portfolio <br /> Analysis
+            Portfolio <br /> Analytics
           </Text>
         ),
       },
@@ -78,7 +80,7 @@ const PortfolioSection = () => {
     });
 
   return (
-    <Container size={"xl"} w={"100%"}>
+    <Container size={"xl"} w={"100%"} my={100}>
       <Stack w={"100%"}>
         <Badge radius={"sm"} variant="dot">
           Portfolio

@@ -45,82 +45,11 @@ const OsSection = () => {
 export default OsSection;
 
 const OsLayers = () => {
-  const canvasRef = useRef(null);
 
-  const primitives = [
-    {
-      id: 1,
-      name: "Accounts",
-      icon: " ",
-    },
-    {
-      id: 2,
-      name: "Virtual Cards",
-      icon: " ",
-    },
-    {
-      id: 3,
-      name: "Payments",
-      icon: " ",
-    },
-    {
-      id: 4,
-      name: "Bills & Utility",
-      icon: " ",
-    },
-    {
-      id: 5,
-      name: "Savings",
-      icon: " ",
-    },
-    // {
-    //   id: 6,
-    //   name: "Savings",
-    //   icon: " ",
-    // },
-  ].map((i) => <Box key={i.id} className={styles.primitives_cont}></Box>);
-
-  const tools = [
-    {
-      id: 1,
-      name: "Portfolio",
-      icon: " ",
-    },
-    {
-      id: 2,
-      name: "Money Management",
-      icon: " ",
-    },
-    {
-      id: 3,
-      name: "Automation",
-      icon: " ",
-    },
-  ].map((i) => <Box key={i.id} className={styles.tools_cont}></Box>);
 
   return (
     <Container p={0} size={"lg"} w={"100%"}>
-      {/* <canvas ref={canvasRef} style={{display: "block"}}/> */}
-      <Box className={styles.os_display_wrapper}>
-        <Box className={styles.os_display_outer}>
-          <Box className={styles.os_display_inner}>
-            <Center>
-              <Title>Soranix Primitives</Title>
-            </Center>
-
-            <Stack gap={"xl"}>
-              {/* primitives */}
-              <SimpleGrid cols={primitives.length}>{primitives}</SimpleGrid>
-
-              {/* Soranix AI */}
-              <Box className={styles.soranix_ai_cont}></Box>
-            </Stack>
-
-            {/* Soranix AI */}
-            <SimpleGrid cols={tools.length}>{tools}</SimpleGrid>
-          </Box>
-        </Box>
-      </Box>
+    
     </Container>
   );
 };
