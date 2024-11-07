@@ -1,0 +1,68 @@
+.wrapper {
+  background-color: hsla(333, 0%, 100%, 1);
+  background-image: radial-gradient(
+      circle at 0% 0%,
+      hsla(64, 82%, 77%, 0.35) 3.1210986267166043%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 20% 0%,
+      hsla(5, 77%, 74%, 0.35) 3.1210986267166043%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 40% 0%,
+      hsla(315, 77%, 74%, 0.35) 3.1210986267166043%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 60% 0%,
+      hsla(256, 77%, 74%, 0.35) 3.1210986267166043%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 0%,
+      hsla(191, 77%, 74%, 0.35) 3.1210986267166043%,
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 100% 0%,
+      hsla(152, 77%, 74%, 0.35) 3%,
+      transparent 40%
+    );
+  background-blend-mode: normal, normal, normal, normal, normal, normal;
+  position: relative;
+}
+
+.header{
+  
+}
+
+.checkbox {
+  position: relative;
+  padding: var(--mantine-spacing-md);
+  transition: border-color 150ms ease;
+
+  &[data-checked] {
+    border-color: var(--mantine-primary-color-filled);
+  }
+
+  &[data-dis =true] {
+    cursor: not-allowed;
+    background-color: var(--mantine-color-gray-1);
+    color: var(--mantine-color-dimmed);
+  }
+
+  @mixin hover {
+    @mixin light {
+      background-color: var(--mantine-color-gray-0);
+    }
+
+    @mixin dark {
+      background-color: var(--mantine-color-dark-6);
+    }
+  }
+}
+
+
+

@@ -4,26 +4,30 @@ import {
   Badge,
   Box,
   Button,
+  Center,
   CopyButton,
   Flex,
   Group,
   Indicator,
   NumberFormatter,
+  Paper,
   rem,
   Stack,
   Text,
   Title,
 } from "@mantine/core";
-import { avatar1,  NG } from "../../../assets/images";
+import { avatar1, NG } from "../../../assets/images";
 import {
   IconArrowDown,
   IconArrowUp,
   IconBellFilled,
   IconChevronRight,
   IconCopy,
+  IconPlus,
   IconQuestionMark,
   IconSettings,
-} from "@tabler/icons-react";import { Carousel } from "@mantine/carousel";
+} from "@tabler/icons-react";
+import { Carousel } from "@mantine/carousel";
 import styles from "./AccountScreen.module.css";
 import { useCallback, useEffect, useState } from "react";
 
@@ -36,7 +40,7 @@ const AccountScreen = () => {
   const [accountsData, setAccountsData] = useState([
     {
       id: 1,
-    name: "Main Account",
+      name: "Main Account",
       balance: "30000",
       accountNumber: "1234567890",
       type: "Deposit",
@@ -204,8 +208,8 @@ const AccountScreen = () => {
                   </CopyButton>
                 </Group>
               </Box>
-                {account.type !== "Linked" && (
-              <Group>
+              {account.type !== "Linked" && (
+                <Group>
                   <ActionIcon
                     radius={"xl"}
                     size={"lg"}
@@ -214,16 +218,16 @@ const AccountScreen = () => {
                   >
                     <IconArrowDown />
                   </ActionIcon>
-                <ActionIcon
-                  radius={"xl"}
-                  size={"lg"}
-                  variant="outline"
-                  color="white"
-                >
-                  <IconArrowUp />
-                </ActionIcon>
-              </Group>
-                )}
+                  <ActionIcon
+                    radius={"xl"}
+                    size={"lg"}
+                    variant="outline"
+                    color="white"
+                  >
+                    <IconArrowUp />
+                  </ActionIcon>
+                </Group>
+              )}
             </Group>
           </Box>
         </Stack>
@@ -285,7 +289,16 @@ const AccountScreen = () => {
         >
           {accountsCarousel}
           <Carousel.Slide>
-            <Box> hello</Box>
+            <Paper withBorder h={"100%"} radius={"md"} style={{borderStyle: "dashed"}}>
+              <Center h={"100%"}>
+                <Stack gap={"xs"} align="center">
+                  <ActionIcon variant="transparent" color="gray">
+                    <IconPlus size={20} />
+                  </ActionIcon>
+                  <Text>Add new account</Text>
+                </Stack>
+              </Center>
+            </Paper>
           </Carousel.Slide>
         </Carousel>
         <Flex justify="space-between">

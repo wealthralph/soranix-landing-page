@@ -1,8 +1,9 @@
-import { createTheme, Divider, MantineProvider, Paper } from "@mantine/core";
+import { Checkbox, createTheme, Divider, Input, MantineProvider, Paper } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import WebLayout from "./components/layout/WebLayout.jsx";
+import EarlyAccess from "./pages/earlyAccess/EarlyAccess.jsx";
 
 const theme = createTheme({
   primaryColor: "indigo",
@@ -16,7 +17,8 @@ const theme = createTheme({
     defaultProps:{
       color: 'dark.7'
     }
-  })
+  }),
+
 });
 
 const App = () => {
@@ -31,7 +33,9 @@ const App = () => {
           <Route path="/">
             <Route element={<WebLayout />}>
               <Route index element={<Home />} />
+
             </Route>
+              <Route path="early_access"  element={<EarlyAccess/>} />
           </Route>
         </Routes>
       </MantineProvider>

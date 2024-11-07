@@ -13,7 +13,15 @@ import {
   Title,
 } from "@mantine/core";
 import styles from "./OsSection.module.css";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import {
+  addEdge,
+  Position,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
+} from "@xyflow/react";
+import { PrimitiveNodes, TriggerNode } from "../../../components/nodes/CustomNode";
 
 const OsSection = () => {
   return (
@@ -24,7 +32,7 @@ const OsSection = () => {
             tt={"capitalize"}
             fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
           >
-            The Operating system for <br /> your personal finance{" "}
+            The AI Operating system for <br /> your personal finance{" "}
           </Title>
           <Stack justify="flex-end" maw={500}>
             <Text>
@@ -44,12 +52,60 @@ const OsSection = () => {
 
 export default OsSection;
 
-const OsLayers = () => {
+const nodeTypes = {
+  primitiveNode: PrimitiveNodes,
+};
 
+const OsLayers = () => {
+  const nodeDefaults = {
+    sourcePosition: Position.Right,
+    targetPosition: Position.Left,
+    draggable: false
+  };
+
+  const initialNodes = [
+    {
+      id: "A",
+      type: "primitiveNode",
+      position: { x: 650, y: 550 },
+      ...nodeDefaults,
+    },
+    {
+      id: "B",
+      type: "primitiveNode",
+      position: { x: 650, y: 650 },
+      ...nodeDefaults,
+    },
+  ];
+
+  const initialEdges = [];
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const onConnect = useCallback(
+    (params) =>
+      setEdges((eds) => addEdge({ ...params, type: "smoothstep" }, eds)),
+    []
+  );
 
   return (
-    <Container p={0} size={"lg"} w={"100%"}>
-    
+    <Container p={0} size={"xl"} w={"100%"} h={400}>
+      <ReactFlow
+        nodes={nodes}
+        nodeTypes={nodeTypes}
+        proOptions={{ hideAttribution: true }}
+        onEdgesChange={onEdgesChange}
+        onNodesChange={onNodesChange}
+        zoomOnDoubleClick={false}
+        zoomOnPinch={false}
+        zoomOnScroll={false}
+        panOnDrag={false}
+        // panOnScroll={false}
+        
+        // onConnect={onConnect}
+        fitView
+      ></ReactFlow>
     </Container>
   );
 };

@@ -41,7 +41,7 @@ import Footer from "../footer/Footer";
 const WebLayout = () => {
   return (
     <section >
-      {/* <Navbar/> */}
+      <Navbar/>
       <Outlet/>
       <Footer/>
     </section>

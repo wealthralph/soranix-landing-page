@@ -70,14 +70,19 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
   ));
 
   return (
-    <Container my={100} ref={containerRef} size={"lg"} >
-      <Paper bg={'cyan.3'} withBorder radius={'lg'} h={400} p={'xl'}>
+    <Container my={100} ref={containerRef} size={"lg"}>
+      <Paper bg={"gray.0"} withBorder radius={"lg"} h={400} p={"xl"}>
         <Stack align="center" justify="center" h={"100%"}>
           <Stack align="center" gap={"sm"}>
             <Title tt={"capitalize"} fz={"sm"} ff={"monospace"}>
               {`Part ${part}`}
             </Title>
-            <Title tt={"capitalize"} ref={titleRef} fz={40}>
+            <Title
+              tt={"capitalize"}
+              ref={titleRef}
+              ta={"center"}
+              fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+            >
               {title}
             </Title>
             <Text ff={"monospace"} ref={descRef}></Text>

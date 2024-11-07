@@ -1,50 +1,75 @@
-import { Box, Button, Container, Grid, Highlight, Image, Paper, Space, Stack, Text, Title } from "@mantine/core";
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import styles from './Home.module.css'
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Highlight,
+  Image,
+  Paper,
+  Space,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import styles from "./Home.module.css";
 
 const HeroSection = () => {
   const BoxRef = useRef(null);
   const titleRef = useRef(null);
   const textRef = useRef(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
 
-    // Animate the title
-    tl.fromTo(titleRef.current,
-      { y: -160, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 }
-    )
+      // Animate the title
+      tl.fromTo(
+        titleRef.current,
+        { y: -160, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1 }
+      )
 
-      // Animate the text after the title
-      .fromTo(textRef.current,
-        { y: -50, opacity: 0 },
-        { y: 0, opacity: 1, duration:0.3 },
-        "-=0.5" // Overlap animations slightly by starting the text 0.5 seconds before the title ends
-      );
-  }, { scope: BoxRef });
+        // Animate the text after the title
+        .fromTo(
+          textRef.current,
+          { y: -50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.5 },
+          "-=0.3" // Overlap animations slightly by starting the text 0.5 seconds before the title ends
+        );
+    },
+    { scope: BoxRef }
+  );
 
   return (
-    <Box >
-
-      <Container size={"xl"} >
+    <Box>
+      <Container size={"xl"}>
         <Stack gap={"lg"}>
-          <Box maw={600} ref={BoxRef}>
-            <Title
+          <Stack maw={600} ref={BoxRef}>
+            <Highlight
+              highlight={[ "AI"]}
+              highlightStyles={{
+                backgroundImage:
+                  "linear-gradient(45deg, var(--mantine-color-cyan-5), var(--mantine-color-indigo-5))",
+                // fontWeight: 700,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
               fz={{ base: 50, xs: "h1", sm: "h1", md: 50 }}
               tt={"capitalize"}
               fw={"bold"}
-              ref={titleRef} // Reference for animation
+              ref={titleRef}
             >
-           Take control of Your Financial future, the Modern Way. {' '}
-             
-            </Title>
+              Take control of Your Finances, the Modern Way with AI
+            </Highlight>
+
             <Text maw={500} ref={textRef}>
-              Unlock the full potential of your finances with a platform that goes beyond the basics.
+              Unlock the full potential of your finances with a platform that
+              goes beyond the basics.
             </Text>
-          </Box>
+          </Stack>
           <Box>
             <Button variant="default">Get Early Access</Button>
           </Box>
@@ -80,11 +105,6 @@ const HeroSection = () => {
 
 export default HeroSection;
 
-
 const GraphicsAccount = () => {
-  return (
-    <div>
-      hello
-    </div>
-  )
-}
+  return <div>hello</div>;
+};

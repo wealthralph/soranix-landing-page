@@ -20,6 +20,7 @@
     "@react-three/fiber": "^8.17.9",
     "@tabler/icons-react": "^3.12.0",
     "@xyflow/react": "^12.2.0",
+    "axios": "^1.7.7",
     "embla-carousel-autoplay": "^7.1.0",
     "embla-carousel-react": "^7.1.0",
     "framer-motion": "^11.5.6",
@@ -28,6 +29,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-fast-marquee": "^1.6.5",
+    "react-hook-form": "^7.53.1",
     "react-router-dom": "^6.26.1",
     "react-slot-counter": "^3.0.1",
     "three": "^0.169.0"

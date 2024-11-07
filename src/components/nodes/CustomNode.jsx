@@ -57,6 +57,10 @@ function CustomHandle({ id, label, onChange }) {
     </div>
   );
 }
+
+
+
+
 export const SplitNode = ({ id, data, isConnectable }) => {
   const { updateNodeData } = useReactFlow();
   const [percentages, setPercentages] = useState([0]);
@@ -67,30 +71,25 @@ export const SplitNode = ({ id, data, isConnectable }) => {
     id: "hello",
   });
 
-  // Get data from the connected source node
   const nodeData = useNodesData(connections?.[0]?.source);
 
-  // Calculate and update individual split values
   useEffect(() => {
     if (nodeData?.data?.value && percentages.reduce((acc, val) => acc + val, 0) <= 100) {
       const inputValue = nodeData.data.value;
       const newSplitValues = percentages.map((p) => (inputValue * parseInt(p)) / 100);
 
-      // Update each connected output with its specific value
       newSplitValues.forEach((splitValue, idx) => {
         updateNodeData(id, { [`output-${idx}`]: splitValue });
       });
     }
   }, [percentages, nodeData]);
 
-  // Handle percentage changes
   const handlePercentageChange = (index, value) => {
     const newPercentages = [...percentages];
     newPercentages[index] = Number(value);
     setPercentages(newPercentages);
   };
 
-  // Delete percentage at a specific index
   const onDeletePercentage = (index) => {
     if (percentages.length > 1) {
       const newPercentages = percentages.filter((_, idx) => idx !== index);
@@ -327,4 +326,20 @@ export const NotificationNode = () => {
       </CustomNodeWrapper.Body>
     </CustomNodeWrapper>
   )
+}
+
+
+export const  PrimitiveNodes = ({id, data}) => {
+
+
+
+  return (
+    <Box w={100} h={35} bg={'gray'}>
+      <Handle
+        className={styles["react-flow__handle"]}
+        type="source"
+        position={Position.Right}
+      />
+    </Box>
+  );
 }
