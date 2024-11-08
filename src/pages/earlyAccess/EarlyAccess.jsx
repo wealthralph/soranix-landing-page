@@ -334,8 +334,18 @@ const Step2 = ({ register, control }) => {
     { id: 4, title: "Too many manual tasks" },
     { id: 5, title: "Lack of insight into financial growth" },
     { id: 6, title: "Difficulty in automating finances" },
-    { id: 7, title: "Other (Text input)" },
   ];
+
+ const features = [
+   { id: 1, title: "Personal Banking" },
+   { id: 2, title: "Portfolio Management" },
+   { id: 3, title: "Money Controls" },
+   { id: 4, title: "Virtaul Card" },
+   { id: 5, title: "Soranix AI" },
+   { id: 6, title: "Flows" },
+   { id: 7, title: "Payments" },
+ ];
+
 
   return (
     <Stack>
@@ -466,6 +476,7 @@ const Step2 = ({ register, control }) => {
                 name="manageFinances"
                 placeholder="Select one"
                 onChange={field.onChange}
+                radius={"md"}
                 value={field.value}
                 data={[
                   "Traditional Banking",
@@ -480,7 +491,41 @@ const Step2 = ({ register, control }) => {
             );
           }}
         />
-     
+
+        <Controller
+          name="painPoints"
+          control={control}
+          render={({ field }) => {
+            return (
+              <Checkbox.Group
+                label={"Which features are you most interested in for Soranix?"}
+                required
+                value={field.value}
+                onChange={field.onChange}
+              >
+                <Group gap={"xs"}>
+                  {features.map((i) => (
+                    <Checkbox.Card
+                      radius="md"
+                      w={"fit-content"}
+                      p={5}
+                      key={i.id}
+                      className={styles.checkbox}
+                      value={i.title}
+                    >
+                      <Group gap="xs" wrap="nowrap" align="center">
+                        <Checkbox.Indicator variant="filled" size="xs" />
+                        <Text size="sm" style={{ textWrap: "nowrap" }}>
+                          {i.title}
+                        </Text>
+                      </Group>
+                    </Checkbox.Card>
+                  ))}
+                </Group>
+              </Checkbox.Group>
+            );
+          }}
+        />
       </Stack>
     </Stack>
   );

@@ -123,7 +123,7 @@ function Navbar() {
           </Box>
           {/* CTA */}
           <Box>
-            <Button onClick={() => navigate("/early_access")}>
+            <Button size="xs" onClick={() => navigate("/early_access")}>
               Get Early Access
             </Button>
           </Box>
