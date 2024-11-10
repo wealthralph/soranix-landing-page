@@ -3,11 +3,9 @@ import {
   ActionIcon,
   alpha,
   Avatar,
-  BackgroundImage,
   Badge,
   Box,
   Button,
-  Center,
   Checkbox,
   ColorSwatch,
   Container,
@@ -22,9 +20,7 @@ import {
   NumberFormatter,
   Paper,
   rem,
-  Select,
   Stack,
-  Switch,
   Table,
   Text,
   Title,
@@ -33,7 +29,7 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import gsap from "gsap";
 import { MotionPathPlugin, ScrollTrigger } from "gsap/all";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import styles from "./Account.module.css";
 import {
   IconArrowNarrowDown,
@@ -54,16 +50,15 @@ import {
   IconTrash,
   IconUsers,
 } from "@tabler/icons-react";
-import { AreaChart, BarChart } from "@mantine/charts";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AreaChart } from "@mantine/charts";
+import {  motion } from "framer-motion";
 import {
-  account_config,
-  fbn,
-  gtb,
+  clickme,
+  GBP,
   logoWhite,
   NG,
-  re,
   sterling,
+  usa,
   wema,
   zenith,
 } from "../../../assets/images";
@@ -239,7 +234,7 @@ const AccountSection = () => {
                   },
                 }}
               >
-                <Stack py={"xl"} h={450}>
+                <Stack py={"xl"} h={450} pos={"relative"}>
                   <Box maw={500}>
                     <Title tt={"capitalize"} order={3} fw={"bold"}>
                       Get paid in different currencies.
@@ -250,7 +245,7 @@ const AccountSection = () => {
                       place.
                     </Text>
                   </Box>
-                  <Box h={"100%"}></Box>
+                  <MultiCurrencyDisplayGraphics />
                 </Stack>
               </Grid.Col>
               <Grid.Col
@@ -891,16 +886,15 @@ const AccountCustomizationGraphics = () => {
         bg={"white"}
         p={"sm"}
         withBorder
-        radius={'md'}
+        radius={"md"}
       >
         <Stack>
           <Group>
-          <Title order={5} fw={"normal"}>
-            Flow Permissions
-          </Title>
-     
+            <Title order={5} fw={"normal"}>
+              Flow Permissions
+            </Title>
           </Group>
-          <Stack gap={'xs'}>
+          <Stack gap={"xs"}>
             {permissions.map((i) => (
               <Group key={i} align="center">
                 <Checkbox checked size="xs" />
@@ -1142,6 +1136,70 @@ const LinkedAccountSyncDisplay = () => {
         </Stack>
       </Stack>
     </Box>
+  );
+};
+
+const MultiCurrencyDisplayGraphics = () => {
+  const initialCurrencies = [
+    { id: 1, currency: "USD", balance: "20,000", symbol: "$", icon: usa },
+    { id: 2, currency: "EUR", balance: "20,000", symbol: "€", icon: GBP },
+    { id: 3, currency: "SPAN", balance: "20,000", symbol: "€", icon: usa },
+  ];
+
+  const [currencies, setCurrencies] = useState(initialCurrencies);
+
+  const clickToMoveIndex = (clickedId) => {
+    const clickedIndex = currencies.findIndex(
+      (currency) => currency.id === clickedId
+    );
+    const newOrder = [
+      currencies[clickedIndex],
+      ...currencies.slice(0, clickedIndex),
+      ...currencies.slice(clickedIndex + 1),
+    ];
+    setCurrencies(newOrder);
+  };
+
+  return (
+    <Stack
+      h={"100%"}
+      w={"100%"}
+      p={"sm"}
+      align="center"
+      justify="center"
+      pos={"relative"}
+      gap={0}
+    >
+      {/* Multicurrency cards */}
+      <Box h={100} w={100} pos={"absolute"} top={-21} right={0}>
+        <Image className={styles.clickme} src={clickme} />
+      </Box>
+      <Stack pos="relative" w="100%" h="100%" align="center">
+        {currencies.map((currency, index) => (
+          <Box
+            key={currency.id}
+            className={`${styles.multicurrency_card_wrapper}`}
+            data-is={index + 1}
+            onClick={() => clickToMoveIndex(currency.id)}
+          >
+            <Box className={styles.multicurrency_card_header}>
+              {currency.currency}
+            </Box>
+            <Box className={styles.multicurrency_card_body}>
+              <Box>
+                <Title order={6} c={"dimmed"} fw={"normal"}>
+                  Balance
+                </Title>
+                <Title order={1} fw={500}>
+                  {currency.symbol}
+                  {currency.balance}
+                </Title>
+              </Box>
+            </Box>
+          </Box>
+        ))}
+      </Stack>
+    </Stack>
   );
 };
 

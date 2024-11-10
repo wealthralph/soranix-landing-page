@@ -342,7 +342,7 @@ const Step2 = ({ register, control }) => {
    { id: 3, title: "Money Controls" },
    { id: 4, title: "Virtaul Card" },
    { id: 5, title: "Soranix AI" },
-   { id: 6, title: "Flows" },
+   { id: 6, title: "Flows Automation" },
    { id: 7, title: "Payments" },
  ];
 
@@ -403,7 +403,7 @@ const Step2 = ({ register, control }) => {
             );
           }}
         />
-        <Controller
+        {/* <Controller
           name="review"
           control={control}
           render={({ field }) => {
@@ -429,7 +429,7 @@ const Step2 = ({ register, control }) => {
               </Radio.Group>
             );
           }}
-        />
+        /> */}
         <Controller
           name="painPoints"
           control={control}
@@ -493,7 +493,7 @@ const Step2 = ({ register, control }) => {
         />
 
         <Controller
-          name="painPoints"
+          name="soranixFeatures"
           control={control}
           render={({ field }) => {
             return (

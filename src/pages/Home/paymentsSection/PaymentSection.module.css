@@ -147,6 +147,7 @@
     );
   background-blend-mode: overlay, normal, normal, normal, normal, normal, normal;
   box-shadow: var(--mantine-shadow-xs);
+  overflow: hidden;
 }
 
 .send_transfer {
@@ -172,4 +173,27 @@
       transparent 90%
     );
   background-blend-mode: normal, normal, normal, normal;
+}
+
+
+
+.send_configuration_card_outer {
+
+  width: 100%;
+  border: thin solid rgb(247, 247, 247);
+  border-radius: var(--mantine-radius-md);
+  backdrop-filter: blur(6px);
+  background-color: rgba(95, 95, 95, 0.062);
+  padding: 4px;
+    /* box-shadow: var(--mantine-shadow-xs); */
+
+}
+
+.send_configuration_card_inner {
+  background-color: var(--mantine-color-body);
+  border-radius: var(--mantine-radius-md) ;
+  padding: var(--mantine-spacing-xs);
+  box-shadow: var(--mantine-shadow-xs);
+  display: flex;
+  justify-content: space-between;
 }

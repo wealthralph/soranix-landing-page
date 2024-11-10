@@ -268,8 +268,6 @@
   padding: calc(var(--mantine-spacing-xs) - 4px);
 }
 
-
-
 .graphics3_analytics_alert_content {
   padding: var(--mantine-spacing-xs);
   background-color: var(--mantine-color-body);
@@ -277,8 +275,6 @@
   border-radius: var(--mantine-radius-sm);
   box-shadow: var(--mantine-shadow-xs);
 }
-
-
 
 .linked_account_balance {
   position: absolute;
@@ -295,7 +291,7 @@
   border: thin solid var(--mantine-color-default-border);
   background-color: rgb(255, 255, 255);
   box-shadow: var(--mantine-shadow-sm);
-    transform-style: preserve-3d;
+  transform-style: preserve-3d;
   transition: 0.32s ease-out;
   transition-property: transform, background;
 }
@@ -312,7 +308,51 @@
 .linked_account_balance:first-child {
   transform: translateY(19px) scale(0.8) translateZ(10px);
   opacity: 0.7;
-  
+
   background-color: var(--mantine-color-gray-4);
+}
+
+.multicurrency_card_wrapper {
+  width: 100%;
+  border: thin solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-md);
+  position: absolute;
+  background-color: var(--mantine-color-body);
+  margin: auto;
+  box-shadow: rgba(56, 56, 56, 0.1) 0px 4px 12px;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.multicurrency_card_header {
+  padding: var(--mantine-spacing-xs);
+  background-color: var(--mantine-color-gray-0);
+  border-radius: inherit;
+}
+
+.multicurrency_card_body {
+  padding: var(--mantine-spacing-xs);
+}
+
+.multicurrency_card_wrapper[data-is="1"] {
+  z-index: 3;
+  margin-top: 6rem;
+}
+
+.multicurrency_card_wrapper[data-is="2"] {
+  z-index: 2;
+  width: 90%;
+  margin-top: 4rem;
+}
+
+.multicurrency_card_wrapper[data-is="3"] {
+  z-index: 1;
+  width: 80%;
+  margin-top: 2rem;
+}
+
+.multicurrency_card_wrapper[data-is="2"]:hover,
+.multicurrency_card_wrapper[data-is="3"]:hover {
+  transform: translateY(-0.875rem);
 }
 

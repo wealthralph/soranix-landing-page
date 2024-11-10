@@ -22,6 +22,7 @@ import {
   SegmentedControl,
   SimpleGrid,
   Stack,
+  Switch,
   Text,
   TextInput,
   Title,
@@ -39,14 +40,15 @@ import {
   avatar4,
   iphoneMockup,
   logoWhite,
+  NG,
   sendImage,
+  september,
 } from "../../../assets/images";
+import { IconArrowRight } from "@tabler/icons-react";
 
 const BoxMotion = motion.create(Box, { forwardMotionProps: true });
 
-
 // Todo Provide Graphics to the Send and Receive Cards
-
 
 const PaymentSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -159,13 +161,14 @@ const Send = () => {
           span={{ base: 12, xs: 12, sm: 6, md: 5, lg: 5 }}
           className={"box"}
         >
-          <Paper withBorder className={styles.send_transfer} h={600}  radius={"lg"} >
+          <Paper
+            withBorder
+            className={styles.send_transfer}
+            h={600}
+            radius={"lg"}
+          >
             <Box p={"xl"}>
-              <Text
-                ff={"monospace"}
-              >
-                Transfer
-              </Text>
+              <Text ff={"monospace"}>Transfer</Text>
               <Title
                 tt={"capitalize"}
                 fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
@@ -191,20 +194,24 @@ const Send = () => {
           span={{ base: 12, xs: 12, sm: 6, md: 4, lg: 4 }}
           className={"box"}
         >
-          <Paper h={600}  radius={"lg"} className={styles.receive_configurations} withBorder>
-            <Box p={"xl"}>
-              <Text
-                ff={"monospace"}
-              >
-                Configurations
-              </Text>
-              <Title
-                tt={"capitalize"}
-                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
-              >
-                Make Payments Flexible with configurations.
-              </Title>
-            </Box>
+          <Paper
+            h={600}
+            radius={"lg"}
+            className={styles.receive_configurations}
+            withBorder
+          >
+            <Stack>
+              <Box p={"xl"} pb={0}>
+                <Text ff={"monospace"}>Configurations</Text>
+                <Title
+                  tt={"capitalize"}
+                  fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+                >
+                  Make Payments Flexible with configurations.
+                </Title>
+              </Box>
+              <SendConfigurationGraphics />
+            </Stack>
           </Paper>
         </Grid.Col>
       </Grid>
@@ -229,7 +236,6 @@ const Receive = () => {
     },
     { scope: containerRef }
   );
-
 
   return (
     <Box>
@@ -279,5 +285,63 @@ const Receive = () => {
         </Grid.Col>
       </Grid>
     </Box>
+  );
+};
+
+const SendConfigurationGraphics = () => {
+  return (
+    <Stack p={"xs"} gap={'xs'}>
+      <Box className={styles.send_configuration_card_outer}>
+        <Box className={styles.send_configuration_card_inner}>
+          <Box>
+            <Title order={6} fw={500}>
+              Main Acc.
+            </Title>
+            <Group>
+              <Text fz={"xs"}>0002142630</Text>
+            </Group>
+          </Box>
+          <Group align="end">
+            <Box>
+              <Text fz={"xs"} c={"dimmed"}>
+                Sending
+              </Text>
+              <Group gap={"xs"}>
+                <Text fw={500}>
+                  <NumberFormatter
+                    value={30000}
+                    thousandSeparator
+                    prefix="₦
+"
+                  />
+                </Text>
+                <Avatar size={"xs"} src={NG} />
+              </Group>
+            </Box>
+            <IconArrowRight size={18} color="var(--mantine-color-dimmed)" />
+            <Box>
+              <Text fz={"xs"} c={"dimmed"}>
+                Reciepient
+              </Text>
+              <Group gap={"xs"}>
+                <Avatar size={"xs"} src={avatar1} />
+                <Text fw={500}>
+                @BlackJames
+                </Text>
+              </Group>
+            </Box>
+          </Group>
+        </Box>
+      </Box>
+      <Box className={styles.send_configuration_card_outer}> 
+        <Box className={styles.send_configuration_card_inner}>
+            <Title fw={500} order={5}>Schedule Payment</Title> 
+            <Switch checked/>
+        </Box>
+      </Box>
+      <Box w={'100%'}>
+        <Image src={september}/>
+      </Box>
+    </Stack>
   );
 };

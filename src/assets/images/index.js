@@ -27,6 +27,10 @@ import sterling from "./sterling.png"
 import wema from "./wema.png"
 import re from "./re.avif"
 import account_config from "./account_config.png"
+import clickme from "./clickme.png"
+import usa from "./usa.png"
+import GBP from "./gbp.png";
+import september from "./september.png"
 
 export {
     logoWhite,
@@ -57,5 +61,9 @@ export {
     sterling,
     wema,
     re,
-    account_config
+    account_config,
+    clickme,
+    usa,
+    GBP,
+    september
 }
