@@ -82,7 +82,7 @@ const AutomationSection = () => {
       </Stack>
       <Space h={70} />
       <Stack w={"100%"}>
-        <FlowSection />
+        {/* <FlowSection /> */}
       </Stack>
     </Container>
   );

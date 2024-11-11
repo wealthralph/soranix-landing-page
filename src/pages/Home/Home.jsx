@@ -19,7 +19,6 @@ import SoranixAiSection from "./soranixAiSection/SoranixAiSection";
 const Home = () => {
   return (
     <Container fluid p={0}>
-      <Space h={70} />
       {/* <Stack gap={50} w={'100%'}> */}
       <HeroSection />
       <OsSection />

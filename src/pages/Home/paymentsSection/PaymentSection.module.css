@@ -82,29 +82,20 @@
   transform: translate(50%, 50%);
 }
 
-.receive_notification_ui {
-  background-color: hsla(117.00000000000004, 40%, 15%, 1);
+.receive_request_link_ui {
+  background-color: hsla(0, 0%, 100%, 1);
   background-image: radial-gradient(
-      circle at 3% 92%,
-      hsla(161, 100%, 50%, 1) 0%,
-      transparent 67%
+      circle at 32% 16%,
+      hsla(14.000000000000004, 100%, 64%, 0.33) 17.647148063137625%,
+      transparent 61.5109675345299%
     ),
     radial-gradient(
-      circle at 46% 94%,
-      hsla(227.6470588235294, 100%, 50%, 1) 0%,
-      transparent 81%
-    ),
-    radial-gradient(
-      circle at 93% 95%,
-      hsla(230.2941176470588, 100%, 23%, 1) 0%,
-      transparent 66%
-    ),
-    radial-gradient(
-      circle at 89% 8%,
-      hsla(243.52941176470586, 100%, 9%, 1) 0%,
-      transparent 150%
+      circle at 75% 1%,
+      hsla(247.99999999999997, 100%, 63%, 0.3) 11.26645584295136%,
+      transparent 63.69587993071477%
     );
-  background-blend-mode: normal, normal, normal, normal;
+  background-blend-mode: multiply, multiply;
+  border: thin solid var(--mantine-color-default-border);
   border-radius: var(--mantine-radius-md);
   overflow: hidden;
   position: relative;
@@ -175,25 +166,38 @@
   background-blend-mode: normal, normal, normal, normal;
 }
 
-
-
-.send_configuration_card_outer {
-
+.send_configuration_card_outer,
+.receive_ui_browser {
   width: 100%;
   border: thin solid rgb(247, 247, 247);
   border-radius: var(--mantine-radius-md);
   backdrop-filter: blur(6px);
   background-color: rgba(95, 95, 95, 0.062);
   padding: 4px;
-    /* box-shadow: var(--mantine-shadow-xs); */
-
+  /* box-shadow: var(--mantine-shadow-xs); */
 }
 
 .send_configuration_card_inner {
   background-color: var(--mantine-color-body);
-  border-radius: var(--mantine-radius-md) ;
+  border-radius: var(--mantine-radius-md);
   padding: var(--mantine-spacing-xs);
   box-shadow: var(--mantine-shadow-xs);
   display: flex;
   justify-content: space-between;
+}
+
+.receive_ui_browser {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  height: 100%;
+}
+
+.receive_ui_browser_inner {
+  border-radius: var(--mantine-radius-md);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+    rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    
 }

@@ -1,10 +1,14 @@
 import { Carousel } from "@mantine/carousel";
 import {
+  ActionIcon,
   Avatar,
   BackgroundImage,
   Badge,
   Box,
   Button,
+  Center,
+  CheckIcon,
+  ColorSwatch,
   Container,
   Divider,
   em,
@@ -19,6 +23,7 @@ import {
   Pill,
   PillsInput,
   Progress,
+  rem,
   SegmentedControl,
   SimpleGrid,
   Stack,
@@ -43,8 +48,15 @@ import {
   NG,
   sendImage,
   september,
+  womanWithPhone,
 } from "../../../assets/images";
-import { IconArrowRight } from "@tabler/icons-react";
+import {
+  IconAnalyze,
+  IconArrowRight,
+  IconChartAreaLine,
+  IconImageInPicture,
+  IconPhoto,
+} from "@tabler/icons-react";
 
 const BoxMotion = motion.create(Box, { forwardMotionProps: true });
 
@@ -53,7 +65,7 @@ const BoxMotion = motion.create(Box, { forwardMotionProps: true });
 const PaymentSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
-  const [value, setValue] = useState("send");
+  const [value, setValue] = useState("receive");
 
   return (
     <Container fluid my={50} p={0} w={"100%"}>
@@ -167,7 +179,7 @@ const Send = () => {
             h={600}
             radius={"lg"}
           >
-            <Box p={"xl"}>
+            <Box p={{ base: "lg", md: "xl" }}>
               <Text ff={"monospace"}>Transfer</Text>
               <Title
                 tt={"capitalize"}
@@ -247,23 +259,18 @@ const Receive = () => {
           <Paper
             radius={"lg"}
             h={600}
-            className={styles.receive_notification_ui}
+            className={styles.receive_request_link_ui}
           >
-            <Box p={"xl"}>
-              <Text
-                c={isLightColor("blue") ? "black" : "white"}
-                ff={"monospace"}
-              >
-                Request Links
-              </Text>
+            <Box p={{ base: "lg", md: "xl" }} pb={0}>
+              <Text ff={"monospace"}>Request Links</Text>
               <Title
-                c={"white"}
                 tt={"capitalize"}
                 fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
               >
-                Send Money to anyone anywhere anytime .
+                Customize How You Get Paid to Suit Your Style
               </Title>
             </Box>
+            <RequestLinksGraphicsDisplay />
           </Paper>
         </Grid.Col>
         <Grid.Col
@@ -280,7 +287,8 @@ const Receive = () => {
             bgp={"90%"}
             h={600}
             radius={"lg"}
-            src={sendImage}
+            src={womanWithPhone}
+            visibleFrom="md"
           ></BackgroundImage>
         </Grid.Col>
       </Grid>
@@ -288,9 +296,11 @@ const Receive = () => {
   );
 };
 
+// Split payments, recurring payments, batch payemnts and scheduled payments
+
 const SendConfigurationGraphics = () => {
   return (
-    <Stack p={"xs"} gap={'xs'}>
+    <Stack p={"xs"} gap={"xs"}>
       <Box className={styles.send_configuration_card_outer}>
         <Box className={styles.send_configuration_card_inner}>
           <Box>
@@ -325,22 +335,138 @@ const SendConfigurationGraphics = () => {
               </Text>
               <Group gap={"xs"}>
                 <Avatar size={"xs"} src={avatar1} />
-                <Text fw={500}>
-                @BlackJames
-                </Text>
+                <Text fw={500}>@BlackJames</Text>
               </Group>
             </Box>
           </Group>
         </Box>
       </Box>
-      <Box className={styles.send_configuration_card_outer}> 
+      <Box className={styles.send_configuration_card_outer}>
         <Box className={styles.send_configuration_card_inner}>
-            <Title fw={500} order={5}>Schedule Payment</Title> 
-            <Switch checked/>
+          <Title fw={500} order={5}>
+            Schedule Payment
+          </Title>
+          <Switch checked />
         </Box>
       </Box>
-      <Box w={'100%'}>
-        <Image src={september}/>
+      <Box w={"100%"}>
+        <Image src={september} />
+      </Box>
+    </Stack>
+  );
+};
+
+const RequestLinksGraphicsDisplay = () => {
+  const colors = [
+    "var(--mantine-color-blue-3)",
+    "var(--mantine-color-pink-3)",
+    "var(--mantine-color-teal-3)",
+    "var(--mantine-color-grape-3)",
+  ];
+
+  const [checked, setChecked] = useState(colors[0]);
+
+  return (
+    <Stack gap={"xs"} h={"100%"}>
+      <Group justify="center" p={"xs"}>
+        {colors.map((i) => (
+          <ColorSwatch
+            onClick={() => setChecked(i)}
+            style={{ color: "#fff", cursor: "pointer" }}
+            withShadow
+            color={i}
+            key={i}
+            size={30}
+          >
+            {checked === i && (
+              <CheckIcon style={{ width: rem(12), height: rem(12) }} />
+            )}
+          </ColorSwatch>
+        ))}
+        {/* Colors */}
+        <ActionIcon radius={"xl"} variant="light" color="gray.0" size={30}>
+          <IconPhoto size={20} />
+        </ActionIcon>
+      </Group>
+      {/* Browser */}
+
+      <Box pos={"relative"} className={styles.receive_ui_browser}>
+        <Box className={styles.receive_ui_browser_inner}>
+          {/* Browser header */}
+          <Group
+            bg={"white"}
+            p={5}
+            justify="space-between"
+            style={{
+              borderBottom: "thin solid var(--mantine-color-default-border)",
+              borderRadius:
+                "var(--mantine-radius-md)  var(--mantine-radius-md) 0 0",
+            }}
+          >
+            <Box>
+              <svg
+                width="52"
+                height="12"
+                viewBox="0 0 52 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="6"
+                  cy="6"
+                  r="4"
+                  fill="#ED6A5E"
+                  stroke="#CF594E"
+                  strokeWidth="0.5"
+                ></circle>
+                <circle
+                  cx="20"
+                  cy="6"
+                  r="4"
+                  fill="#F4BD50"
+                  stroke="#D79F3E"
+                  strokeWidth="0.5"
+                ></circle>
+                <circle
+                  cx="35"
+                  cy="6"
+                  r="4"
+                  fill="#61C355"
+                  stroke="#52A63D"
+                  strokeWidth="0.5"
+                ></circle>
+              </svg>
+            </Box>
+            <Paper bg={"gray.0"} radius={"md"} py={3} w={"50%"}>
+              <Center>
+                <Text fw={500} fz={11}>
+                  blackJames.soranix.com
+                </Text>
+              </Center>
+            </Paper>
+            <IconChartAreaLine size={16} color="var(--mantine-color-dimmed)" />
+          </Group>
+          {/* Browser body */}
+          <Box h={"100%"} bg={"white"}>
+            <Stack align="center" h={"100%"} p={"lg"}>
+              <Paper
+                radius={"md"}
+                withBorder
+                h={"300px"}
+                w={"85%"}
+                style={{
+      
+                  backgroundImage: `linear-gradient(to bottom, ${checked} , #fff 40%  )`,
+                }}
+              >
+                <Box
+                  h={"30%"}
+                  // make background a linear gradient that goes from top to bottom with the color of the checked color
+                ></Box>
+              </Paper>
+            </Stack>
+          </Box>
+        </Box>
       </Box>
     </Stack>
   );

@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Center,
   Container,
   Grid,
   Highlight,
@@ -10,6 +11,7 @@ import {
   Stack,
   Text,
   Title,
+  UnstyledButton,
 } from "@mantine/core";
 import { useRef } from "react";
 import gsap from "gsap";
@@ -28,7 +30,7 @@ const HeroSection = () => {
       // Animate the title
       tl.fromTo(
         titleRef.current,
-        { y: -160, opacity: 0 },
+        { y: -50, opacity: 0 },
         { y: 0, opacity: 1, duration: 1 }
       )
 
@@ -44,62 +46,33 @@ const HeroSection = () => {
   );
 
   return (
-    <Box>
-      <Container size={"xl"}>
-        <Stack gap={"lg"}>
-          <Stack maw={600} ref={BoxRef}>
-            <Highlight
-              highlight={[ "AI"]}
-              highlightStyles={{
-                backgroundImage:
-                  "linear-gradient(45deg, var(--mantine-color-cyan-5), var(--mantine-color-indigo-5))",
-                // fontWeight: 700,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-              fz={{ base: 50, xs: "h1", sm: "h1", md: 50 }}
-              tt={"capitalize"}
-              fw={"bold"}
+    <Container fluid h={"100vh"} className={styles.hero_main_wrapper}>
+      <Stack gap={'xl'} size={"lg"} className={styles.hero_main_container}>
+        {/* Title and text content */}
+        <Center>
+          <Stack align="center">
+            <Title
               ref={titleRef}
+              ta={"center"}
+              fz={{ xs: "h2", sm: "h1", md: 45, lg: 40 }}
+              tt={'capitalize'}
+              fw={700}
+              maw={600}
             >
-              Take control of Your Finances, the Modern Way with AI
-            </Highlight>
-
-            <Text maw={500} ref={textRef}>
-              Unlock the full potential of your finances with a platform that
-              goes beyond the basics.
+              Take control of Your Finances the Modern Way with AI
+            </Title>
+            <Text ta={"center"} size="xl" ref={textRef} maw={450}>
+              Unlock the full potential of your finances .
             </Text>
+            <button className={styles["hero_button"]}>Get Early Access</button>
           </Stack>
-          <Box>
-            <Button variant="default">Get Early Access</Button>
-          </Box>
-        </Stack>
-        <Space h={70} />
-        {/* <div className={styles.translucent_cont}>
-          <div className={styles.gradient}>Hello</div>
-          <div className={styles.translucent_bg} >
-            <Container size={'lg'} p={'xs'}>
-              <Grid gutter={0}>
-                <Grid.Col h={400}  span={7}  >
-                  <div className={styles.hero_image_products}>
-
-                  </div>
-                </Grid.Col>
-                <Grid.Col h={400} span={5}  >
-                  <div className={styles.hero_image_ai}>
-                    <svg width="100%" height="100%" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                   
-                      <circle cx="100" cy="100" r="60" stroke="var(--mantine-color-default-border)" strokeWidth="0.5" fill="none" />
-                    </svg>
-                  </div>
-                </Grid.Col>
-              </Grid>
-            </Container>
-          </div>
-        </div> */}
-        {/* <Space h={70} /> */}
-      </Container>
-    </Box>
+        </Center>
+        {/* Platform graphics */}
+        <Box bg={'cyan'}>
+    hello
+        </Box>
+      </Stack>
+    </Container>
   );
 };
 
@@ -108,3 +81,11 @@ export default HeroSection;
 const GraphicsAccount = () => {
   return <div>hello</div>;
 };
+
+// <Stack maw={600} ref={BoxRef} justify="center">
+//           <Title ta={'center'} fz={{base: 50, sm: "h2", md: "h1"}}>Take control of Your Finances, the Modern Way with AI</Title>
+
+//           <Text maw={500} ref={textRef}>
+//             Unlock the full potential of your finances with a platform that
+//             goes beyond the basics.
+//           </Text>
