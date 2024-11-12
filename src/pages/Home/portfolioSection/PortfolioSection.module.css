@@ -87,8 +87,8 @@
 }
 
 .portfolio_alert_node {
-  border: thin solid var(--mantine-color-default-border);
-  margin-top: 67px;
+  border: thin solid var(--mantine-color-teal-filled);
+  margin-top: 62px;
   max-width: 280px;
     padding: 5px;
   border-radius: var(--mantine-radius-md);
