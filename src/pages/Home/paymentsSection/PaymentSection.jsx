@@ -307,11 +307,9 @@ const SendConfigurationGraphics = () => {
             <Title order={6} fw={500}>
               Main Acc.
             </Title>
-            <Group>
               <Text fz={"xs"}>0002142630</Text>
-            </Group>
           </Box>
-          <Group align="end">
+          <Group gap={'xs'}  align="end">
             <Box>
               <Text fz={"xs"} c={"dimmed"}>
                 Sending
@@ -319,23 +317,22 @@ const SendConfigurationGraphics = () => {
               <Group gap={"xs"}>
                 <Text fw={500}>
                   <NumberFormatter
-                    value={30000}
+                    value={3000}
                     thousandSeparator
                     prefix="₦
 "
                   />
                 </Text>
-                <Avatar size={"xs"} src={NG} />
               </Group>
             </Box>
-            <IconArrowRight size={18} color="var(--mantine-color-dimmed)" />
+            <IconArrowRight size={16} color="var(--mantine-color-dimmed)" />
             <Box>
               <Text fz={"xs"} c={"dimmed"}>
                 Reciepient
               </Text>
               <Group gap={"xs"}>
                 <Avatar size={"xs"} src={avatar1} />
-                <Text fw={500}>@BlackJames</Text>
+                <Text  fw={500}>@james</Text>
               </Group>
             </Box>
           </Group>

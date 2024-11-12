@@ -4,6 +4,7 @@ import {
   Container,
   Divider,
   em,
+  Flex,
   Grid,
   Group,
   Image,
@@ -12,23 +13,22 @@ import {
   Space,
   Stack,
   Text,
+  ThemeIcon,
   Title,
 } from "@mantine/core";
 import { motion } from "framer-motion";
 import PortfolioSyncSection from "../portfolioSyncSection/PortfolioSyncSection";
-import PortfolioManagementSection from "../portfolioManagementSection/PortfolioManagementSection";
-import PortfolioAnalysisSection from "../portfolioAnalysisSection/PortfolioAnalysisSection";
 import { useMediaQuery } from "@mantine/hooks";
-import { useState } from "react";
 import styles from "./PortfolioSection.module.css";
-import { Carousel } from "@mantine/carousel";
-import { portfolioPerfomance, portfolioTargetvalue, portfolioWatchlist } from "../../../assets/images";
+import {
+  portfolioPerfomance,
+  portfolioTargetvalue,
+  portfolioWatchlist,
+} from "../../../assets/images";
 import Marquee from "react-fast-marquee";
-
+import { IconChartCandle, IconSend } from "@tabler/icons-react";
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
-
-// Todo
 
 const PortfolioSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -75,8 +75,6 @@ const PortfolioSection = () => {
       ),
     },
   ];
-
-  const [] = useState();
 
   const portfolioComponentsMap = portfolioComponents.map((i) => {
     return (
@@ -200,7 +198,7 @@ const PortfolioSection = () => {
               },
             }}
           >
-            <Stack py={"xl"} h={400}>
+            <Stack py={"xl"} h={450}>
               <Box maw={450}>
                 <Title order={3} fw={"bold"}>
                   Comprehensive Portfolio Analytics
@@ -229,16 +227,17 @@ const PortfolioSection = () => {
               },
             }}
           >
-            <Stack maw={500} py={"xl"}>
-              <Box>
-                <Title tt={"capitalize"} order={3} fw={"normal"}>
-                  Make sense of Your Portfolio
+            <Stack h={450} py={"xl"}>
+              <Box maw={500}>
+                <Title tt={"capitalize"} order={3} fw={"bold"}>
+                  Automate your portfolio
                 </Title>
-                <Text size="sm">
-                  Get detailed real-time analysis of every aspect of your
-                  portfolio, from growth trends to risk exposure.
+                <Text>
+                  Effortlessly automate your portfolio management with custom
+                  workflows, built in minutes.
                 </Text>
               </Box>
+              <PortfolioAutomationGraphics />
             </Stack>
           </Grid.Col>
         </Grid>
@@ -268,20 +267,126 @@ const PortfolioAnalyticsGraphics = () => {
       title: "Portfolio Performance",
       image: portfolioTargetvalue,
     },
-
   ];
 
   return (
-    <Box >
+    <Box>
       <Marquee speed={15} gradient>
-
-      {analytics.map((i) => {
-        return (
-          <Image mx={'xs'} key={i.id} src={i.image} h={250} fit="contain" w={"auto"} />
-        );
-      })}
+        {analytics.map((i) => {
+          return (
+            <Image
+              mx={"xs"}
+              key={i.id}
+              src={i.image}
+              h={300}
+              fit="contain"
+              w={"auto"}
+            />
+          );
+        })}
       </Marquee>
-      
+    </Box>
+  );
+};
+
+const PortfolioAutomationGraphics = () => {
+  return (
+    <Box
+      bg={"grap"}
+      w={"100%"}
+      h={"100%"}
+      className={styles.portfolio_automation_cont}
+    >
+      {/* Trigger Node */}
+      <Box data-is="Trigger" className={styles.portfolio_trigger_node}>
+        {/* header */}
+        <Flex gap={"md"} align={"center"} justify={"space-between"}>
+          <Group gap={"xs"}>
+            <ThemeIcon variant="light" color="orange" size={"xs"}>
+              <IconChartCandle
+                color="var(--mantine-color-orange-filled)"
+                size={13}
+                strokeWidth={1}
+              />
+            </ThemeIcon>
+            <Text fz={"sm"}>When asset price updates</Text>
+          </Group>
+          <Badge variant="light" color="gray" radius={"sm"} size="xs">
+            Assets
+          </Badge>
+        </Flex>
+        <Divider my={4} />
+        <Box py={7}>
+          <Title c={"dimmed"} fz={"xs"} fw={"normal"} textWrap="nowrap">
+            Triggers when{" "}
+            <Text fw={"bold"} c={"red"} inherit span>
+              TSLA
+            </Text>{" "}
+            asset hits $428.64
+          </Title>
+        </Box>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="none"
+          viewBox="0 0 12 12"
+          className={styles.portfolio_trigger_handle}
+        >
+          <circle
+            cx="6"
+            cy="6"
+            r="4.8"
+            stroke="var(--mantine-color-teal-filled)"
+            fill="white"
+            strokeWidth="1"
+          ></circle>
+        </svg>
+        <svg
+          width="16"
+          height="57"
+          viewBox="0 0 16 57"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={styles.portfolio_trigger_arrow}
+        >
+          <path
+            strokeWidth={0.5}
+            d="M7.2929 56.7071C7.68342 57.0976 8.31658 57.0976 8.70711 56.7071L15.0711 50.3431C15.4616 49.9526 15.4616 49.3195 15.0711 48.9289C14.6805 48.5384 14.0474 48.5384 13.6569 48.9289L8 54.5858L2.34315 48.9289C1.95262 48.5384 1.31946 48.5384 0.928934 48.9289C0.53841 49.3195 0.53841 49.9526 0.928934 50.3431L7.2929 56.7071ZM7 4.37114e-08L7 56L9 56L9 -4.37114e-08L7 4.37114e-08Z"
+            fill="var(--mantine-color-teal-filled)"
+          />
+        </svg>
+      </Box>
+
+      {/* Alert Node */}
+      <Box className={styles.portfolio_alert_node}>
+        {/* header */}
+        <Flex gap={"md"} align={"center"} justify={"space-between"}>
+          <Group gap={"xs"}>
+            <ThemeIcon variant="light" color="teal" size={"xs"}>
+              <IconSend
+                color="var(--mantine-color-teal-filled)"
+                size={13}
+                strokeWidth={1}
+              />
+            </ThemeIcon>
+            <Text fz={"sm"}>Send Email</Text>
+          </Group>
+          <Badge variant="light" color="gray" radius={"sm"} size="xs">
+            Alert
+          </Badge>
+        </Flex>
+        <Divider my={4} />
+        <Box py={7}>
+          <Title c={"dimmed"} fz={"xs"} fw={"normal"} textWrap="nowrap">
+            Sell 10% of your{" "}
+            <Text fw={"bold"} c={"red"} inherit span>
+              TSLA
+            </Text>{" "}
+            asset.
+          </Title>
+        </Box>
+      </Box>
     </Box>
   );
 };

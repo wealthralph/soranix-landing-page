@@ -179,7 +179,7 @@ const NetWorthSection = () => {
             </div>
           </div>
         </Container>
-        <Box>
+        {/* <Box>
           <Divider />
           <Grid m={"xs"}>
             <Grid.Col
@@ -235,7 +235,7 @@ const NetWorthSection = () => {
             </Grid.Col>
           </Grid>
           <Divider />
-        </Box>
+        </Box> */}
       </Stack>
     </Container>
   );
