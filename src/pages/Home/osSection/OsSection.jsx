@@ -1,19 +1,12 @@
 import {
-  Box,
-  Center,
+
   Container,
-  Divider,
-  Flex,
-  Grid,
-  Highlight,
-  SimpleGrid,
-  Space,
+
   Stack,
-  Text,
   Title,
 } from "@mantine/core";
 import styles from "./OsSection.module.css";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import {
   addEdge,
   Position,
@@ -21,28 +14,27 @@ import {
   useEdgesState,
   useNodesState,
 } from "@xyflow/react";
-import { PrimitiveNodes, TriggerNode } from "../../../components/nodes/CustomNode";
+import {
+  AiLayerNode,
+  GroupNode,
+  OthersLayerNodes,
+  PrimitiveNodes,
+  SemanticLayerNode,
+} from "../../../components/nodes/CustomNode";
 
 const OsSection = () => {
   return (
     <Container size={"xl"} w={"100%"}>
-      <Stack w={"100%"} gap={"xl"}>
-        <SimpleGrid cols={{ base: 1, xs: 1, sm: 2, md: 2 }}>
-          <Title
-            tt={"capitalize"}
-            fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
-          >
-            The AI Operating system for <br /> your personal finance{" "}
-          </Title>
-          <Stack justify="flex-end" maw={500}>
-            <Text>
-              Why settle for just banking when you can have so much more? We’ve
-              reimagined what a financial platform can do with all the tools you
-              need to make your money work harder, smarter, and faster.
-              {/* —it’s a complete redefinition of how you interact with your money. */}
-            </Text>
-          </Stack>
-        </SimpleGrid>
+      <Stack w={"100%"} align="center">
+        <Title
+          ta={"center"}
+          tt={"capitalize"}
+          fz={{ xs: "h3", sm: "h2", md: 45, lg: 40 }}
+          fw={600}
+          maw={600}
+        >
+          The AI Operating system for your personal finance
+        </Title>
 
         <OsLayers />
       </Stack>
@@ -54,31 +46,127 @@ export default OsSection;
 
 const nodeTypes = {
   primitiveNode: PrimitiveNodes,
+  semanticLayer: SemanticLayerNode,
+  aiLayer: AiLayerNode,
+  otherLayer: OthersLayerNodes,
+  groupNode: GroupNode
 };
 
 const OsLayers = () => {
   const nodeDefaults = {
     sourcePosition: Position.Right,
     targetPosition: Position.Left,
-    draggable: false
+    draggable: false,
   };
 
   const initialNodes = [
     {
       id: "A",
       type: "primitiveNode",
-      position: { x: 650, y: 550 },
+      data: { title: "Accounts" },
+      position: { x: 10, y: 100 },
       ...nodeDefaults,
     },
     {
       id: "B",
       type: "primitiveNode",
-      position: { x: 650, y: 650 },
+      data: { title: "Savings" },
+      position: { x: 10, y: 150 },
+      ...nodeDefaults,
+    },
+    {
+      id: "C",
+      type: "primitiveNode",
+      data: { title: "Payments" },
+      position: { x: 10, y: 200 },
+      ...nodeDefaults,
+    },
+    {
+      id: "D",
+      type: "primitiveNode",
+      data: { title: "Virtual Card" },
+      position: { x: 10, y: 250 },
+      ...nodeDefaults,
+    },
+
+    {
+      id: "E",
+      type: "primitiveNode",
+      data: { title: "Bills" },
+      position: { x: 10, y: 300 },
+      ...nodeDefaults,
+    },
+    {
+      id: "F",
+      type: "semanticLayer",
+      position: { x: 200, y: 180 },
+
+      draggable: false,
+    },
+    {
+      id: "G",
+      type: "aiLayer",
+      position: { x: 400, y: 180 },
+
+      draggable: false,
+    },
+    {
+      id: "H",
+      type: "otherLayer",
+      position: { x: 600, y: 100 },
+      data: { title: "Bills" },
+
+      ...nodeDefaults,
+    },
+    {
+      id: "I",
+      type: "otherLayer",
+      position: { x: 600, y: 150 },
+      data: { title: "Bills" },
+
+      ...nodeDefaults,
+    },
+    {
+      id: "J",
+      type: "otherLayer",
+      position: { x: 600, y: 200 },
+      data: { title: "Bills" },
+
+      ...nodeDefaults,
+    },
+    {
+      id: "K",
+      type: "otherLayer",
+      data: { title: "Bills" },
+      position: { x: 600, y: 250 },
       ...nodeDefaults,
     },
   ];
 
-  const initialEdges = [];
+  const initialEdges = [
+    ...initialNodes
+      .filter((node) => node.type === "primitiveNode")
+      .map((node) => ({
+        id: `${node.id}-F`,
+        source: node.id,
+        target: "F",
+        type: "bezier",
+        animated: true
+      })),
+
+    { id: "F-G", source: "F", target: "G", type: "bezier", targetHandle: Position.Left , animated: true},
+
+    ...initialNodes
+      .filter((node) => node.type === "otherLayer")
+      .map((node) => ({
+        id: `${node.id}-G`,
+        source: node.id,
+        target: "G",
+        type: "bezier",
+        targetHandle: Position.Right,
+      })),
+  ];
+
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -90,10 +178,12 @@ const OsLayers = () => {
   );
 
   return (
-    <Container p={0} size={"xl"} w={"100%"} h={400}>
+    <Container p={0} size={"xl"} w={"100%"} h={400} pos={'relative'}>
       <ReactFlow
+        style={{ pointerEvents: "none" }}
         nodes={nodes}
         nodeTypes={nodeTypes}
+        edges={edges}
         proOptions={{ hideAttribution: true }}
         onEdgesChange={onEdgesChange}
         onNodesChange={onNodesChange}
@@ -101,9 +191,8 @@ const OsLayers = () => {
         zoomOnPinch={false}
         zoomOnScroll={false}
         panOnDrag={false}
-        // panOnScroll={false}
-        
-        // onConnect={onConnect}
+        panOnScroll={false}
+        onConnect={onConnect}
         fitView
       ></ReactFlow>
     </Container>

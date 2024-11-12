@@ -31,6 +31,9 @@ import usa from "./usa.png"
 import GBP from "./gbp.png";
 import september from "./september.png"
 import womanWithPhone from "./woman_smilling.jpg"
+import portfolioPerfomance from "./portfolio-performance.png"
+import portfolioWatchlist from "./portfolio_watchlist.png"
+import portfolioTargetvalue from "./portfolio-target-value.png"
 
 export {
     logoWhite,
@@ -65,5 +68,8 @@ export {
     usa,
     GBP,
     september,
-    womanWithPhone
+    womanWithPhone,
+    portfolioPerfomance,
+    portfolioWatchlist,
+    portfolioTargetvalue
 }

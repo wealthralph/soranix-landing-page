@@ -27,3 +27,4 @@
 body{
   background-color: light-dark(var(--mantine-color-body),darken(var(--mantine-color-dark-9), 0.07) );
 }
+

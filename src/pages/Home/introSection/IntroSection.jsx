@@ -96,7 +96,7 @@ const updateNetWorthData = (currentValues, setNetWorthData, setGraphData) => {
 };
 
 
-const GraphicsDashboardDisplay = () => {
+export const GraphicsDashboardDisplay = () => {
 
   const [netWorthData, setNetWorthData] = useState([
     {

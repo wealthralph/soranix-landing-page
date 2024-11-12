@@ -57,7 +57,7 @@
   .graphics_gradient_cover {
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(to top, var(--mantine-color-dark-9) 10% 0%, transparent 50% 80%);
+    /* background-image: linear-gradient(to top, var(--mantine-color-dark-9) 10% 0%, transparent 50% 80%); */
     position: absolute;
     z-index: 1;
     pointer-events: none;

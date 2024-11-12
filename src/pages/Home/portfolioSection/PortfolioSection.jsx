@@ -6,6 +6,7 @@ import {
   em,
   Grid,
   Group,
+  Image,
   Paper,
   SimpleGrid,
   Space,
@@ -19,10 +20,15 @@ import PortfolioManagementSection from "../portfolioManagementSection/PortfolioM
 import PortfolioAnalysisSection from "../portfolioAnalysisSection/PortfolioAnalysisSection";
 import { useMediaQuery } from "@mantine/hooks";
 import { useState } from "react";
+import styles from "./PortfolioSection.module.css";
+import { Carousel } from "@mantine/carousel";
+import { portfolioPerfomance, portfolioTargetvalue, portfolioWatchlist } from "../../../assets/images";
+import Marquee from "react-fast-marquee";
+
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
 
-// Todo 
+// Todo
 
 const PortfolioSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -70,7 +76,7 @@ const PortfolioSection = () => {
     },
   ];
 
-  const [] = useState()
+  const [] = useState();
 
   const portfolioComponentsMap = portfolioComponents.map((i) => {
     return (
@@ -92,33 +98,26 @@ const PortfolioSection = () => {
     );
   });
 
- const aiPortfolioAIFeatures = [
-   {
-     id: 1,
-     title: "Real-Time Investment Insights",
-     description:
-       "Provides up-to-the-minute analysis on your portfolio's performance, market movements, and key trends, helping you make timely investment decisions.",
-   },
-   {
-     id: 2,
-     title: "Personalized Stock Recommendations",
-     description:
-       "Suggests stocks and other investments tailored to your preferences, risk tolerance, and financial goals, making it easier to diversify and strengthen your portfolio.",
-   },
-   {
-     id: 3,
-     title: "Investment Analytics and Performance Tracking",
-     description:
-       "Offers comprehensive analytics to break down your portfolio's performance, including risk analysis, sector distribution, and growth projections.",
-   },
-   {
-     id: 4,
-     title: "AI-Driven Q&A",
-     description:
-       "Allows you to ask questions about your investments and market conditions, with AI providing detailed responses to guide your financial decisions and deepen your understanding of market dynamics.",
-   },
- ];
-
+  const aiPortfolioAIFeatures = [
+    {
+      id: 1,
+      title: "Real-Time Investment Insights",
+      description:
+        "Provides up-to-the-minute analysis on your portfolio's performance.",
+    },
+    {
+      id: 2,
+      title: "Personalized Stock Recommendations",
+      description:
+        "Get stocks  tailored to your goals, risk tolerance, and financial goals.",
+    },
+    {
+      id: 3,
+      title: "Ask any question about your assest",
+      description:
+        "Get answers to any question about your assets—instantly and insightfully.",
+    },
+  ];
 
   return (
     <Container size={"xl"} w={"100%"} my={100}>
@@ -151,33 +150,38 @@ const PortfolioSection = () => {
         <Divider />
 
         <SimpleGrid p={"lg"} cols={{ base: 1, md: 2, lg: 2, xl: 2 }}>
-          <Stack maw={450} py={"xl"} >
+          <Stack maw={450} py={"xl"}>
             <Box>
               <Title order={3} fw={"bold"}>
-                Your AI-Enhanced Investment Advisor{" "}
+                The AI Co-Pilot for Your Portfolio{" "}
               </Title>
-              <Text >
-                Get real-time insights, tailored recommendations, and analytics
+              <Text>
+                {/* Get real-time insights, tailored recommendations, and analytics
                 that help you make informed decisions , and keeps your portfolio
-                on the right track.
+                on the right track. */}
+                Navigate the markets like never before. Our AI co-pilot provides
+                real-time insights, actionable analytics, and tailored
+                recommendations to help maximize your investments.
               </Text>
             </Box>
-            <Stack>
-              {
-                  aiPortfolioAIFeatures.map((i) => {
-                    return (
-                      <Stack gap={'xs'} key={i.id}>
-                        <Title order={5} fw={500} >
-                          {i.title}
-                        </Title>
-                        {/* <Text size="sm">{i.description}</Text> */}
-                      </Stack>
-                    );
-                  })
-              }
+            <Stack gap={"xs"}>
+              {aiPortfolioAIFeatures.map((i) => {
+                return (
+                  <Box
+                    className={styles.ai_portfolio_features}
+                    gap={"xs"}
+                    key={i.id}
+                  >
+                    <Title order={5} fw={500}>
+                      {i.title}
+                    </Title>
+                    <Text size="sm">{i.description}</Text>
+                  </Box>
+                );
+              })}
             </Stack>
           </Stack>
-          <Paper withBorder w={"100%"} h={"100%"} radius={"lg"}></Paper>
+          <Box className={styles.ai_portfolio_display}></Box>
         </SimpleGrid>
         <Divider />
       </Box>
@@ -196,16 +200,17 @@ const PortfolioSection = () => {
               },
             }}
           >
-            <Stack maw={450} py={"xl"} h={400}>
-              <Box>
-                <Title order={3} fw={"normal"}>
-                  Hands-On Control for Your Investments{" "}
+            <Stack py={"xl"} h={400}>
+              <Box maw={450}>
+                <Title order={3} fw={"bold"}>
+                  Comprehensive Portfolio Analytics
                 </Title>
-                <Text size="sm">
-                  Take control of your investments with powerful tools that help
-                  you manage your portfolio effortlessly.
+                <Text>
+                  Get comprehensive analytics about your portfolio including
+                  risk analysis, portfolio distribution, and growth projections.
                 </Text>
               </Box>
+              <PortfolioAnalyticsGraphics />
             </Stack>
           </Grid.Col>
           <Grid.Col
@@ -224,7 +229,7 @@ const PortfolioSection = () => {
               },
             }}
           >
-            <Stack maw={450} py={"xl"}>
+            <Stack maw={500} py={"xl"}>
               <Box>
                 <Title tt={"capitalize"} order={3} fw={"normal"}>
                   Make sense of Your Portfolio
@@ -245,3 +250,38 @@ const PortfolioSection = () => {
 };
 
 export default PortfolioSection;
+
+const PortfolioAnalyticsGraphics = () => {
+  const analytics = [
+    {
+      id: 1,
+      title: "Portfolio Performance",
+      image: portfolioPerfomance,
+    },
+    {
+      id: 2,
+      title: "Portfolio Performance",
+      image: portfolioWatchlist,
+    },
+    {
+      id: 3,
+      title: "Portfolio Performance",
+      image: portfolioTargetvalue,
+    },
+
+  ];
+
+  return (
+    <Box >
+      <Marquee speed={15} gradient>
+
+      {analytics.map((i) => {
+        return (
+          <Image mx={'xs'} key={i.id} src={i.image} h={250} fit="contain" w={"auto"} />
+        );
+      })}
+      </Marquee>
+      
+    </Box>
+  );
+};
