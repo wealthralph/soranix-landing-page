@@ -71,9 +71,9 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
 
   return (
     <Container my={100} ref={containerRef} size={"lg"}>
-      <Paper bg={"gray.0"} withBorder radius={"lg"} h={400} p={"xl"}>
+      <Paper bg={"gray.0"} withBorder radius={"lg"} h={350} p={"xl"}>
         <Stack align="center" justify="center" h={"100%"}>
-          <Stack align="center" gap={"sm"}>
+          <Stack align="center" gap={"sm"} justify="center">
             <Title tt={"capitalize"} fz={"sm"} ff={"monospace"}>
               {`Part ${part}`}
             </Title>
@@ -81,11 +81,11 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
               tt={"capitalize"}
               ref={titleRef}
               ta={"center"}
-              fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+              fz={{ xs: "h3", sm: "h2", md: 40 }}
             >
               {title}
             </Title>
-            <Text ff={"monospace"} ref={descRef}></Text>
+            <Text ta={"center"} ff={"monospace"} ref={descRef}></Text>
             <Group>{featuresList}</Group>
           </Stack>
         </Stack>
