@@ -1,10 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import {
-  Box,
-  Center,
+
   ColorSwatch,
   Container,
-  Divider,
   Group,
   Paper,
   Stack,
@@ -81,7 +79,7 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
               tt={"capitalize"}
               ref={titleRef}
               ta={"center"}
-              fz={{ xs: "h3", sm: "h2", md: 40 }}
+              fz={{base: 25, xs: "h1", sm: "h1", md: 40 }}
             >
               {title}
             </Title>

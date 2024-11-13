@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion"
 import { Badge, Box, Container, Divider, Flex, Grid, Group, List, Paper, rem, SimpleGrid, Space, Stack, Text, ThemeIcon, Title } from '@mantine/core'
-import { useInterval } from '@mantine/hooks'
 import styles from "./MoneyManagementSection.module.css"
 import BudgetSection from '../budgetSection/BudgetSection'
 import IncomeSource from '../incomeSource/IncomeSource'

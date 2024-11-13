@@ -86,7 +86,7 @@ const HeroSection = () => {
         </Center>
         <Space h={50} />
         {/* Platform graphics */}
-<Box>
+{/* <Box>
 
         <Box className={styles.hero_main_image_wrapper}>
           <Box className={styles.hero_main_image_cont}>
@@ -95,7 +95,7 @@ const HeroSection = () => {
         <Box h={30} maw={1080} mx={'auto'}  pos={'relative'}>
           <DottedGridCanvas/>
         </Box>
-</Box>
+</Box> */}
       </Stack>
 
     </Container>

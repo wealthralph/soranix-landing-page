@@ -1143,7 +1143,7 @@ const MultiCurrencyDisplayGraphics = () => {
   const initialCurrencies = [
     { id: 1, currency: "USD", balance: "20,000", symbol: "$", icon: usa },
     { id: 2, currency: "EUR", balance: "20,000", symbol: "€", icon: GBP },
-    { id: 3, currency: "SPAN", balance: "20,000", symbol: "€", icon: usa },
+    { id: 3, currency: "GPB", balance: "20,000", symbol: "€", icon: usa },
   ];
 
   const [currencies, setCurrencies] = useState(initialCurrencies);

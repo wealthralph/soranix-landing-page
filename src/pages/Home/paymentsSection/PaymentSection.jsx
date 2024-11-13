@@ -1,35 +1,21 @@
 import { Carousel } from "@mantine/carousel";
 import {
-  ActionIcon,
   Avatar,
   BackgroundImage,
-  Badge,
   Box,
-  Button,
-  Center,
-  CheckIcon,
-  ColorSwatch,
+
   Container,
-  Divider,
   em,
   Flex,
   Grid,
   Group,
   Image,
-  isLightColor,
   NumberFormatter,
-  NumberInput,
   Paper,
-  Pill,
-  PillsInput,
-  Progress,
-  rem,
-  SegmentedControl,
-  SimpleGrid,
+
   Stack,
   Switch,
   Text,
-  TextInput,
   Title,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
