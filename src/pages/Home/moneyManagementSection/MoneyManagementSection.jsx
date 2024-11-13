@@ -122,7 +122,7 @@ const MoneyManagementSection = () => {
     <Container w={"100%"} size={"xl"} my={50}>
       <Stack>
         <Badge radius={"sm"} color='grape' variant="dot">
-          Money Controls
+          Financial Management
         </Badge>
         <SimpleGrid cols={{ base: 1, xs: 1, sm: 2, md: 2 }}>
           <Title

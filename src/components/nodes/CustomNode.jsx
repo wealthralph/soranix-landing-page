@@ -256,7 +256,7 @@ export const OthersLayerNodes = ({  data }) => {
   return (
     <Box className={styles.primitive_node_outer}>
       <Box className={styles.primitive_node_inner}>
-        <Text fz={11} c={"transparent"} className={styles.primitive_node_text}>
+        <Text fz={10} c={"transparent"} className={styles.primitive_node_text}>
           {data?.title}
         </Text>
 

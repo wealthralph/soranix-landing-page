@@ -114,7 +114,7 @@ const OsLayers = () => {
       id: "H",
       type: "otherLayer",
       position: { x: 600, y: 100 },
-      data: { title: "Bills" },
+      data: { title: "Portfolio Management" },
 
       ...nodeDefaults,
     },
@@ -122,7 +122,7 @@ const OsLayers = () => {
       id: "I",
       type: "otherLayer",
       position: { x: 600, y: 150 },
-      data: { title: "Bills" },
+      data: { title: "Smart Budgets" },
 
       ...nodeDefaults,
     },
@@ -130,15 +130,22 @@ const OsLayers = () => {
       id: "J",
       type: "otherLayer",
       position: { x: 600, y: 200 },
-      data: { title: "Bills" },
+      data: { title: "Automation" },
 
       ...nodeDefaults,
     },
     {
       id: "K",
       type: "otherLayer",
-      data: { title: "Bills" },
+      data: { title: "Financial Plans" },
       position: { x: 600, y: 250 },
+      ...nodeDefaults,
+    },
+    {
+      id: "L",
+      type: "otherLayer",
+      data: { title: "Expense Management" },
+      position: { x: 600, y: 300 },
       ...nodeDefaults,
     },
   ];
