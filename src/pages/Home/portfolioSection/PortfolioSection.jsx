@@ -139,11 +139,10 @@ const PortfolioSection = () => {
           >
             Welcome to your <br /> Investment Control Center.
           </Title>
-          <Stack justify="flex-end">
+          <Stack justify="center">
             <Text>
-              Why settle for just banking when you can have so much more? We’ve
-              reimagined what a financial platform can do with all the tools you
-              need to make your money work harder, smarter, and faster.
+              A complete hub for managing your investments, making smarter
+              decisions, and seeing your portfolio thrive.
               {/* —it’s a complete redefinition of how you interact with your money. */}
             </Text>
           </Stack>
@@ -152,46 +151,6 @@ const PortfolioSection = () => {
       </Stack>
       <Space h={70} />
       <PortfolioSyncSection />
-
-      <Box>
-        <Divider />
-
-        <SimpleGrid py={"xl"} cols={{ base: 1, md: 2, lg: 2, xl: 2 }}>
-          <Stack maw={500}>
-            <Box maw={500}>
-              <Title order={3} fw={"bold"}>
-                The AI Co-Pilot for Your Portfolio{" "}
-              </Title>
-              <Text>
-                {/* Get real-time insights, tailored recommendations, and analytics
-                that help you make informed decisions , and keeps your portfolio
-                on the right track. */}
-                Navigate the markets like never before. Our AI co-pilot provides
-                real-time insights and actionable analytics tailored
-                to your portfolio preference.
-              </Text>
-            </Box>
-            <Stack gap={"xs"}>
-              {aiPortfolioAIFeatures.map((i) => {
-                return (
-                  <Box
-                    className={styles.ai_portfolio_features}
-                    gap={"xs"}
-                    key={i.id}
-                  >
-                    <Title order={5} fw={500}>
-                      {i.title}
-                    </Title>
-                    <Text size="sm">{i.description}</Text>
-                  </Box>
-                );
-              })}
-            </Stack>
-          </Stack>
-          <AiPortfolioAnimation />
-        </SimpleGrid>
-        <Divider />
-      </Box>
 
       <Box>
         <Divider />
@@ -250,6 +209,45 @@ const PortfolioSection = () => {
             </Stack>
           </Grid.Col>
         </Grid>
+        <Divider />
+      </Box>
+      <Box>
+        <Divider />
+
+        <SimpleGrid py={60} cols={{ base: 1, md: 2, lg: 2, xl: 2 }}>
+          <Stack maw={500}>
+            <Box>
+              <Title order={3} fw={"bold"}>
+                The AI Co-Pilot for Your Portfolio{" "}
+              </Title>
+              <Text>
+                {/* Get real-time insights, tailored recommendations, and analytics
+                that help you make informed decisions , and keeps your portfolio
+                on the right track. */}
+                Navigate the markets like never before. Our AI co-pilot provides
+                real-time insights and actionable analytics tailored to your
+                portfolio preference.
+              </Text>
+            </Box>
+            <Stack gap={"xs"}>
+              {aiPortfolioAIFeatures.map((i) => {
+                return (
+                  <Box
+                    className={styles.ai_portfolio_features}
+                    gap={"xs"}
+                    key={i.id}
+                  >
+                    <Title order={5} fw={500}>
+                      {i.title}
+                    </Title>
+                    <Text size="sm">{i.description}</Text>
+                  </Box>
+                );
+              })}
+            </Stack>
+          </Stack>
+          <AiPortfolioAnimation />
+        </SimpleGrid>
         <Divider />
       </Box>
       <Stack w={"100%"}></Stack>
@@ -406,13 +404,6 @@ const AiPortfolioAnimation = () => {
 
   const performingAsset =  [
     {
-      id:1,
-      assetName: "Spotify",
-      symbol: "SPOT",
-      summary: "Spotify delivered improved margins offsetting Q2 result miss.",
-      icon: spotify
-    },
-    {
       id:2,
       assetName: "Amazon Inc",
       symbol: "AMZN",
@@ -425,6 +416,13 @@ const AiPortfolioAnimation = () => {
       symbol: "RDDT",
       summary: "Reddit partners with inMarket to Measure real world impact of advertising campaiagns.",
       icon: reddit
+    },
+    {
+      id:1,
+      assetName: "Spotify",
+      symbol: "SPOT",
+      summary: "Spotify delivered improved margins offsetting Q2 result miss.",
+      icon: spotify
     },
   ]
 
@@ -455,12 +453,12 @@ const AiPortfolioAnimation = () => {
   ));
 
   useGSAP(() => {
-    const tl = gsap.timeline({ repeat: -1 ,repeatDelay: 5});
+    const tl = gsap.timeline({ repeat: -1 ,repeatDelay: 3});
 
     tl.to(textRef.current, {
       duration: 3,
       text: {
-        value: "What were my three best peforming asset in Q3 ?",
+        value: "What were my 3 best peforming asset in Q3 ?",
         delimiter: "",
       },
     });
@@ -468,7 +466,7 @@ const AiPortfolioAnimation = () => {
          y: -250,
         //  opacity: 0,
          stagger: 0.5,
-         duration: 2,
+         duration: 1,
          ease: "power1.inOut",
        });
 

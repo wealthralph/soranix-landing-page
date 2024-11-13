@@ -47,13 +47,10 @@ const Home = () => {
         }
         features={[
           {
-            name: "Budgeting",
-            color: "var(--mantine-color-blue-6)",
+            name: "Money Controls",
+            color: "var(--mantine-color-grape-6)",
           },
-          {
-            name: "Portfolio",
-            color: "var(--mantine-color-orange-6)",
-          },
+   
         ]}
       />
       <MoneyManagementSection />

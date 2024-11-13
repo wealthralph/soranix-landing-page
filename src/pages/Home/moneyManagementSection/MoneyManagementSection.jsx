@@ -123,7 +123,7 @@ const MoneyManagementSection = () => {
   return (
     <Container w={"100%"} size={"xl"} my={50}>
       <Stack>
-        <Badge radius={"sm"} variant="dot">
+        <Badge radius={"sm"} color='grape' variant="dot">
           Money Controls
         </Badge>
         <SimpleGrid cols={{ base: 1, xs: 1, sm: 2, md: 2 }}>
@@ -148,7 +148,7 @@ const MoneyManagementSection = () => {
       </Stack>
       <Space h={70} />
       <BudgetSection/>
-      <IncomeSource/>
+      {/* <IncomeSource/> */}
       <ExpenseManagementSection/>
       <FinancialPlan/>
     </Container>

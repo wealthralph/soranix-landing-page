@@ -42,64 +42,7 @@ const BudgetSection = () => {
             </Box>
           </Stack>
         </Box>
-        <Box>
-          <Divider />
-          <Grid m={"xs"}>
-            <Grid.Col
-              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-              styles={{
-                col: {
-                  paddingInlineEnd: !isMobile
-                    ? "var(--mantine-spacing-xl)"
-                    : null,
-                  overflow: "hidden",
-                },
-              }}
-            >
-              <Stack maw={450} py={"xl"} h={400}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Scope Your Budgets{" "}
-                  </Title>
-                  <Text size="sm">
-                    Take control of your investments with powerful tools that
-                    help you manage your portfolio effortlessly.
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-            <Grid.Col
-              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-              styles={{
-                col: {
-                  borderLeft: !isMobile
-                    ? `thin solid var(--mantine-color-default-border)`
-                    : "none",
-                  borderTop: !isMobile
-                    ? "none"
-                    : `thin solid var(--mantine-color-default-border)`,
-                  paddingInlineStart: !isMobile
-                    ? "var(--mantine-spacing-xl)"
-                    : null,
-                },
-              }}
-            >
-              <Stack maw={450} py={"xl"}>
-                <Box>
-                  <Title tt={"capitalize"} order={3} fw={"normal"}>
-                    Implement the budegting style that works for you
-                  </Title>
-                  <Text size="sm">
-                    Get detailed real-time analysis of every aspect of your
-                    portfolio, from growth trends to risk exposure.
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-          </Grid>
-          <Divider />
-       
-        </Box>{" "}
+ 
       </Stack>
     </Container>
   );

@@ -201,3 +201,10 @@
     rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     
 }
+
+
+.receive_convert_cont {
+    background-color: hsla(0, 0%, 100%, 1);
+    background-image: radial-gradient(circle at 32% 16%, hsla(14.000000000000004, 100%, 64%, 0.33) 17.647148063137625%, transparent 61.5109675345299%), radial-gradient(circle at 75% 1%, hsla(37.42857142857143, 91%, 54%, 0.26) 11.26645584295136%, transparent 63.69587993071477%);
+    background-blend-mode: multiply, multiply;  border: thin solid var(--mantine-color-default-border);
+}

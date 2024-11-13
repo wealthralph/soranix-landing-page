@@ -270,14 +270,24 @@ const Receive = () => {
                 Customize How You Get Paid to Suit Your Style
               </Title>
             </Box>
-            <RequestLinksGraphicsDisplay />
+            {/* <RequestLinksGraphicsDisplay /> */}
           </Paper>
         </Grid.Col>
         <Grid.Col
           span={{ base: 12, xs: 12, sm: 6, md: 4, lg: 4 }}
           className={"box"}
         >
-          <Paper radius={"lg"} h={600} bg={"gray"}></Paper>
+          <Paper radius={"lg"} h={600} className={styles.receive_convert_cont}>
+            <Box p={{ base: "lg", md: "xl" }} pb={0}>
+              <Text ff={"monospace"}>Convert</Text>
+              <Title
+                tt={"capitalize"}
+                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+              >
+                Unlock the Best Exchange Rates for Your Money{" "}
+              </Title>
+            </Box>
+          </Paper>
         </Grid.Col>
         <Grid.Col
           span={{ base: 12, xs: 12, sm: 6, md: 3, lg: 3 }}
@@ -323,6 +333,7 @@ const SendConfigurationGraphics = () => {
 "
                   />
                 </Text>
+                <Avatar size={'xs'} src={NG}/>
               </Group>
             </Box>
             <IconArrowRight size={16} color="var(--mantine-color-dimmed)" />
@@ -353,118 +364,118 @@ const SendConfigurationGraphics = () => {
   );
 };
 
-const RequestLinksGraphicsDisplay = () => {
-  const colors = [
-    "var(--mantine-color-blue-3)",
-    "var(--mantine-color-pink-3)",
-    "var(--mantine-color-teal-3)",
-    "var(--mantine-color-grape-3)",
-  ];
+// const RequestLinksGraphicsDisplay = () => {
+//   const colors = [
+//     "var(--mantine-color-blue-3)",
+//     "var(--mantine-color-pink-3)",
+//     "var(--mantine-color-teal-3)",
+//     "var(--mantine-color-grape-3)",
+//   ];
 
-  const [checked, setChecked] = useState(colors[0]);
+//   const [checked, setChecked] = useState(colors[0]);
 
-  return (
-    <Stack gap={"xs"} h={"100%"}>
-      <Group justify="center" p={"xs"}>
-        {colors.map((i) => (
-          <ColorSwatch
-            onClick={() => setChecked(i)}
-            style={{ color: "#fff", cursor: "pointer" }}
-            withShadow
-            color={i}
-            key={i}
-            size={30}
-          >
-            {checked === i && (
-              <CheckIcon style={{ width: rem(12), height: rem(12) }} />
-            )}
-          </ColorSwatch>
-        ))}
-        {/* Colors */}
-        <ActionIcon radius={"xl"} variant="light" color="gray.0" size={30}>
-          <IconPhoto size={20} />
-        </ActionIcon>
-      </Group>
-      {/* Browser */}
+//   return (
+//     <Stack gap={"xs"} h={"100%"}>
+//       <Group justify="center" p={"xs"}>
+//         {colors.map((i) => (
+//           <ColorSwatch
+//             onClick={() => setChecked(i)}
+//             style={{ color: "#fff", cursor: "pointer" }}
+//             withShadow
+//             color={i}
+//             key={i}
+//             size={30}
+//           >
+//             {checked === i && (
+//               <CheckIcon style={{ width: rem(12), height: rem(12) }} />
+//             )}
+//           </ColorSwatch>
+//         ))}
+//         {/* Colors */}
+//         <ActionIcon radius={"xl"} variant="light" color="gray.0" size={30}>
+//           <IconPhoto size={20} />
+//         </ActionIcon>
+//       </Group>
+//       {/* Browser */}
 
-      <Box pos={"relative"} className={styles.receive_ui_browser}>
-        <Box className={styles.receive_ui_browser_inner}>
-          {/* Browser header */}
-          <Group
-            bg={"white"}
-            p={5}
-            justify="space-between"
-            style={{
-              borderBottom: "thin solid var(--mantine-color-default-border)",
-              borderRadius:
-                "var(--mantine-radius-md)  var(--mantine-radius-md) 0 0",
-            }}
-          >
-            <Box>
-              <svg
-                width="52"
-                height="12"
-                viewBox="0 0 52 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle
-                  cx="6"
-                  cy="6"
-                  r="4"
-                  fill="#ED6A5E"
-                  stroke="#CF594E"
-                  strokeWidth="0.5"
-                ></circle>
-                <circle
-                  cx="20"
-                  cy="6"
-                  r="4"
-                  fill="#F4BD50"
-                  stroke="#D79F3E"
-                  strokeWidth="0.5"
-                ></circle>
-                <circle
-                  cx="35"
-                  cy="6"
-                  r="4"
-                  fill="#61C355"
-                  stroke="#52A63D"
-                  strokeWidth="0.5"
-                ></circle>
-              </svg>
-            </Box>
-            <Paper bg={"gray.0"} radius={"md"} py={3} w={"50%"}>
-              <Center>
-                <Text fw={500} fz={11}>
-                  blackJames.soranix.com
-                </Text>
-              </Center>
-            </Paper>
-            <IconChartAreaLine size={16} color="var(--mantine-color-dimmed)" />
-          </Group>
-          {/* Browser body */}
-          <Box h={"100%"} bg={"white"}>
-            <Stack align="center" h={"100%"} p={"lg"}>
-              <Paper
-                radius={"md"}
-                withBorder
-                h={"300px"}
-                w={"85%"}
-                style={{
+//       <Box pos={"relative"} className={styles.receive_ui_browser}>
+//         <Box className={styles.receive_ui_browser_inner}>
+//           {/* Browser header */}
+//           <Group
+//             bg={"white"}
+//             p={5}
+//             justify="space-between"
+//             style={{
+//               borderBottom: "thin solid var(--mantine-color-default-border)",
+//               borderRadius:
+//                 "var(--mantine-radius-md)  var(--mantine-radius-md) 0 0",
+//             }}
+//           >
+//             <Box>
+//               <svg
+//                 width="52"
+//                 height="12"
+//                 viewBox="0 0 52 12"
+//                 fill="none"
+//                 xmlns="http://www.w3.org/2000/svg"
+//               >
+//                 <circle
+//                   cx="6"
+//                   cy="6"
+//                   r="4"
+//                   fill="#ED6A5E"
+//                   stroke="#CF594E"
+//                   strokeWidth="0.5"
+//                 ></circle>
+//                 <circle
+//                   cx="20"
+//                   cy="6"
+//                   r="4"
+//                   fill="#F4BD50"
+//                   stroke="#D79F3E"
+//                   strokeWidth="0.5"
+//                 ></circle>
+//                 <circle
+//                   cx="35"
+//                   cy="6"
+//                   r="4"
+//                   fill="#61C355"
+//                   stroke="#52A63D"
+//                   strokeWidth="0.5"
+//                 ></circle>
+//               </svg>
+//             </Box>
+//             <Paper bg={"gray.0"} radius={"md"} py={3} w={"50%"}>
+//               <Center>
+//                 <Text fw={500} fz={11}>
+//                   blackJames.soranix.com
+//                 </Text>
+//               </Center>
+//             </Paper>
+//             <IconChartAreaLine size={16} color="var(--mantine-color-dimmed)" />
+//           </Group>
+//           {/* Browser body */}
+//           <Box h={"100%"} bg={"white"}>
+//             <Stack align="center" h={"100%"} p={"lg"}>
+//               <Paper
+//                 radius={"md"}
+//                 withBorder
+//                 h={"300px"}
+//                 w={"85%"}
+//                 style={{
       
-                  backgroundImage: `linear-gradient(to bottom, ${checked} , #fff 40%  )`,
-                }}
-              >
-                <Box
-                  h={"30%"}
-                  // make background a linear gradient that goes from top to bottom with the color of the checked color
-                ></Box>
-              </Paper>
-            </Stack>
-          </Box>
-        </Box>
-      </Box>
-    </Stack>
-  );
-};
+//                   backgroundImage: `linear-gradient(to bottom, ${checked} , #fff 40%  )`,
+//                 }}
+//               >
+//                 <Box
+//                   h={"30%"}
+//                   // make background a linear gradient that goes from top to bottom with the color of the checked color
+//                 ></Box>
+//               </Paper>
+//             </Stack>
+//           </Box>
+//         </Box>
+//       </Box>
+//     </Stack>
+//   );
+// };
