@@ -213,7 +213,7 @@ const PortfolioSyncSection = () => {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Bring all your investments from Stocks, ETfs  and
+                  Bring all your investments from Stocks, ETfs  
                   across different platforms to Soranix giving you a unified
                   view of your investments .
                 </Highlight>

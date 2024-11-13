@@ -29,6 +29,7 @@ import re from "./re.avif"
 import clickme from "./clickme.png"
 import usa from "./usa.png"
 import GBP from "./gbp.png";
+import euro from "./euro.png";
 import september from "./september.png"
 import womanWithPhone from "./woman_smilling.jpg"
 import portfolioPerfomance from "./portfolio-performance.png"
@@ -71,5 +72,6 @@ export {
     womanWithPhone,
     portfolioPerfomance,
     portfolioWatchlist,
-    portfolioTargetvalue
+    portfolioTargetvalue,
+    euro
 }

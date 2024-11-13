@@ -20,6 +20,7 @@ import {
   NumberFormatter,
   Paper,
   rem,
+  Space,
   Stack,
   Table,
   Text,
@@ -54,6 +55,7 @@ import { AreaChart } from "@mantine/charts";
 import {  motion } from "framer-motion";
 import {
   clickme,
+  euro,
   GBP,
   logoWhite,
   NG,
@@ -1140,11 +1142,39 @@ const LinkedAccountSyncDisplay = () => {
 };
 
 const MultiCurrencyDisplayGraphics = () => {
-  const initialCurrencies = [
-    { id: 1, currency: "USD", balance: "20,000", symbol: "$", icon: usa },
-    { id: 2, currency: "EUR", balance: "20,000", symbol: "€", icon: GBP },
-    { id: 3, currency: "GPB", balance: "20,000", symbol: "€", icon: usa },
-  ];
+ const initialCurrencies = [
+   {
+     id: 1,
+     currency: "USD",
+     balance: "20,000",
+     symbol: "$",
+     icon: usa,
+     accountNumber: "1234567890",
+     bankName: "BOA",
+     swiftCode: "BOFAUS3N",
+   },
+   {
+     id: 2,
+     currency: "EUR",
+     balance: "20,000",
+     symbol: "€",
+     icon: euro,
+     accountNumber: "0987654321",
+     bankName: "Deutsche Bank",
+     swiftCode: "DEUTDEFF",
+   },
+   {
+     id: 3,
+     currency: "GBP",
+     balance: "20,000",
+     symbol: "£",
+     icon: GBP,
+     accountNumber: "1122334455",
+     bankName: "Barclays",
+     swiftCode: "BARCGB22",
+   },
+ ];
+
 
   const [currencies, setCurrencies] = useState(initialCurrencies);
 
@@ -1183,18 +1213,40 @@ const MultiCurrencyDisplayGraphics = () => {
             onClick={() => clickToMoveIndex(currency.id)}
           >
             <Box className={styles.multicurrency_card_header}>
-              {currency.currency}
+              <Image src={currency.icon} h={20} />
+              <Text fw={500}>{currency.currency} Bank Account</Text>
             </Box>
             <Box className={styles.multicurrency_card_body}>
-              <Box>
-                <Title order={6} c={"dimmed"} fw={"normal"}>
-                  Balance
-                </Title>
+              <Group>
                 <Title order={1} fw={500}>
                   {currency.symbol}
                   {currency.balance}
                 </Title>
-              </Box>
+              </Group>
+              <Space h={10} />
+              <Divider />
+              <Space h={10} />
+              <Group justify="space-between">
+                <Box >
+                  <Text c={"dimmed"} size="xs">
+                    Bank Name
+                  </Text>
+                  <Text size="sm">{currency.bankName}</Text>
+                </Box>
+                <Box>
+                  <Text c={"dimmed"} size="xs">
+                    Account Number
+                  </Text>
+                  <Text>{currency.accountNumber}</Text>
+                </Box>
+
+                <Box>
+                  <Text c={"dimmed"} size="xs">
+                    Swift Code
+                  </Text>
+                  <Text>{currency.swiftCode}</Text>
+                </Box>
+              </Group>
             </Box>
           </Box>
         ))}

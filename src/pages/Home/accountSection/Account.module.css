@@ -317,21 +317,29 @@
   border: thin solid var(--mantine-color-default-border);
   border-radius: var(--mantine-radius-md);
   position: absolute;
-  background-color: var(--mantine-color-body);
   margin: auto;
   box-shadow: rgba(56, 56, 56, 0.1) 0px 4px 12px;
   transition: all 300ms ease;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .multicurrency_card_header {
   padding: var(--mantine-spacing-xs);
-  background-color: var(--mantine-color-gray-0);
-  border-radius: inherit;
+  border-radius: var(--mantine-radius-md) 0 0;
+  border-bottom: thin solid var(--mantine-color-gray-2);
+  display: flex;
+  gap: var(--mantine-spacing-xs);
+  backdrop-filter: blur(10px);
+  background-color: rgba(242, 242, 242, 0.062);
+  align-items: center;
+  position: relative;
 }
+
 
 .multicurrency_card_body {
   padding: var(--mantine-spacing-xs);
+  background-color: var(--mantine-color-body);
 }
 
 .multicurrency_card_wrapper[data-is="1"] {
@@ -355,4 +363,3 @@
 .multicurrency_card_wrapper[data-is="3"]:hover {
   transform: translateY(-0.875rem);
 }
-
