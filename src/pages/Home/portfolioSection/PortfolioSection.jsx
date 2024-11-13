@@ -21,14 +21,23 @@ import PortfolioSyncSection from "../portfolioSyncSection/PortfolioSyncSection";
 import { useMediaQuery } from "@mantine/hooks";
 import styles from "./PortfolioSection.module.css";
 import {
+  amazon,
   portfolioPerfomance,
   portfolioTargetvalue,
   portfolioWatchlist,
+  reddit,
+  spotify,
 } from "../../../assets/images";
 import Marquee from "react-fast-marquee";
 import { IconChartCandle, IconSend } from "@tabler/icons-react";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { TextPlugin } from "gsap/all";
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
+gsap.registerPlugin(TextPlugin);
+
 
 const PortfolioSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -147,9 +156,9 @@ const PortfolioSection = () => {
       <Box>
         <Divider />
 
-        <SimpleGrid p={"lg"} cols={{ base: 1, md: 2, lg: 2, xl: 2 }}>
-          <Stack maw={450} py={"xl"}>
-            <Box>
+        <SimpleGrid py={"xl"} cols={{ base: 1, md: 2, lg: 2, xl: 2 }}>
+          <Stack maw={500}>
+            <Box maw={500}>
               <Title order={3} fw={"bold"}>
                 The AI Co-Pilot for Your Portfolio{" "}
               </Title>
@@ -158,8 +167,8 @@ const PortfolioSection = () => {
                 that help you make informed decisions , and keeps your portfolio
                 on the right track. */}
                 Navigate the markets like never before. Our AI co-pilot provides
-                real-time insights, actionable analytics, and tailored
-                recommendations to help maximize your investments.
+                real-time insights and actionable analytics tailored
+                to your portfolio preference.
               </Text>
             </Box>
             <Stack gap={"xs"}>
@@ -179,7 +188,7 @@ const PortfolioSection = () => {
               })}
             </Stack>
           </Stack>
-          <Box className={styles.ai_portfolio_display}></Box>
+          <AiPortfolioAnimation />
         </SimpleGrid>
         <Divider />
       </Box>
@@ -319,7 +328,7 @@ const PortfolioAutomationGraphics = () => {
         <Box py={7}>
           <Title c={"dimmed"} fz={"xs"} fw={"normal"} textWrap="nowrap">
             Triggers when{" "}
-            <Text fw={"bold"} c={"red"} inherit span>
+            <Text fw={"bold"} c={"teal"} inherit span>
               TSLA
             </Text>{" "}
             asset hits $428.64
@@ -380,12 +389,101 @@ const PortfolioAutomationGraphics = () => {
         <Box py={7}>
           <Title c={"dimmed"} fz={"xs"} fw={"normal"} textWrap="nowrap">
             Sell 10% of your{" "}
-            <Text fw={"bold"} c={"red"} inherit span>
+            <Text fw={"bold"} c={"teal"} inherit span>
               TSLA
             </Text>{" "}
             asset.
           </Title>
         </Box>
+      </Box>
+    </Box>
+  );
+};
+
+const AiPortfolioAnimation = () => {
+  const textRef = useRef(null);
+  const boxRef = useRef([]);
+
+  const performingAsset =  [
+    {
+      id:1,
+      assetName: "Spotify",
+      symbol: "SPOT",
+      summary: "Spotify delivered improved margins offsetting Q2 result miss.",
+      icon: spotify
+    },
+    {
+      id:2,
+      assetName: "Amazon Inc",
+      symbol: "AMZN",
+      summary: "Amazon's entry into the chip market creates healthy competition for NVIDIA.",
+      icon: amazon
+    },
+    {
+      id:3,
+      assetName: "Reddit Inc",
+      symbol: "RDDT",
+      summary: "Reddit partners with inMarket to Measure real world impact of advertising campaiagns.",
+      icon: reddit
+    },
+  ]
+
+  const performingAssetMap = performingAsset.map((i, index) => (
+    <Box
+      ref={(el) => (boxRef.current[index] = el)}
+      key={i.id}
+
+      radius={"md"}
+      style={{
+        zIndex: index
+      }}
+      className={styles.ai_portfolio_display_asset}
+    >
+      <Box style={{ display: "flex", alignItems: "center", padding: "10px" }}>
+        <Image src={i.icon} height={25} width={25} fit="contain" />
+        <Box ml={10}>
+          <Text>{i.assetName}</Text>
+          <Text size="xs" color="dimmed">
+            {i.symbol}
+          </Text>
+        </Box>
+      </Box>
+      <Text size="xs" color="dimmed" style={{ padding: "0 10px 10px" }}>
+        {i.summary}
+      </Text>
+    </Box>
+  ));
+
+  useGSAP(() => {
+    const tl = gsap.timeline({ repeat: -1 ,repeatDelay: 5});
+
+    tl.to(textRef.current, {
+      duration: 3,
+      text: {
+        value: "What were my three best peforming asset in Q3 ?",
+        delimiter: "",
+      },
+    });
+       tl.from(boxRef.current, {
+         y: -250,
+        //  opacity: 0,
+         stagger: 0.5,
+         duration: 2,
+         ease: "power1.inOut",
+       });
+
+  })
+
+
+
+  return (
+    <Box pos={"relative"} className={styles.ai_portfolio_display}>
+      <Box className={styles.ai_portfolio_display_assets}>
+
+        {performingAssetMap}
+      </Box>
+      <Box className={styles.ai_portfolio_display_input}>
+        <Text size="sm" c={"dimmed"} ref={textRef}></Text>
       </Box>
     </Box>
   );
