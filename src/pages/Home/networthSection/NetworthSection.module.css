@@ -42,5 +42,5 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
-
+    background-blend-mode: overlay, overlay, overlay;
 }
