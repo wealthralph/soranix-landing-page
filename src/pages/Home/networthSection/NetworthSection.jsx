@@ -1,21 +1,38 @@
-import { ActionIcon, Box, ColorSwatch, Container, Divider, em, Grid, Group, NumberFormatter, Progress,  Stack, Text, Title } from "@mantine/core";
-import { useState } from "react";
-import styles from "./NetworthSection.module.css"
+import {
+  ActionIcon,
+  Box,
+  Button,
+  ColorSwatch,
+  Container,
+  Divider,
+  em,
+  Flex,
+  Grid,
+  Group,
+  NumberFormatter,
+  Progress,
+  Stack,
+  Text,
+  Title,
+} from "@mantine/core";
+import { useEffect, useState } from "react";
+import styles from "./NetworthSection.module.css";
 import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
+import SlotCounter from "react-slot-counter";
 
 const NetWorthSection = () => {
   const [netWorthData, setNetWorthData] = useState([
     {
       id: 1,
-      value: 25900,
+      value: 500,
       label: "Deposit",
       color: "orange",
-      striped: true,
+      striped: false,
     },
     {
       id: 2,
-      value: 30000,
+      value: 3000,
       label: "Savings",
       color: "indigo",
       striped: false,
@@ -29,7 +46,7 @@ const NetWorthSection = () => {
     },
     {
       id: 4,
-      value: 59000,
+      value: 9000,
       label: "Investment",
       color: "pink",
       striped: false,
@@ -38,23 +55,31 @@ const NetWorthSection = () => {
 
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
-  const addRandomNetWorthData = () => {
-    const newId = netWorthData.length + 1;
-    const newValue = Math.floor(Math.random() * 100000); // Random value between 0 and 100,000
-    const newLabel = `Random Label ${newId}`; // Example label, can be customized
-    const newColor = "#" + Math.floor(Math.random() * 16777215).toString(16); // Random hex color
-    const newStriped = Math.random() > 0.5;
+  const [graphData, setGraphData] = useState([]);
 
-    const newNetWorthItem = {
-      id: newId,
-      value: newValue,
-      label: newLabel,
-      color: newColor,
-      striped: newStriped,
-    };
+  const TARGET_NET_WORTH = 10000;
+  const newNetWorth = graphData[graphData.length - 1]?.netWorth || 5000;
 
-    setNetWorthData((prevData) => [...prevData, newNetWorthItem]);
-  };
+  const difference = TARGET_NET_WORTH - newNetWorth;
+  const percentageDiff = (newNetWorth / TARGET_NET_WORTH) * 100;
+
+  const formattedNetworth = Number(newNetWorth).toLocaleString("en-NG");
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentValues = {
+        deposit: netWorthData.find((item) => item.label === "Deposit").value,
+        savings: netWorthData.find((item) => item.label === "Savings").value,
+        debts: netWorthData.find((item) => item.label === "Debts").value,
+        investment: netWorthData.find((item) => item.label === "Investment")
+          .value,
+      };
+
+      updateNetWorthData(currentValues, setNetWorthData, setGraphData);
+    }, 2000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [netWorthData]);
 
   const segments = netWorthData.map((segment) => {
     return (
@@ -69,15 +94,22 @@ const NetWorthSection = () => {
   });
 
   const swatches = netWorthData.map((swatch) => {
+    const formattedValue = Number(swatch.value).toLocaleString("en-US");
+
     return (
       <Group key={swatch.id} gap={"3px"}>
-        <ColorSwatch size={15} color={swatch.color} />
-        <Text fz={"sm"} fw={"normal"}>
+        <ColorSwatch size={10} color={swatch.color} opacity={0.5} />
+        <Title order={5} fw={500} tt={"lowercase"}>
           {swatch.label}
-        </Text>
-        <Text c={"dimmed"} fw={"lighter"}>
-          <NumberFormatter prefix="$" value={swatch.value} thousandSeparator />
-        </Text>
+        </Title>
+        <Group align="end" gap={0}>
+          <Title order={5} fw={500} c={"dimmed"}>
+            ₦
+          </Title>
+          <Title order={5} fw={500} c={"dimmed"}>
+            <SlotCounter value={formattedValue} />
+          </Title>
+        </Group>
       </Group>
     );
   });
@@ -85,7 +117,6 @@ const NetWorthSection = () => {
   return (
     <Container mt={50} size={"xl"}>
       <Stack gap={"xl"}>
- 
         <Box maw={500} w={"100%"}>
           <Stack gap={"xl"}>
             <Box>
@@ -112,12 +143,7 @@ const NetWorthSection = () => {
           <div className={styles.networth_box_blur}>
             <div className={styles.networth_content}>
               <Group gap={"xs"} justify="end">
-                <ActionIcon
-                  onClick={addRandomNetWorthData}
-                  variant="transparent"
-                  color="dark"
-                  size={"sm"}
-                >
+                <ActionIcon variant="transparent" color="dark" size={"sm"}>
                   <IconPlus />
                 </ActionIcon>
                 <ActionIcon variant="transparent" color="dark" size={"sm"}>
@@ -125,35 +151,43 @@ const NetWorthSection = () => {
                 </ActionIcon>
               </Group>
               {/* <Space h={30} /> */}
-              <Group justify="space-between">
+              <Group gap={{base: "sm", xs: "md", md: "xl", lg: "xl", xl: "xl"}} align="end">
                 <Box>
-                  <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
+                  <Text c={"dimmed"} tt={"capitalize"}>
                     Networth
                   </Text>
-                  <Title fz={{ base: "h2", xs: "h3", sm: "h1", md: "h1" }}>
+                  <Group align="end" gap={4}>
+                    <Title fz={{ base: 25, xs: "h1", sm: "h1", md: 40 }}>
+                      ₦
+                    </Title>
+                    <Title fz={{ base: 25, xs: "h1", sm: "h1", md: 40 }}>
+                      <SlotCounter value={formattedNetworth} />
+                    </Title>
+                  </Group>
+                </Box>
+                <Box>
+                  <Text c={"dimmed"} tt={"capitalize"}>
+                    Diff
+                  </Text>
+                  <Title
+                    c={percentageDiff >= 100 ? "teal" : "yellow"}
+                    fz={{ base: 25, xs: "h1", sm: "h1", md: 40 }}
+                  >
                     <NumberFormatter
-                      prefix="$"
-                      value={5000}
+                      suffix="%"
+                      value={percentageDiff.toFixed(0)}
                       thousandSeparator
                     />
                   </Title>
                 </Box>
                 <Box>
-                  <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
-                    Diff
-                  </Text>
-                  <Title fz={{ base: "h2", xs: "h3", sm: "h1", md: "h1" }}>
-                    <NumberFormatter suffix="%" value={10} thousandSeparator />
-                  </Title>
-                </Box>
-                <Box>
-                  <Text c={"dimmed"} fz={"sm"} tt={"capitalize"}>
+                  <Text c={"dimmed"} tt={"capitalize"}>
                     Target
                   </Text>
-                  <Title fz={{ base: "h2", xs: "h3", sm: "h1", md: "h1" }}>
+                  <Title fz={{ base: 25, xs: "h1", sm: "h1", md: 40 }}>
                     <NumberFormatter
-                      prefix="$"
-                      value={10000}
+                      prefix="₦"
+                      value={TARGET_NET_WORTH}
                       thousandSeparator
                     />
                   </Title>
@@ -174,71 +208,70 @@ const NetWorthSection = () => {
                 >
                   {segments}
                 </Progress.Root>
-                <Group>{swatches}</Group>
+                <Group gap={'sm'}>{swatches}</Group>
               </Stack>
             </div>
           </div>
         </Container>
-        {/* <Box>
-          <Divider />
-          <Grid m={"xs"}>
-            <Grid.Col
-              h={400}
-              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-              style={{
-                paddingInlineEnd: !isMobile
-                  ? "var(--mantine-spacing-xl)"
-                  : null,
-              }}
-            >
-              <Stack py={"xl"}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Impact Analysis
-                  </Title>
-                  <Text >
-                    Get a clear view of how your daily decisions like savings,
-                    expense affect your net-worth and shape your financial
-                    future.
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-            <Grid.Col
-              h={400}
-              span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-              styles={{
-                col: {
-                  borderLeft: !isMobile
-                    ? `thin solid var(--mantine-color-default-border)`
-                    : "none",
-                  borderTop: !isMobile
-                    ? "none"
-                    : `thin solid var(--mantine-color-default-border)`,
-                  paddingInlineStart: !isMobile
-                    ? "var(--mantine-spacing-xl)"
-                    : null,
-                },
-              }}
-            >
-              <Stack py={"xl"}>
-                <Box>
-                  <Title order={3} fw={"normal"}>
-                    Net-Worth Drivers
-                  </Title>
-                  <Text >
-                    Boost your account experience with a range of smart,
-                    easy-to-customize features .
-                  </Text>
-                </Box>
-              </Stack>
-            </Grid.Col>
-          </Grid>
-          <Divider />
-        </Box> */}
       </Stack>
     </Container>
   );
 };
 
-export default NetWorthSection
+export default NetWorthSection;
+
+const generateRandomValue = (
+  currentValue,
+  range = 1000,
+  allowNegative = false
+) => {
+  const change = Math.floor(Math.random() * range * 2 - range);
+  const newValue = currentValue + change;
+
+  return allowNegative ? newValue : Math.max(0, newValue);
+};
+
+// Function to calculate net worth based on the current asset and debt values
+const generateNetWorthData = (previousNetWorth, currentValues) => {
+  const { savings, deposit, debts, investment } = currentValues;
+
+  const netWorth = deposit + savings + investment - debts;
+
+  return Math.max(0, netWorth);
+};
+
+const updateNetWorthData = (currentValues, setNetWorthData, setGraphData) => {
+  const newValues = {
+    deposit: generateRandomValue(currentValues.deposit, 1000, false),
+    savings: generateRandomValue(currentValues.savings, 1000, false),
+    investment: generateRandomValue(currentValues.investment, 1000, false),
+
+    debts: generateRandomValue(currentValues.debts, 1000, true),
+  };
+
+  const newNetWorth = generateNetWorthData(0, newValues);
+
+  const timestamp = new Date().toLocaleTimeString(); //
+
+  setGraphData((prevGraphData) => [
+    ...prevGraphData,
+    { date: timestamp, netWorth: newNetWorth },
+  ]);
+
+  setNetWorthData((prevData) =>
+    prevData.map((item) => {
+      switch (item.label) {
+        case "Deposit":
+          return { ...item, value: newValues.deposit };
+        case "Savings":
+          return { ...item, value: newValues.savings };
+        case "Debts":
+          return { ...item, value: newValues.debts };
+        case "Investment":
+          return { ...item, value: newValues.investment };
+        default:
+          return item;
+      }
+    })
+  );
+};
