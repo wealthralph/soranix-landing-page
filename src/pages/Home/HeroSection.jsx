@@ -18,7 +18,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import styles from "./Home.module.css";
 import { motion } from "framer-motion";
-import { GraphicsDashboardDisplay } from "./introSection/IntroSection";
 import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {

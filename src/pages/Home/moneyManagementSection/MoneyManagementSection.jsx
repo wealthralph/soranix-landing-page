@@ -148,7 +148,7 @@ const MoneyManagementSection = () => {
       <BudgetSection/>
       {/* <IncomeSource/> */}
       <ExpenseManagementSection/>
-      <FinancialPlan/>
+      {/* <FinancialPlan/> */}
     </Container>
   );
 }

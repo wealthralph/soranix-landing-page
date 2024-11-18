@@ -1,13 +1,8 @@
 import {
   ActionIcon,
   Box,
-  Button,
   ColorSwatch,
   Container,
-  Divider,
-  em,
-  Flex,
-  Grid,
   Group,
   NumberFormatter,
   Progress,
@@ -18,7 +13,6 @@ import {
 import { useEffect, useState } from "react";
 import styles from "./NetworthSection.module.css";
 import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
-import { useMediaQuery } from "@mantine/hooks";
 import SlotCounter from "react-slot-counter";
 
 const NetWorthSection = () => {
@@ -26,7 +20,7 @@ const NetWorthSection = () => {
     {
       id: 1,
       value: 500,
-      label: "Deposit",
+      label: "Cash",
       color: "orange",
       striped: false,
     },
@@ -53,14 +47,12 @@ const NetWorthSection = () => {
     },
   ]);
 
-  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
   const [graphData, setGraphData] = useState([]);
 
   const TARGET_NET_WORTH = 10000;
   const newNetWorth = graphData[graphData.length - 1]?.netWorth || 5000;
 
-  const difference = TARGET_NET_WORTH - newNetWorth;
   const percentageDiff = (newNetWorth / TARGET_NET_WORTH) * 100;
 
   const formattedNetworth = Number(newNetWorth).toLocaleString("en-NG");
@@ -153,7 +145,7 @@ const NetWorthSection = () => {
               {/* <Space h={30} /> */}
               <Group gap={{base: "sm", xs: "md", md: "xl", lg: "xl", xl: "xl"}} align="end">
                 <Box>
-                  <Text c={"dimmed"} tt={"capitalize"}>
+                  <Text c={"dimmed"} tt={"capitalize"} >
                     Networth
                   </Text>
                   <Group align="end" gap={4}>

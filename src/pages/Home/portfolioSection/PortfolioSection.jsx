@@ -299,7 +299,6 @@ const PortfolioAnalyticsGraphics = () => {
 const PortfolioAutomationGraphics = () => {
   return (
     <Box
-      bg={"grap"}
       w={"100%"}
       h={"100%"}
       className={styles.portfolio_automation_cont}

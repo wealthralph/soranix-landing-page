@@ -35,8 +35,10 @@ import womanWithPhone from "./woman_smilling.jpg"
 import portfolioPerfomance from "./portfolio-performance.png"
 import portfolioWatchlist from "./portfolio_watchlist.png"
 import portfolioTargetvalue from "./portfolio-target-value.png"
+import budgetui from "./budget-ui.png"
 
 export {
+    budgetui,
     logoWhite,
     avatar1,
     avatar2,
