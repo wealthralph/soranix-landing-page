@@ -1,12 +1,15 @@
 .networth_box_blur {
   width: 100%;
-  border: thin solid var(--mantine-color-default-border);
+  /* border: thin solid var(--mantine-color-default-border); */
   margin-inline: auto;
   border-radius: var(--mantine-radius-md);
   background-color: rgba(40, 40, 40, 0);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   position: relative;
+  box-shadow: var(--mantine-shadow-md);
+  padding: 2px;
+  z-index: 3;
 }
 
 /* .networth_box_blur:hover {
@@ -31,11 +34,85 @@
   width: 100%;
   border-radius: inherit;
   height: 100%;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   inset: 0;
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
-  mix-blend-mode: overlay, color-burn;
+  mix-blend-mode: overlay, soft-light;
   opacity: 0.4;
+  /* box-shadow: var(--mantine-shadow-sm); */
+  border: thin solid var(--mantine-color-default-border);
+    filter: url("data:image/svg+xml,%3Csvg viewBox='0 0 1799 1799' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+}
+
+
+@keyframes hero-gradient-animation {
+    0% {
+        --c-0: hsla(206, 90%, 80%, 0.55);
+        --s-start-0: 9%;
+        --s-end-0: 55%;
+        --x-0: 85%;
+        --y-0: 80%;
+    }
+
+    100% {
+        --c-0: hsla(150.8823529411765, 52%, 83%, 0.66);
+        --s-start-0: 9%;
+        --s-end-0: 55%;
+        --x-0: 31%;
+        --y-0: 94%;
+    }
+}
+
+@property --c-0 {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: hsla(206.0000000000001, 100%, 82%, 0.55)
+}
+
+@property --s-start-0 {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 9%
+}
+
+@property --s-end-0 {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 55%
+}
+
+@property --x-0 {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 85%
+}
+
+@property --y-0 {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 80%
+}
+
+.networth_bg_gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+ bottom: 0;
+ z-index: -2;
+   /* -webkit-mask-image: linear-gradient(180deg, #000 10%, transparent 85%);
+  mask-image: linear-gradient(180deg, #000 10%, transparent 85%); */
+}
+
+.networth_contet , .networth_bg_gradient{
+    --c-0: hsla(206, 67%, 74%, 0.55);
+    --x-0: 85%;
+    --y-0: 80%;
+    ;
+    background-color: rgba(255, 255, 255, 0);
+    background-image: radial-gradient(circle at var(--x-0) var(--y-0), var(--c-0) var(--s-start-0), transparent var(--s-end-0));
+    animation: hero-gradient-animation 5s linear infinite alternate;
+    background-blend-mode: normal;
 }

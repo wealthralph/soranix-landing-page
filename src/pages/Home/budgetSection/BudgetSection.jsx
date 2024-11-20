@@ -1,42 +1,30 @@
+import { gsap } from "gsap";
 import {
-  ActionIconGroup,
   Badge,
   Box,
   Button,
   Container,
   Divider,
   em,
-  Flex,
   Grid,
   Group,
   Image,
-  NumberFormatter,
-  // NumberFormatter,
-  NumberInput,
   Paper,
   rem,
-  SimpleGrid,
   Space,
   Stack,
-  Switch,
   Text,
   Title,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import styles from "./BudgetSection.module.css";
-import {
-  IconAlertTriangleFilled,
-  IconCircle,
-  IconCircle0,
-  IconCircle3,
-  IconGlobe,
-  IconPlus,
-  IconWorld,
-} from "@tabler/icons-react";
+import { IconAlertTriangleFilled, IconWorld } from "@tabler/icons-react";
 import { budgetui } from "../../../assets/images";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SlotCounter from "react-slot-counter";
+import { LineChart } from "@mantine/charts";
+import { useGSAP } from "@gsap/react";
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
 const TextMotion = motion.create(Text, { forwardMotionProps: true });
@@ -78,18 +66,19 @@ const BudgetSection = () => {
           </Box>
         </Container>
       </Stack>
-      <Box>
+      <Box w={"100%"}>
         <Divider />
-        <Grid m={"xs"}>
+        <Grid my={"xs"}>
           <Grid.Col span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
             <Stack py={"xl"} h={450} w={"100%"}>
-              <Box maw={500}>
+              <Box maw={450}>
                 <Title order={3} tt={"capitalize"} fw={"bold"}>
                   Effortless Tracking and Management
                 </Title>
                 <Text>
-                  We've completely reimagined budgeting to make it effortless
-                  and give you system that works for you, not against you.{" "}
+                  We&apos;ve completely reimagined budgeting to make it
+                  effortless and give you system that works for you, not against
+                  you.{" "}
                 </Text>
               </Box>
               <BudgetingTrackingDisplay />
@@ -111,7 +100,7 @@ const BudgetSection = () => {
               },
             }}
           >
-            <Stack py={"xl"} h={450}>
+            <Stack py={"xl"} h={450} w={"100%"}>
               <Box maw={450}>
                 <Title order={3} fw={"bold"}>
                   Tailor your budget to your finances
@@ -134,12 +123,14 @@ const BudgetSection = () => {
 export default BudgetSection;
 
 const BudgetingTrackingDisplay = () => {
-  const allocated = 50000;
+  const allocated = 6000;
   const [spent, setSpent] = useState(0);
   const [remaining, setRemaining] = useState(allocated);
   const [spentHistory, setSpentHistory] = useState([]);
   const [status, setStatus] = useState("On Track");
+  const alertRef = useRef(null);
 
+  // Reset spent and history after overrun
   useEffect(() => {
     if (status === "Overrun") {
       const resetTimeout = setTimeout(() => {
@@ -147,12 +138,13 @@ const BudgetingTrackingDisplay = () => {
         setSpentHistory([]);
         setRemaining(allocated);
         setStatus("On Track");
-      }, 5000);
+      }, 7000);
 
       return () => clearTimeout(resetTimeout);
     }
   }, [status, allocated]);
 
+  // Generate random spending data
   useEffect(() => {
     const interval = setInterval(() => {
       if (remaining > 0) {
@@ -161,13 +153,18 @@ const BudgetingTrackingDisplay = () => {
           Math.floor(Math.random() * (maxSpend - 500 + 1)) + 500;
 
         setSpentHistory((prevHistory) => {
-          const newHistory = [...prevHistory, randomSpent];
-          const newSpent = newHistory.reduce((acc, curr) => acc + curr, 0);
+          const newHistory = [
+            ...prevHistory,
+            { amount: randomSpent, date: new Date().toLocaleDateString() }, // Add date
+          ];
+          const newSpent = newHistory.reduce(
+            (acc, curr) => acc + curr.amount,
+            0
+          );
 
           setSpent(newSpent);
           setRemaining(newSpent > allocated ? 0 : allocated - newSpent);
 
-          // Update status
           if (newSpent > allocated) {
             setStatus("Overrun");
           } else if (newSpent < allocated * 0.4) {
@@ -184,157 +181,251 @@ const BudgetingTrackingDisplay = () => {
     return () => clearInterval(interval);
   }, [remaining, allocated]);
 
-  return (
-    <Box className={styles.budget_display_wrapper}>
-      <Box className={styles.budget_display_outer}>
-        <Box className={styles.budget_display_inner}>
-          <Box maw={400}>
-            <Stack gap={"xs"}>
-              <Flex>
-              <Group gap={2} align="baseline">
-                <Title order={4} fw={"bold"} c={"dark.4"}>
-                  Groceries
-                </Title>
-                <Badge
-                  leftSection={
-                    <IconWorld
-                      style={{ width: rem(10), height: rem(10) }}
-                      strokeWidth={1.2}
-                    />
-                  }
-                  variant="transparent"
-                  color="gray.8"
-                  c={"dark"}
-                  radius={"sm"}
-                  size="md"
-                >
-                  Global
-                </Badge>
-              </Group>
-                  <ActionIconGroup></ActionIconGroup>
-              </Flex>
-              <Group gap={"xs"}>
-                <Badge
-                  styles={{
-                    root: {
-                      border: "thin solid var(--mantine-color-default-border)",
-                    },
-                  }}
-                  variant="light"
-                  color="gray.8"
-                  c={"dark"}
-                  radius={"sm"}
-                  size="xs"
-                >
-                  Cycle
-                </Badge>
-                <Badge
-                  styles={{
-                    root: {
-                      border: "thin solid var(--mantine-color-default-border)",
-                    },
-                  }}
-                  variant="light"
-                  color="gray.8"
-                  c={"dark"}
-                  radius={"sm"}
-                  size="xs"
-                >
-                  Jun 10 - Jun 17
-                </Badge>
-              </Group>
-            </Stack>
-            <Space h={30} />
-            <Group gap={"md"} justify="space-between" align="start">
-              <Box>
-                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
-                  Allocated
-                </Text>
+  useGSAP(() => {
+    const alert = alertRef.current;
 
-                <Text fw={600}>
-                  <NumberFormatter
-                    value={allocated}
-                    prefix="₦"
-                    thousandSeparator
-                  />
-                </Text>
-              </Box>
-              <Box>
-                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
-                  Spent
-                </Text>
-                <Group align="end" gap={0}>
-                  <Text fw={600} c={"red"}>
-                    ₦
-                  </Text>
-                  <Text fw={600} c={"red.8"}>
-                    <SlotCounter
-                      value={Number(spent).toLocaleString("en-US")}
-                    />{" "}
-                  </Text>
+    gsap.set(alert, { y: 0, opacity: 0, visibility: "hidden" });
+
+    if (status === "Overrun") {
+      gsap.to(alert, {
+        opacity: 1,
+        visibility: "visible",
+        duration: 0.5,
+        y: -65,
+        ease: "power1.inOut",
+        yoyo: true,
+      });
+    }
+  }, [status]);
+
+  const chartData = spentHistory.map((item, index) => ({
+    date: item.date,
+    spent: spentHistory
+      .slice(0, index + 1)
+      .reduce((acc, curr) => acc + curr.amount, 0),
+  }));
+
+  const budgetAlertActions = ["Adjust Budget", "View Spending Insight", "Lock Spend" ];
+
+  return (
+    <Box w={"100%"} h={"100%"} pos={"relative"}>
+      <Box className={styles.budget_display_wrapper}>
+        <Box className={styles.budget_display_outer}>
+          <Box className={styles.budget_display_inner}>
+            <Box maw={450}>
+              {/* Header */}
+              <Stack gap={"xs"}>
+                <Group gap={2} align="baseline">
+                  <Title order={4} fw={"bold"} c={"dark.4"}>
+                    Groceries
+                  </Title>
+                  <Badge
+                    leftSection={
+                      <IconWorld
+                        style={{ width: rem(10), height: rem(10) }}
+                        strokeWidth={1.2}
+                      />
+                    }
+                    variant="transparent"
+                    color="gray.8"
+                    c={"dark"}
+                    radius={"sm"}
+                    size="md"
+                  >
+                    Global
+                  </Badge>
                 </Group>
-              </Box>
-              <Box>
-                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
-                  Remaining
-                </Text>
-                <Group align="end" gap={0}>
-                  <Text
-                    fw={600}
-                    c={
-                      status === "Overrun"
-                        ? "var(--mantine-color-red-filled)"
-                        : status === "At Risk"
-                        ? "var(--mantine-color-orange-filled)"
-                        : "var(--mantine-color-teal-filled)"
-                    }
+
+                {/* Cycle Information */}
+                <Group gap={"xs"}>
+                  <Badge
+                    styles={{
+                      root: {
+                        border:
+                          "thin solid var(--mantine-color-default-border)",
+                      },
+                    }}
+                    variant="light"
+                    color="gray.8"
+                    c={"dark"}
+                    radius={"sm"}
+                    size="xs"
                   >
-                    ₦
-                  </Text>
-                  <Text
-                    fw={600}
-                    c={
-                      status === "Overrun"
-                        ? "var(--mantine-color-red-filled)"
-                        : status === "At Risk"
-                        ? "var(--mantine-color-orange-filled)"
-                        : "var(--mantine-color-teal-filled)"
-                    }
+                    Cycle
+                  </Badge>
+                  <Badge
+                    styles={{
+                      root: {
+                        border:
+                          "thin solid var(--mantine-color-default-border)",
+                      },
+                    }}
+                    variant="light"
+                    color="gray.8"
+                    c={"dark"}
+                    radius={"sm"}
+                    size="xs"
                   >
-                    <SlotCounter
-                      value={Number(remaining).toLocaleString("en-US")}
-                    />
-                  </Text>
+                    Jun 10 - Jun 17
+                  </Badge>
                 </Group>
-              </Box>
-              <Stack align="start" gap={3}>
-                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
-                  Status
-                </Text>
-                <AnimatePresence mode="wait">
-                  <TextMotion
-                    key={status}
-                    initial={{ y: 5, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -5, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    fz={"xs"}
-                    fw={"bold"}
-                    tt={"uppercase"}
-                    c={
-                      status === "Overrun"
-                        ? "var(--mantine-color-red-filled)"
-                        : status === "At Risk"
-                        ? "var(--mantine-color-orange-filled)"
-                        : "var(--mantine-color-teal-filled)"
-                    }
-                  >
-                    {status}
-                  </TextMotion>
-                </AnimatePresence>
               </Stack>
-            </Group>
+
+              <Space h={20} />
+              <Group maw={400} gap={"md"} justify="space-between" align="start">
+                <Box>
+                  <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                    Allocated
+                  </Text>
+                  <Text fw={600}>₦{allocated.toLocaleString("en-US")}</Text>
+                </Box>
+                <Box>
+                  <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                    Spent
+                  </Text>
+                  <Group align="end" gap={0}>
+                    <Text fw={600} c={"red"}>
+                      ₦
+                    </Text>
+                    <Text fw={600} c={"red.8"}>
+                      <SlotCounter
+                        value={Number(spent).toLocaleString("en-US")}
+                      />{" "}
+                    </Text>
+                  </Group>
+                </Box>
+                <Box>
+                  <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                    Remaining
+                  </Text>
+                  <Group align="end" gap={0}>
+                    <Text
+                      fw={600}
+                      c={
+                        status === "Overrun"
+                          ? "var(--mantine-color-red-filled)"
+                          : status === "At Risk"
+                          ? "var(--mantine-color-orange-filled)"
+                          : "var(--mantine-color-teal-filled)"
+                      }
+                    >
+                      ₦
+                    </Text>
+                    <Text
+                      fw={600}
+                      c={
+                        status === "Overrun"
+                          ? "var(--mantine-color-red-filled)"
+                          : status === "At Risk"
+                          ? "var(--mantine-color-orange-filled)"
+                          : "var(--mantine-color-teal-filled)"
+                      }
+                    >
+                      <SlotCounter
+                        value={Number(remaining).toLocaleString("en-US")}
+                      />
+                    </Text>
+                  </Group>
+                </Box>
+                <Stack align="start" gap={2}>
+                  <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                    Status
+                  </Text>
+                  <AnimatePresence mode="wait">
+                    <TextMotion
+                      key={status}
+                      initial={{ y: 5, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -5, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      fz={"xs"}
+                      fw={"bold"}
+                      tt={"uppercase"}
+                      c={
+                        status === "Overrun"
+                          ? "var(--mantine-color-red-filled)"
+                          : status === "At Risk"
+                          ? "var(--mantine-color-orange-filled)"
+                          : "var(--mantine-color-teal-filled)"
+                      }
+                    >
+                      {status}
+                    </TextMotion>
+                  </AnimatePresence>
+                </Stack>
+              </Group>
+
+              {/* Line Chart */}
+              <Space h={20} />
+              <LineChart
+                h={120}
+                data={chartData}
+                dataKey="date"
+                withPointLabels
+                series={[
+                  {
+                    name: "spent",
+                    color:
+                      status === "Overrun"
+                        ? "red"
+                        : status === "At Risk"
+                        ? "orange"
+                        : "teal",
+                    strokeDasharray: "5 5",
+                  },
+                ]}
+                curveType="natural"
+                withYAxis={false}
+                withXAxis={false}
+                withDots={false}
+                gridAxis="y"
+                referenceLines={[
+                  {
+                    y: allocated,
+                    label:
+                      status === "Overrun"
+                        ? "Budget Overrun"
+                        : "Budget Allocated",
+                    color: status === "Overrun" ? "red.6" : "teal",
+                  },
+                  { x: "Mar 25", label: "Report out" },
+                ]}
+                withTooltip={false}
+              />
+            </Box>
           </Box>
+        </Box>
+      </Box>
+      <Box ref={alertRef} className={styles.budget_alert_outer}>
+        <Box className={styles.budget_alert_inner}>
+          <Stack gap={"xs"}>
+            <Group gap={4}>
+              <IconAlertTriangleFilled
+                color="var(--mantine-color-red-7)"
+                style={{ height: rem("14px"), width: rem("14px") }}
+              />
+              <Title fw={400} fz={"h6"} c={"red.7"}>
+               Budget overrun fix this issue by taking action.
+              </Title>
+            </Group>
+            {/* <Text size="xs">You've exceeded your budget.</Text> */}
+            <Group gap={4}>
+              {budgetAlertActions.map((i) => {
+                return (
+                  <Button
+                    key={i}
+                    variant="light"
+                    color="gray"
+                    radius={"sm"}
+                    size="compact-xs"
+                    c={'dark.6'}
+                  >
+                    {i}
+                  </Button>
+                );
+              })}
+            </Group>
+          </Stack>
         </Box>
       </Box>
     </Box>
@@ -344,7 +435,7 @@ const BudgetingTrackingDisplay = () => {
 const BudgetConfigurationDisplay = () => {
   const [selected, setSelected] = useState("Weekly");
 
-  const cycles = ["Weekly", "Monthly", "Yearly"];
+  const cycles = ["Weekly", "Monthly", "Quarterly", "Yearly"];
 
   return (
     <Box pos={"relative"} h={"100%"}>
@@ -373,6 +464,12 @@ const BudgetConfigurationDisplay = () => {
                 </Box>
                 <Box>
                   <Text size="sm">Zero Based Budgeting</Text>
+                  <Text size="xs">
+                    Enable this to deduct allocated amounts from your income
+                  </Text>
+                </Box>
+                <Box>
+                  <Text size="sm">Set Spend Cap</Text>
                   <Text size="xs">
                     Enable this to deduct allocated amounts from your income
                   </Text>

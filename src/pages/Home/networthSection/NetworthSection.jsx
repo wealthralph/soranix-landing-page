@@ -38,13 +38,13 @@ const NetWorthSection = () => {
       color: "violet",
       striped: false,
     },
-    {
-      id: 4,
-      value: 9000,
-      label: "Investment",
-      color: "pink",
-      striped: false,
-    },
+    // {
+    //   id: 4,
+    //   value: 9000,
+    //   label: "Investment",
+    //   color: "pink",
+    //   striped: false,
+    // },
   ]);
 
 
@@ -131,9 +131,9 @@ const NetWorthSection = () => {
             </Box>
           </Stack>
         </Box>
-        <Container my={40} w={"100%"} p={0} size={"md"}>
-          <div className={styles.networth_box_blur}>
-            <div className={styles.networth_content}>
+        <Container my={40} w={"100%"} p={0} size={"md"} h={'350px'} bg={'cya'} pos={'relative'}>
+          <Box className={styles.networth_box_blur}>
+            <Box className={styles.networth_content}>
               <Group gap={"xs"} justify="end">
                 <ActionIcon variant="transparent" color="dark" size={"sm"}>
                   <IconPlus />
@@ -202,8 +202,9 @@ const NetWorthSection = () => {
                 </Progress.Root>
                 <Group gap={'sm'}>{swatches}</Group>
               </Stack>
-            </div>
-          </div>
+            </Box>
+          </Box>
+          <Box className={styles.networth_bg_gradient}></Box>
         </Container>
       </Stack>
     </Container>

@@ -8,7 +8,6 @@
   mask-image: linear-gradient(180deg, #000 50%, transparent 85%);
 }
 
-
 .budget_display_wrapper {
   --mask-visible: #000;
   --mask-invisible: transparent;
@@ -125,18 +124,41 @@
 .budget_config_display_dropdown {
   width: 150px;
   height: fit-content;
- -webkit-backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   border-radius: var(--mantine-radius-md);
   border: thin solid var(--mantine-color-white);
-    background-color: rgba(110, 110, 110, 0.041);
+  background-color: rgba(110, 110, 110, 0.041);
   box-shadow: var(--mantine-shadow-xs);
   padding: var(--mantine-spacing-xs);
   position: absolute;
-  top: 47%;
+  top: 43%;
   left: 130px;
   display: flex;
   flex-direction: column;
-  
 }
 
+.budget_alert_outer {
+  border-radius: var(--mantine-radius-md);
+  border: thin solid rgb(247, 247, 247);
+  backdrop-filter: blur(6px);
+  background-color: rgba(242, 242, 242, 0.062);
+  padding: 4px;
+  width: 100%;
+  bottom: 10%;
+  position: absolute;
+}
+
+.budget_alert_inner {
+  width: 100%;
+  box-shadow: var(--mantine-shadow-xs);
+  border-radius: inherit;
+  padding: var(--mantine-spacing-xs);
+  background: linear-gradient(
+    to right,
+    hsla(0, 0%, 100%, 0.849),
+    hsla(0, 0%, 100%, 0.795),
+    hsla(0, 0%, 97%, 0.322) 55%
+    );
+    background-color: white;
+}

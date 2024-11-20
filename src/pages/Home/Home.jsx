@@ -79,7 +79,7 @@ const Home = () => {
           },
         ]}
       />
-      <VectorSearch />
+      {/* <VectorSearch /> */}
       <NetWorthSection />
       <AnalyticsSection />
       <IntroSection
