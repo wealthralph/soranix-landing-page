@@ -1,4 +1,5 @@
 import {
+  ActionIconGroup,
   Badge,
   Box,
   Button,
@@ -10,8 +11,10 @@ import {
   Group,
   Image,
   NumberFormatter,
+  // NumberFormatter,
   NumberInput,
   Paper,
+  rem,
   SimpleGrid,
   Space,
   Stack,
@@ -22,6 +25,7 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import styles from "./BudgetSection.module.css";
 import {
+  IconAlertTriangleFilled,
   IconCircle,
   IconCircle0,
   IconCircle3,
@@ -30,11 +34,12 @@ import {
   IconWorld,
 } from "@tabler/icons-react";
 import { budgetui } from "../../../assets/images";
-import { motion } from "framer-motion";
-import { useState } from "react";
-
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import SlotCounter from "react-slot-counter";
 
 const PaperMotion = motion.create(Paper, { forwardMotionProps: true });
+const TextMotion = motion.create(Text, { forwardMotionProps: true });
 
 const BudgetSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -109,11 +114,11 @@ const BudgetSection = () => {
             <Stack py={"xl"} h={450}>
               <Box maw={450}>
                 <Title order={3} fw={"bold"}>
-                  Fully Configurable to Fit Your Needs
+                  Tailor your budget to your finances
                 </Title>
                 <Text>
-                  Get comprehensive analytics about your portfolio including
-                  risk analysis, portfolio distribution, and growth projections.
+                  Configure every detail of your budget. Adjust cycles,
+                  allocation styles, and more to make budgeting work for you.
                 </Text>
               </Box>
               <BudgetConfigurationDisplay />
@@ -129,117 +134,207 @@ const BudgetSection = () => {
 export default BudgetSection;
 
 const BudgetingTrackingDisplay = () => {
+  const allocated = 50000;
+  const [spent, setSpent] = useState(0);
+  const [remaining, setRemaining] = useState(allocated);
+  const [spentHistory, setSpentHistory] = useState([]);
+  const [status, setStatus] = useState("On Track");
+
+  useEffect(() => {
+    if (status === "Overrun") {
+      const resetTimeout = setTimeout(() => {
+        setSpent(0);
+        setSpentHistory([]);
+        setRemaining(allocated);
+        setStatus("On Track");
+      }, 5000);
+
+      return () => clearTimeout(resetTimeout);
+    }
+  }, [status, allocated]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (remaining > 0) {
+        const maxSpend = Math.min(remaining, 4000);
+        const randomSpent =
+          Math.floor(Math.random() * (maxSpend - 500 + 1)) + 500;
+
+        setSpentHistory((prevHistory) => {
+          const newHistory = [...prevHistory, randomSpent];
+          const newSpent = newHistory.reduce((acc, curr) => acc + curr, 0);
+
+          setSpent(newSpent);
+          setRemaining(newSpent > allocated ? 0 : allocated - newSpent);
+
+          // Update status
+          if (newSpent > allocated) {
+            setStatus("Overrun");
+          } else if (newSpent < allocated * 0.4) {
+            setStatus("On Track");
+          } else {
+            setStatus("At Risk");
+          }
+
+          return newHistory;
+        });
+      }
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [remaining, allocated]);
+
   return (
-    <Box className={styles.budget_tracking_outer}>
-      <Box className={styles.budget_tracking_inner}>
-        <Flex mb={60} gap={"lg"} align={"center"}>
-          <Stack gap={3} align="start">
-            <Group gap={4}>
-              <Text fw={"normal"} size="sm" c={"dimmed"}>
-                Allocated{" "}
-              </Text>
-              <IconCircle
-                size={16}
-                strokeWidth={2}
-                color="var(--mantine-color-teal-filled)"
-              />
-            </Group>
-            <Title c={"dark.4"} order={4} fw={500}>
-              <NumberFormatter prefix="₦" value={300000} thousandSeparator />
-            </Title>
-          </Stack>
-          <Stack gap={3}>
-            <Group gap={4}>
-              <Text fw={"normal"} size="sm" c={"dimmed"}>
-                Spent{" "}
-              </Text>
-            </Group>
-            <Title c={"red"} order={4} fw={500}>
-              <NumberFormatter prefix="₦" value={300000} thousandSeparator />
-            </Title>{" "}
-          </Stack>
-          <Stack gap={3}>
-            <Group gap={4}>
-              <Text fw={"normal"} size="sm" c={"dimmed"}>
-                Available{" "}
-              </Text>
-            </Group>
-            <Title c={"teal"} order={4} fw={500}>
-              <NumberFormatter prefix="₦" value={300000} thousandSeparator />
-            </Title>{" "}
-          </Stack>
-        </Flex>
-        <Box h={"100%"} pos={"relative"}>
-          <Box w={"100%"} top={5} style={{ zIndex: "10" }} pos={"absolute"}>
-            <Divider
-              label={
-                <Paper shadow="sm" withBorder px={5} radius={"md"} py={1}>
-                  Overrun
-                </Paper>
-              }
-              color="red"
-            />
-          </Box>
-          <Stack pos={"realtive"}>
-            <svg
-              fill="none"
-              height="104"
-              viewBox="0 0 401 104"
-              width="401"
-              xmlns="http://www.w3.org/2000/svg"
-              className=""
-            >
-              <path
-                d="M1 103L57.7031 56L119.5 46"
-                stroke="#3B82F6"
-                strokeLinecap="round"
-                strokeWidth="2"
-                style={{
-                  stroke: "#3B82F6",
-                  strokeColor: "color(display-p3 0.2314 0.5098 0.9647)",
-                  strokeOpacity: 1,
-                }}
-              ></path>
-              <path
-                d="M57.7031 56L1 103H119V46.5L57.7031 56Z"
-                fill="#3B82F6"
-                fillOpacity="0.08"
-                style={{
-                  fill: "#3B82F6",
-                  fillColor: "color(display-p3 0.2314 0.5098 0.9647)",
-                  fillOpacity: 0.08,
-                }}
-              ></path>
-            </svg>
-            <svg
-              fill="none"
-              height="104"
-              viewBox="0 0 401 104"
-              width="401"
-              xmlns="http://www.w3.org/2000/svg"
-              className={styles.chartSvg}
-            >
-              <path
-                d="M119 46L400.5 0.5"
-                stroke="#1D3E7A"
-                strokeDasharray="2 6"
-                strokeLinecap="round"
-                // strokeOpacity="0.24"
-                className={styles.chartPath}
-              ></path>
-            </svg>
-            <Box>
-              <Divider />
-              <Flex justify={"space-between"}>
-                <Text size="xs" c={"dimmed"}>
-                  Jun 1
-                </Text>
-                <Text size="xs" c={"dimmed"}>
-                  Jul 1
-                </Text>
+    <Box className={styles.budget_display_wrapper}>
+      <Box className={styles.budget_display_outer}>
+        <Box className={styles.budget_display_inner}>
+          <Box maw={400}>
+            <Stack gap={"xs"}>
+              <Flex>
+              <Group gap={2} align="baseline">
+                <Title order={4} fw={"bold"} c={"dark.4"}>
+                  Groceries
+                </Title>
+                <Badge
+                  leftSection={
+                    <IconWorld
+                      style={{ width: rem(10), height: rem(10) }}
+                      strokeWidth={1.2}
+                    />
+                  }
+                  variant="transparent"
+                  color="gray.8"
+                  c={"dark"}
+                  radius={"sm"}
+                  size="md"
+                >
+                  Global
+                </Badge>
+              </Group>
+                  <ActionIconGroup></ActionIconGroup>
               </Flex>
-            </Box>
-          </Stack>
+              <Group gap={"xs"}>
+                <Badge
+                  styles={{
+                    root: {
+                      border: "thin solid var(--mantine-color-default-border)",
+                    },
+                  }}
+                  variant="light"
+                  color="gray.8"
+                  c={"dark"}
+                  radius={"sm"}
+                  size="xs"
+                >
+                  Cycle
+                </Badge>
+                <Badge
+                  styles={{
+                    root: {
+                      border: "thin solid var(--mantine-color-default-border)",
+                    },
+                  }}
+                  variant="light"
+                  color="gray.8"
+                  c={"dark"}
+                  radius={"sm"}
+                  size="xs"
+                >
+                  Jun 10 - Jun 17
+                </Badge>
+              </Group>
+            </Stack>
+            <Space h={30} />
+            <Group gap={"md"} justify="space-between" align="start">
+              <Box>
+                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                  Allocated
+                </Text>
+
+                <Text fw={600}>
+                  <NumberFormatter
+                    value={allocated}
+                    prefix="₦"
+                    thousandSeparator
+                  />
+                </Text>
+              </Box>
+              <Box>
+                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                  Spent
+                </Text>
+                <Group align="end" gap={0}>
+                  <Text fw={600} c={"red"}>
+                    ₦
+                  </Text>
+                  <Text fw={600} c={"red.8"}>
+                    <SlotCounter
+                      value={Number(spent).toLocaleString("en-US")}
+                    />{" "}
+                  </Text>
+                </Group>
+              </Box>
+              <Box>
+                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                  Remaining
+                </Text>
+                <Group align="end" gap={0}>
+                  <Text
+                    fw={600}
+                    c={
+                      status === "Overrun"
+                        ? "var(--mantine-color-red-filled)"
+                        : status === "At Risk"
+                        ? "var(--mantine-color-orange-filled)"
+                        : "var(--mantine-color-teal-filled)"
+                    }
+                  >
+                    ₦
+                  </Text>
+                  <Text
+                    fw={600}
+                    c={
+                      status === "Overrun"
+                        ? "var(--mantine-color-red-filled)"
+                        : status === "At Risk"
+                        ? "var(--mantine-color-orange-filled)"
+                        : "var(--mantine-color-teal-filled)"
+                    }
+                  >
+                    <SlotCounter
+                      value={Number(remaining).toLocaleString("en-US")}
+                    />
+                  </Text>
+                </Group>
+              </Box>
+              <Stack align="start" gap={3}>
+                <Text fz={"xs"} tt={"uppercase"} c={"dimmed"}>
+                  Status
+                </Text>
+                <AnimatePresence mode="wait">
+                  <TextMotion
+                    key={status}
+                    initial={{ y: 5, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -5, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    fz={"xs"}
+                    fw={"bold"}
+                    tt={"uppercase"}
+                    c={
+                      status === "Overrun"
+                        ? "var(--mantine-color-red-filled)"
+                        : status === "At Risk"
+                        ? "var(--mantine-color-orange-filled)"
+                        : "var(--mantine-color-teal-filled)"
+                    }
+                  >
+                    {status}
+                  </TextMotion>
+                </AnimatePresence>
+              </Stack>
+            </Group>
+          </Box>
         </Box>
       </Box>
     </Box>
@@ -247,21 +342,18 @@ const BudgetingTrackingDisplay = () => {
 };
 
 const BudgetConfigurationDisplay = () => {
+  const [selected, setSelected] = useState("Weekly");
 
-
-  const [selected , setSelected] = useState("Weekly")
-
-  const cycles = ["Weekly", "Monthly",  "Yearly" ]
-
+  const cycles = ["Weekly", "Monthly", "Yearly"];
 
   return (
-    <Box pos={'relative'} h={'100%'}>
-      <Box className={styles.budget_config_display_wrapper}>
-        <Box className={styles.budget_config_display_outer}>
-          <Box className={styles.budget_config_display_inner}>
+    <Box pos={"relative"} h={"100%"}>
+      <Box className={styles.budget_display_wrapper}>
+        <Box className={styles.budget_display_outer}>
+          <Box className={styles.budget_display_inner}>
             <Box>
               <Title order={4} fw={"bold"} c={"dark.4"}>
-                Budget
+                Budget Configuration
               </Title>
               <Space h={20} />
               <Stack>
@@ -275,7 +367,8 @@ const BudgetConfigurationDisplay = () => {
                 <Box>
                   <Text size="sm">Set Default Cycle</Text>
                   <Text size="xs">
-                    Enable this to deduct allocated amounts from your income
+                    Choose how often your budget resets—weekly, monthly, or
+                    custom.
                   </Text>
                 </Box>
                 <Box>
@@ -290,36 +383,33 @@ const BudgetConfigurationDisplay = () => {
         </Box>
       </Box>
       <Box className={styles.budget_config_display_dropdown}>
-            {
-              cycles.map(i => {
-                return (
-                  <Box
-                    key={i}
-                    px={"xs"}
-                    py={3}
-                    pos={"relative"}
-                    onMouseOver={() => setSelected(i)}
-                    w={'100%'}
-                    display={'flex'}
-                    
-                  >
-                    <Text style={{zIndex: '2'}}>{i}</Text>
-                    {i === selected && (
-                      <PaperMotion
-                        style={{zIndex: '0'}}
-                        layoutId="config"
-                        w={"100%"}
-                        pos={"absolute"}
-                        withBorder
-                        radius={"sm"}
-                        inset={0}
-                        shadow="xs"
-                      ></PaperMotion>
-                    )}
-                  </Box>
-                );
-              })
-            }
+        {cycles.map((i) => {
+          return (
+            <Box
+              key={i}
+              px={"xs"}
+              py={3}
+              pos={"relative"}
+              onMouseOver={() => setSelected(i)}
+              w={"100%"}
+              display={"flex"}
+            >
+              <Text style={{ zIndex: "2" }}>{i}</Text>
+              {i === selected && (
+                <PaperMotion
+                  style={{ zIndex: "0" }}
+                  layoutId="config"
+                  w={"100%"}
+                  pos={"absolute"}
+                  withBorder
+                  radius={"md"}
+                  inset={0}
+                  shadow="xs"
+                ></PaperMotion>
+              )}
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );
