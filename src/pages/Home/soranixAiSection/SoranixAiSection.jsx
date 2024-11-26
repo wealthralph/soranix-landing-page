@@ -1,8 +1,10 @@
 import {
+  Accordion,
   Box,
   Container,
   Divider,
   em,
+  Grid,
   Paper,
   SimpleGrid,
   Space,
@@ -74,24 +76,6 @@ const SoranixAiSection = () => {
 export default SoranixAiSection;
 
 const ChatWithSoranix = () => {
-  const chatFeatures = [
-    {
-      id: 1,
-      title: "Ai powered summaries",
-      desc: "Get a quick overview of your finances with Soranix AI, a smart assistant that learns and adapts to your unique financial journey.",
-    },
-    {
-      id: 2,
-      title: "Ai tools",
-      desc: "Get a quick overview of your finances with Soranix AI, a smart assistant that learns and adapts to your unique financial journey.",
-    },
-    {
-      id: 3,
-      title: "Ai tools tools",
-      desc: "Get a quick overview of your finances with Soranix AI, a smart assistant that learns and adapts to your unique financial journey.",
-    },
-  ];
-
   return (
     <Box>
       <FeatureIntroGrid
@@ -100,25 +84,39 @@ const ChatWithSoranix = () => {
             <Text inherit span c={"dark"}>
               Start a conversation about your finances.
             </Text>{" "}
-            From tracking spending to planning investments, Soranix AI is here
-            to guide you.
+            From tracking spending to planning investments.
           </Text>
         }
       />
       <SimpleGrid
         cols={{ base: 1, xs: 1, sm: 2, md: 2 }}
         className={styles.ai_grid}
+        m={0}
+        spacing={0}
       >
         <Box className={styles.ai_vector_search_display}>
           <Box className={styles.ai_chat_text_box}>
-            <Title order={3} fw={"bold"}>Vector Search</Title>
+            <Title order={3} fw={"bold"}>
+              Vector Search
+            </Title>
             <Text>
-            
-              Use natural language to find answers and search through your financial data faster than ever before.
+              Use natural language to find answers and search through your
+              financial data faster than ever before.
             </Text>
           </Box>
         </Box>
-        <Box className={styles.ai_chat_display}></Box>
+        <Box className={styles.ai_chat_display}>
+          <Box className={styles.ai_chat_text_box}>
+            <Title order={3} fw={"bold"}>
+              Chat with Soranix AI
+            </Title>
+            <Text>
+              Soranix AI leverages your financial data, web knowledge and
+              advanced AI to deliver smarter, tailored answers to all your money
+              questions.
+            </Text>
+          </Box>
+        </Box>
       </SimpleGrid>
       <Divider />
     </Box>
@@ -126,19 +124,79 @@ const ChatWithSoranix = () => {
 };
 
 const RealTimeInsights = () => {
+
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+
+
+  const accordionData = [
+    {
+      id: 1,
+      title: "Real-time arts",
+      content:
+        "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+    },
+    {
+      id: 2,
+      title: "Real-time aerts",
+      content:
+        "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+    },
+    {
+      id: 3,
+      title: "Real-time alers",
+      content:
+        "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+    },
+  
+  ]
+
+
   return (
     <Box>
       <FeatureIntroGrid
         title={
           <Text fz={"h2"} lh={"h1"} c={"dimmed"} fw={600} maw={500}>
             <Text inherit span c={"dark"}>
-              Stay ahead with real-time AI actionable insights
+              Keep a pulse on your money with real-time AI actionable insights
             </Text>{" "}
-            Get alerts on spending, budgets, and investments, plus actions to
-            keep you on track
+            Get alerts, summaries, recommendations and more.
           </Text>
         }
       />
+      <Grid  className={styles.ai_grid} gutter={0}>
+        <Grid.Col span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
+          <Box className={styles.ai_accordion_container}>
+            <Box maw={500} w={"100%"}>
+              <Accordion>
+                {accordionData.map((item) => (
+                  <Accordion.Item key={item.id} value={item.title}>
+                    <Accordion.Control>{item.title}</Accordion.Control>
+                    <Accordion.Panel>{item.content}</Accordion.Panel>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </Box>
+          </Box>
+        </Grid.Col>
+        <Grid.Col
+          styles={{
+            col: {
+              borderLeft: !isMobile
+                ? `thin solid var(--mantine-color-default-border)`
+                : "none",
+              borderTop: !isMobile
+                ? "none"
+                : `thin solid var(--mantine-color-default-border)`,
+           
+            },
+          }}
+          span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          
+        >
+          <Box w={"100%"} h={'100%'}  className={styles.ai_chat_features_display}></Box>
+        </Grid.Col>
+      </Grid>
+      <Divider />
     </Box>
   );
 };
@@ -146,9 +204,17 @@ const RealTimeInsights = () => {
 const AiPoweredTools = () => {
   return (
     <Box>
-      <Title order={2} fw={500}>
-        Let AI do your financial heavy lifting using tools
-      </Title>
+      <FeatureIntroGrid
+        title={
+          <Text fz={"h2"} lh={"h1"} c={"dimmed"} fw={600} maw={500}>
+            <Text inherit span c={"dark"}>
+              Let AI do your financial heavy lifting using tools
+            </Text>{" "}
+            Get alerts on spending, budgets, and investments, plus actions to
+            keep you on track
+          </Text>
+        }
+      />
     </Box>
   );
 };
@@ -163,15 +229,13 @@ const AiAgents = () => {
   );
 };
 
-
-const FeatureIntroGrid = ({title}) => {
-
+const FeatureIntroGrid = ({ title }) => {
   return (
     <Box className={styles.ai_grid}>
-      <SimpleGrid cols={{ base: 1, xs: 1, sm: 2, md: 2 }} >
+      <SimpleGrid spacing={0} cols={{ base: 1, xs: 1, sm: 2, md: 2 }}>
         <Box className={styles.ai_text_cont}>{title}</Box>
       </SimpleGrid>
       <Divider />
     </Box>
   );
-}
+};
