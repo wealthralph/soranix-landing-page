@@ -43,8 +43,7 @@ const BudgetSection = () => {
               </Text>
               <Title
                 tt={"capitalize"}
-                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
-              >
+order={1}              >
                 Budgeting Built for Real-Life Needs{" "}
               </Title>
             </Box>
@@ -212,7 +211,7 @@ const BudgetingTrackingDisplay = () => {
       <Box className={styles.budget_display_wrapper}>
         <Box className={styles.budget_display_outer}>
           <Box className={styles.budget_display_inner}>
-            <Box maw={450}>
+            <Box maw={{base: "100%", sm: 450}}>
               {/* Header */}
               <Stack gap={"xs"}>
                 <Group gap={2} align="baseline">

@@ -38,15 +38,14 @@ const NetWorthSection = () => {
       color: "violet",
       striped: false,
     },
-    // {
-    //   id: 4,
-    //   value: 9000,
-    //   label: "Investment",
-    //   color: "pink",
-    //   striped: false,
-    // },
+    {
+      id: 4,
+      value: 9000,
+      label: "Investment",
+      color: "pink",
+      striped: false,
+    },
   ]);
-
 
   const [graphData, setGraphData] = useState([]);
 
@@ -115,10 +114,7 @@ const NetWorthSection = () => {
               <Text size="xs" ff={"monospace"}>
                 Networth
               </Text>
-              <Title
-                tt={"capitalize"}
-                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
-              >
+              <Title tt={"capitalize"} order={1}>
                 Your networth <br /> visualized in real time
               </Title>
             </Box>
@@ -131,7 +127,15 @@ const NetWorthSection = () => {
             </Box>
           </Stack>
         </Box>
-        <Container my={40} w={"100%"} p={0} size={"md"} h={'350px'} bg={'cya'} pos={'relative'}>
+        <Container
+          my={40}
+          w={"100%"}
+          p={0}
+          size={"md"}
+          h={"350px"}
+          bg={"cya"}
+          pos={"relative"}
+        >
           <Box className={styles.networth_box_blur}>
             <Box className={styles.networth_content}>
               <Group gap={"xs"} justify="end">
@@ -143,9 +147,12 @@ const NetWorthSection = () => {
                 </ActionIcon>
               </Group>
               {/* <Space h={30} /> */}
-              <Group gap={{base: "sm", xs: "md", md: "xl", lg: "xl", xl: "xl"}} align="end">
+              <Group
+                gap={{ base: "sm", xs: "md", md: "xl", lg: "xl", xl: "xl" }}
+                align="end"
+              >
                 <Box>
-                  <Text c={"dimmed"} tt={"capitalize"} >
+                  <Text c={"dimmed"} tt={"capitalize"}>
                     Networth
                   </Text>
                   <Group align="end" gap={4}>
@@ -200,7 +207,7 @@ const NetWorthSection = () => {
                 >
                   {segments}
                 </Progress.Root>
-                <Group gap={'sm'}>{swatches}</Group>
+                <Group gap={"sm"}>{swatches}</Group>
               </Stack>
             </Box>
           </Box>
@@ -224,7 +231,6 @@ const generateRandomValue = (
   return allowNegative ? newValue : Math.max(0, newValue);
 };
 
-// Function to calculate net worth based on the current asset and debt values
 const generateNetWorthData = (previousNetWorth, currentValues) => {
   const { savings, deposit, debts, investment } = currentValues;
 
@@ -238,7 +244,6 @@ const updateNetWorthData = (currentValues, setNetWorthData, setGraphData) => {
     deposit: generateRandomValue(currentValues.deposit, 1000, false),
     savings: generateRandomValue(currentValues.savings, 1000, false),
     investment: generateRandomValue(currentValues.investment, 1000, false),
-
     debts: generateRandomValue(currentValues.debts, 1000, true),
   };
 

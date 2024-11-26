@@ -1,0 +1,49 @@
+.analytics_grid_container {
+  display: grid;
+  grid-template-areas:
+    "cummulative-balance cummulative-balance switcher balance-distribution"
+    " expense expense .  ."
+    " expense expense category-ration  category-ration"
+    " expense expense category-ration  category-ration"
+    ;
+  gap: var(--mantine-spacing-md);
+}
+
+.grid_item {
+  isolation: isolate;
+  contain: paint;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: var(--mantine-radius-md);
+  /* border: thin solid var(--mantine-color-default-border); */
+  padding: var(--mantine-spacing-sm);
+  /* background-color: rgba(199, 199, 199, 0.121); */
+  box-shadow: var(--mantine-shadow-md);
+  width: 100%;
+}
+
+.grid_item:first-child {
+  grid-area: cummulative-balance;
+  height: -moz-fit-content;
+  height: fit-content;
+
+  
+}
+
+.grid_item:nth-child(2) {
+  grid-area: switcher;
+}
+
+.grid_item:nth-child(3) {
+  grid-area: balance-distribution;
+}
+
+.grid_item:nth-child(4) {
+  grid-area: expense;
+}
+
+.grid_item:nth-child(5) {
+  grid-area: category-ration;
+}

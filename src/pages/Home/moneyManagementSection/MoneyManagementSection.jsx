@@ -82,19 +82,7 @@ const MoneyManagementSection = () => {
       bg: "blue.9",
     },
 
-    {
-      id: 5,
-      name: (
-        <Text ta={"center"}>
-          Configurations <br /> Control
-        </Text>
-      ),
-      title: "Expense Categories that Make Sense ",
-      description:
-        "Break down your expenses into clear categories that help you understand your spending habits and make smarter financial choices.",
-      features: [],
-      bg: "blue.9",
-    },
+
   ];
 
 
@@ -132,15 +120,14 @@ const MoneyManagementSection = () => {
             Money management Tools That Put Enterprise-Level Control at Your
             Fingertips{" "}
           </Title>
-          <Stack justify="center">
+          {/* <Stack justify="center">
             <Text>
               Take full command of your finances with easy-to-use tools that
               give you the control corporations have. From budgeting to payment
               configurations, it’s all designed to help you stay ahead and
               manage your money your way.
-              {/* —it’s a complete redefinition of how you interact with your money. */}
             </Text>
-          </Stack>
+          </Stack> */}
         </SimpleGrid>
         <Group>{bankingProductsMap}</Group>
       </Stack>
@@ -153,4 +140,5 @@ const MoneyManagementSection = () => {
   );
 }
 
+{/* —it’s a complete redefinition of how you interact with your money. */}
 export default MoneyManagementSection

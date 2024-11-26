@@ -12,7 +12,7 @@ const ExpenseManagementSection = () => {
               </Text>
               <Title
                 tt={"capitalize"}
-                fz={{ base: 40, xs: "h1", sm: "h1", md: 40 }}
+                order={1}
               >
                 Redefine the way you spend Money{" "}
               </Title>
@@ -28,11 +28,9 @@ const ExpenseManagementSection = () => {
                 >
                   All Your Income, One View.{" "}
                 </Text>{" "} */}
-                If you feel like your money slips through your fingers faster
-                than you can earn it, you’re not alone. This tool helps you get
-                a handle on your spending, giving you a clear breakdown
-                of your expenses. No more guessing, no more stress—just smarter
-                spending habits that stick.
+                Feel like  money slips through your fingers faster
+                than you can earn it, Soranix brings clarity and control to your
+                spending habits.
               </Text>
             </Box>
           </Stack>

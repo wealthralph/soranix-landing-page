@@ -78,7 +78,7 @@ const AutomationSection = () => {
             </Text>
           </Stack>
         </SimpleGrid>
-        <Group>{bankingProductsMap}</Group>
+        {/* <Group>{bankingProductsMap}</Group> */}
       </Stack>
       <Space h={70} />
       <Stack w={"100%"}>

@@ -1,18 +1,14 @@
 import HeroSection from "./HeroSection";
 // import IntroSection from "./introSection/IntroSection";
-import VirtualCards from "./virtualCardSection/VirttualCards";
 import AutomationSection from "./AutomationSection";
-import { Container, Space, Stack } from "@mantine/core";
-import AccountSection from "./accountSection/AccountSection";
+import { Container, Space } from "@mantine/core";
 import NetWorthSection from "./networthSection/NetworthSection";
-import PaymentSection from "./paymentsSection/PaymentSection";
 import OsSection from "./osSection/OsSection";
 import IntroSection from "../../components/intro/IntroSection";
-import { ReactLenis, useLenis } from "lenis/react";
+// import { ReactLenis, useLenis } from "lenis/react";
 import BankingSection from "./bankingSection/BankingSection";
 import PortfolioSection from "./portfolioSection/PortfolioSection";
 import MoneyManagementSection from "./moneyManagementSection/MoneyManagementSection";
-import VectorSearch from "./vectorSearch/VectorSearch";
 import AnalyticsSection from "./analyticsSection/AnalyticsSection";
 import SoranixAiSection from "./soranixAiSection/SoranixAiSection";
 
@@ -62,10 +58,6 @@ const Home = () => {
         }
         features={[
           {
-            name: "Vector Search",
-            color: "var(--mantine-color-blue-6)",
-          },
-          {
             name: "Networth",
             color: "var(--mantine-color-orange-6)",
           },
@@ -74,7 +66,7 @@ const Home = () => {
             color: "var(--mantine-color-orange-6)",
           },
           {
-            name: "Reports",
+            name: "Semantic Layer ",
             color: "var(--mantine-color-orange-6)",
           },
         ]}
