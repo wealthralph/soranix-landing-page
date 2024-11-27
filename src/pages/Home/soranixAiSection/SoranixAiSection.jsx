@@ -108,7 +108,8 @@ const ChatWithSoranix = () => {
         <Box className={styles.ai_chat_display}>
           <Box className={styles.ai_chat_text_box}>
             <Title order={3} fw={"bold"}>
-              Chat with Soranix AI
+              {/* Chat with Soranix AI */}
+              Ask questions across all your data
             </Title>
             <Text>
               Soranix AI leverages your financial data, web knowledge and
