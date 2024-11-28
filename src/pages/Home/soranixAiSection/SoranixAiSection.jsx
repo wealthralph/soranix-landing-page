@@ -1,10 +1,12 @@
 import {
   Accordion,
   Box,
+  Button,
   Container,
   Divider,
   em,
   Grid,
+  Group,
   Paper,
   SimpleGrid,
   Space,
@@ -16,6 +18,8 @@ import { useMediaQuery } from "@mantine/hooks";
 import { testVideo } from "../../../assets/images";
 import styles from "./SoranixAiSection.module.css";
 import EmblaCarousel from "../../../components/emblaCarousel/EmblaCarousel";
+import { useState } from "react";
+import MatrixRainCanvas from "../../../components/matrixRain/MatrixRain";
 
 const SoranixAiSection = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
@@ -66,8 +70,7 @@ const SoranixAiSection = () => {
         </Box>
         <ChatWithSoranix />
         <RealTimeInsights />
-        <AiPoweredTools />
-        <AiAgents />
+        <AiCreate />
       </Box>
     </Container>
   );
@@ -95,9 +98,10 @@ const ChatWithSoranix = () => {
         spacing={0}
       >
         <Box className={styles.ai_vector_search_display}>
+          <SemanticSearchDisplay/>
           <Box className={styles.ai_chat_text_box}>
             <Title order={3} fw={"bold"}>
-              Vector Search
+              Semantic  Search
             </Title>
             <Text>
               Use natural language to find answers and search through your
@@ -125,9 +129,7 @@ const ChatWithSoranix = () => {
 };
 
 const RealTimeInsights = () => {
-
-    const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
-
+  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
   const accordionData = [
     {
@@ -148,9 +150,7 @@ const RealTimeInsights = () => {
       content:
         "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
     },
-  
-  ]
-
+  ];
 
   return (
     <Box>
@@ -164,7 +164,7 @@ const RealTimeInsights = () => {
           </Text>
         }
       />
-      <Grid  className={styles.ai_grid} gutter={0}>
+      <Grid className={styles.ai_grid} gutter={0}>
         <Grid.Col span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
           <Box className={styles.ai_accordion_container}>
             <Box maw={500} w={"100%"}>
@@ -188,13 +188,15 @@ const RealTimeInsights = () => {
               borderTop: !isMobile
                 ? "none"
                 : `thin solid var(--mantine-color-default-border)`,
-           
             },
           }}
           span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
-          
         >
-          <Box w={"100%"} h={'100%'}  className={styles.ai_chat_features_display}></Box>
+          <Box
+            w={"100%"}
+            h={"100%"}
+            className={styles.ai_chat_features_display}
+          ></Box>
         </Grid.Col>
       </Grid>
       <Divider />
@@ -202,30 +204,55 @@ const RealTimeInsights = () => {
   );
 };
 
-const AiPoweredTools = () => {
+const AiCreate = () => {
+
+
+  const features = [
+    {
+      id: 1,
+      title: "Create Workflows",
+    },
+    {
+      id: 2,
+      title: "Create Budgets",
+    },
+    {
+      id: 3,
+      title: "Make Transfers",
+    },
+  ];
+
+    const [select, setSelected] = useState(features[0]);
+
+
   return (
     <Box>
       <FeatureIntroGrid
         title={
           <Text fz={"h2"} lh={"h1"} c={"dimmed"} fw={600} maw={500}>
             <Text inherit span c={"dark"}>
-              Let AI do your financial heavy lifting using tools
+              Create smarter, faster, and with confidence.
             </Text>{" "}
-            Get alerts on spending, budgets, and investments, plus actions to
-            keep you on track
+            Soranix AI turns your ideas into actions.
           </Text>
         }
       />
-    </Box>
-  );
-};
-
-const AiAgents = () => {
-  return (
-    <Box w={"100%"}>
-      <Title order={2} fw={500}>
-        Build custom AI agents for your finances
-      </Title>
+      <Box h={600} className={styles.ai_grid} pos={"relative"} pt={"xl"}>
+        <Group justify="center">
+          {features.map((i) => (
+            <Button variant="light" color="gray" size="compact-xs" onClick={() => setSelected(i)} key={i.id}>{i.title}</Button>
+          ))}
+        </Group>
+        <Space h={20}/>
+        <Box pos={'relative'}  h={'100%'} px={'md'}>
+          <Paper withBorder shadow="xs" h={'100%'} radius={'lg'}>
+            {
+              select.title
+            }
+          </Paper>
+        </Box>
+      </Box>
+      <Divider />
     </Box>
   );
 };
@@ -240,3 +267,20 @@ const FeatureIntroGrid = ({ title }) => {
     </Box>
   );
 };
+
+
+
+
+
+const SemanticSearchDisplay = () => {
+
+  return (
+    <Box  h={'100%'}>
+      <Box className={styles.semantic_canvas_box}>
+
+      <MatrixRainCanvas/>
+      </Box>
+    </Box>
+  )
+
+}

@@ -8,6 +8,7 @@
 .ai_grid {
   border-right: thin solid var(--mantine-color-default-border);
   border-left: thin solid var(--mantine-color-default-border);
+  overflow: hidden;
 }
 
 .ai_chat_features_display {
@@ -87,4 +88,13 @@
   display: flex;
   align-items: center;
   
+}
+
+
+.semantic_canvas_box {
+  width: 100%;
+  height:100%;
+  --mask-bottom : linear-gradient(180deg, #000 10%, transparent 65%);
+    -webkit-mask-image:var(--mask-bottom) ;
+  mask-image: var(--mask-bottom);
 }
