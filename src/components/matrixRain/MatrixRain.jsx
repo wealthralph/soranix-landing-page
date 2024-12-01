@@ -53,17 +53,16 @@ class MatrixRain {
     this.lastTime = timeStamp;
 
     if (this.timer > this.nextFrame) {
-      // Create a transparent background effect
       this.ctx.fillStyle = "rgba(255, 255, 255, 0.05)";
       this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 
-      // Create a gradient for the text
       const gradient = this.ctx.createLinearGradient(
         0,
         0,
         this.canvasWidth,
         this.canvasHeight
       );
+        
       gradient.addColorStop(0, "red");
       gradient.addColorStop(0.5, "purple");
       gradient.addColorStop(1, "blue");
@@ -73,7 +72,7 @@ class MatrixRain {
       this.ctx.textAlign = "center";
 
       this.symbols.forEach((symbol) => symbol.draw(this.ctx));
-      this.timer = 0; // Reset timer
+      this.timer = 0; 
     } else {
       this.timer += deltaTime;
     }

@@ -5,25 +5,38 @@ import {
   Container,
   Divider,
   em,
+  Flex,
   Grid,
   Group,
+  Kbd,
   Paper,
   SimpleGrid,
   Space,
   Stack,
   Text,
+  ThemeIcon,
   Title,
 } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { testVideo } from "../../../assets/images";
 import styles from "./SoranixAiSection.module.css";
-import EmblaCarousel from "../../../components/emblaCarousel/EmblaCarousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MatrixRainCanvas from "../../../components/matrixRain/MatrixRain";
+import { IconPlus, IconSearch } from "@tabler/icons-react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { TextPlugin } from "gsap/all";
+import { AnimatePresence, motion } from "framer-motion";
+import Marquee from "react-fast-marquee";
+import { chatQuestions, query } from "./data";
+import AiChatInput from "../../../components/AiChatInput/AiChatInput";
+
+gsap.registerPlugin(TextPlugin, useGSAP);
+
+const BoxMotion = motion.create(Box, { forwardMotionProps: true });
+const TextMotion = motion.create(Text, { forwardMotionProps: true });
 
 const SoranixAiSection = () => {
-  const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
-
   return (
     <Container size={"xl"} my={50}>
       <Box>
@@ -98,10 +111,10 @@ const ChatWithSoranix = () => {
         spacing={0}
       >
         <Box className={styles.ai_vector_search_display}>
-          <SemanticSearchDisplay/>
+          <SemanticSearchDisplay />
           <Box className={styles.ai_chat_text_box}>
             <Title order={3} fw={"bold"}>
-              Semantic  Search
+              Semantic Search
             </Title>
             <Text>
               Use natural language to find answers and search through your
@@ -110,6 +123,7 @@ const ChatWithSoranix = () => {
           </Box>
         </Box>
         <Box className={styles.ai_chat_display}>
+          <SoranixAiChatDisplay />
           <Box className={styles.ai_chat_text_box}>
             <Title order={3} fw={"bold"}>
               {/* Chat with Soranix AI */}
@@ -134,7 +148,7 @@ const RealTimeInsights = () => {
   const accordionData = [
     {
       id: 1,
-      title: "Real-time arts",
+      title: "Real-Time Ai Insights ",
       content:
         "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
     },
@@ -205,8 +219,6 @@ const RealTimeInsights = () => {
 };
 
 const AiCreate = () => {
-
-
   const features = [
     {
       id: 1,
@@ -222,8 +234,7 @@ const AiCreate = () => {
     },
   ];
 
-    const [select, setSelected] = useState(features[0]);
-
+  const [select, setSelected] = useState(features[0]);
 
   return (
     <Box>
@@ -240,15 +251,21 @@ const AiCreate = () => {
       <Box h={600} className={styles.ai_grid} pos={"relative"} pt={"xl"}>
         <Group justify="center">
           {features.map((i) => (
-            <Button variant="light" color="gray" size="compact-xs" onClick={() => setSelected(i)} key={i.id}>{i.title}</Button>
+            <Button
+              variant="light"
+              color="gray"
+              size="compact-xs"
+              onClick={() => setSelected(i)}
+              key={i.id}
+            >
+              {i.title}
+            </Button>
           ))}
         </Group>
-        <Space h={20}/>
-        <Box pos={'relative'}  h={'100%'} px={'md'}>
-          <Paper withBorder shadow="xs" h={'100%'} radius={'lg'}>
-            {
-              select.title
-            }
+        <Space h={20} />
+        <Box pos={"relative"} h={"100%"} px={"md"}>
+          <Paper withBorder shadow="xs" h={"100%"} radius={"lg"}>
+            {select.title}
           </Paper>
         </Box>
       </Box>
@@ -268,19 +285,246 @@ const FeatureIntroGrid = ({ title }) => {
   );
 };
 
-
-
-
-
 const SemanticSearchDisplay = () => {
+  const quickActions = [
+    "Create New Bank Account",
+    "Create New Virtual Card",
+    "Create Transfer",
+    "Create Budget",
+    "Create Workflow",
+  ];
+
+  const [recent, setRecent] = useState([]);
+  const [queryIndex, setQueryIndex] = useState(0);
+  const [showView, setShowView] = useState("default");
+  const [displayedText, setDisplayedText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    let typingTimeout;
+    let fullText = query[queryIndex]?.title || "";
+
+    function updateTransactions() {
+      //check if all query already exists in recent
+      // const querytitleList = query.map(i => i.title)
+
+      // const testing =  querytitleList.some(item => recent.includes(item))
+      // console.log(testing, "testing")
+
+      if (recent.length >= query.length) {
+        setRecent([]);
+      }
+
+      // let's check if the query already exist in the recent array
+      const alreadyExist = recent.find((i) => i === query[queryIndex].title);
+
+      if (!alreadyExist)
+        return setRecent((prev) => [
+          query[queryIndex].title,
+          ...prev,
+          // { type: "search", command: query[queryIndex].title },
+        ]);
+    }
+
+    if (isTyping) {
+      typingTimeout = setTimeout(() => {
+        setDisplayedText((prev) => fullText.substring(0, prev.length + 1));
+      }, 70);
+    } else {
+      typingTimeout = setTimeout(() => {
+        setQueryIndex((prevIndex) => (prevIndex + 1) % query.length);
+        setIsTyping(true);
+        setDisplayedText("");
+        setShowView("default");
+      }, 4000);
+    }
+
+    if (displayedText === fullText) {
+      setShowView("search");
+      setIsTyping(false);
+      updateTransactions();
+    }
+
+    return () => clearTimeout(typingTimeout);
+  }, [isTyping, displayedText, queryIndex, query]);
+
+  const searchView = (
+    <Box>
+      {/* <Text weight="bold">{activeQuery.title}</Text> */}
+      <Stack spacing="xs">
+        {query[queryIndex]?.transactions?.map((txn) => (
+          <Box key={txn.id}>
+            <Text size="sm">
+              {txn.date}: {txn.merchant} - ${txn.amount} ({txn.category})
+            </Text>
+          </Box>
+        ))}
+      </Stack>
+    </Box>
+  );
+
+  const defaultView = (
+    <Box>
+      {/* recent search */}
+      <Stack gap={"xs"} p={"sm"}>
+        <Text c={"dimmed"} size="xs">
+          Recent
+        </Text>
+        <Stack>
+          {recent.map((i) => (
+            <Flex key={i}>
+              <Group align="center">
+                <ThemeIcon
+                  variant="light"
+                  color="gray"
+                  radius={"sm"}
+                  size={"xs"}
+                >
+                  <IconSearch size={12} />
+                  {/* {i.type === "search" ? (
+                  ) : (
+                    <IconPlus size={12} />
+                  )} */}
+                </ThemeIcon>
+                <Text size="sm">{i}</Text>
+              </Group>
+            </Flex>
+          ))}
+        </Stack>
+      </Stack>
+      <Divider color="gray.3" />
+      <Stack gap={"xs"} p={"sm"}>
+        <Text c={"dimmed"} size="xs">
+          Quick Actions
+        </Text>
+        <Stack gap={"sm"}>
+          {quickActions.map((i) => (
+            <Flex key={i}>
+              <Group align="center">
+                <ThemeIcon variant="light" color="gray" radius={"sm"} size={16}>
+                  <IconPlus size={12} />
+                </ThemeIcon>
+                <Text size="sm">{i}</Text>
+              </Group>
+            </Flex>
+          ))}
+        </Stack>
+      </Stack>
+    </Box>
+  );
 
   return (
-    <Box  h={'100%'}>
+    <Box h={"100%"} pos={"relative"} display={"flex"}>
       <Box className={styles.semantic_canvas_box}>
-
-      <MatrixRainCanvas/>
+        <MatrixRainCanvas />
+      </Box>
+      <Box style={{ zIndex: 1 }} w={"100%"} height={"100%"} px={"xs"} py={"xl"}>
+        <Box className={styles.search_box_outer}>
+          {/* <Box className={styles.search_box_inner}></Box> */}
+          {/* search */}
+          <Box className={styles.search_input}>
+            <Flex w={"100%"} align={"center"} justify={"space-between"}>
+              <Group gap={"sm"}>
+                <IconSearch size={16} color="var(--mantine-color-dimmed)" />
+                <TextMotion
+                  size={"sm"}
+                  key={queryIndex}
+                  initial={{ opacity: 0, x: -3 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 3 }}
+                  transition={{ duration: 1 }}
+                  ff={"monospace"}
+                >
+                  {displayedText}
+                </TextMotion>{" "}
+              </Group>
+              <div dir="ltr">
+                <Kbd size="xs">⌘</Kbd>
+                <Kbd size="xs">K</Kbd>
+              </div>
+            </Flex>
+          </Box>
+          <Divider color="gray.3" />
+          {/* search box body */}
+          <Box h={"100%"} w={"100%"} style={{ overflow: "hidden" }}>
+            <AnimatePresence mode="wait">
+              <BoxMotion
+                key={showView}
+                initial={{ y: -10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 10, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {showView === "default" ? defaultView : searchView}
+              </BoxMotion>
+            </AnimatePresence>
+          </Box>
+        </Box>
       </Box>
     </Box>
-  )
+  );
+};
 
-}
+const SoranixAiChatDisplay = () => {
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
+
+  const renderQuestions = chatQuestions.map((i) => (
+    <BoxMotion
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
+      key={i.id}
+      className={styles.chat_question}
+      onClick={() => setSelectedQuestion(i)}
+    >
+      <Text size="sm">{i.question}</Text>
+    </BoxMotion>
+  ));
+
+  const questionsView = (
+    <Stack className={styles.chat_question_cont}>
+      <Marquee>{renderQuestions}</Marquee>
+      <Marquee speed={65} direction="right">
+        {renderQuestions}
+      </Marquee>
+      <Marquee>{renderQuestions}</Marquee>
+      <Marquee speed={65} direction="right">
+        {renderQuestions}
+      </Marquee>
+    </Stack>
+  );
+
+  const agentView = (
+    <Box className={styles.agent_view_wrapper}>
+      <Text>{selectedQuestion && selectedQuestion.question}</Text>
+      <AiChatInput/>
+    </Box>
+  );
+
+  useEffect(() => {
+    if (!selectedQuestion?.id) return;
+
+    const timeout = setTimeout(() => {
+      setSelectedQuestion(null);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, [selectedQuestion?.id]);
+
+  return (
+    <Box h={"100%"} pos={"relative"} className={styles.chat_question_wrapper}>
+      <Stack w={"100%"}>
+        <AnimatePresence mode="wait">
+          <BoxMotion
+            key={selectedQuestion ? selectedQuestion?.id : ""}
+            initial={{ y: -10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 10, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {selectedQuestion ? agentView : questionsView}
+          </BoxMotion>
+        </AnimatePresence>
+      </Stack>
+    </Box>
+  );
+};
