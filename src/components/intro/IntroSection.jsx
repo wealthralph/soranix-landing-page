@@ -1,6 +1,5 @@
 import { useGSAP } from "@gsap/react";
 import {
-
   ColorSwatch,
   Container,
   Group,
@@ -9,9 +8,9 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { useRef } from "react";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/all";
-import { useRef } from "react";
 
 gsap.registerPlugin(TextPlugin);
 
@@ -79,7 +78,7 @@ const IntroSection = ({ part, title, desc, features = [] }) => {
               tt={"capitalize"}
               ref={titleRef}
               ta={"center"}
-              fz={{base: 25, xs: "h1", sm: "h1", md: 40 }}
+              fz={{ base: 25, xs: "h1", sm: "h1", md: 40 }}
             >
               {title}
             </Title>

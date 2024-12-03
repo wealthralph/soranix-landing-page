@@ -28,13 +28,13 @@ const theme = createTheme({
 
 const App = () => {
 
-  useEffect(() => {
-    posthog.init("phc_plHrpcMhzRVmnsI4YSLuN5kMOyIEInIx63gpDQrxz63", {
-      api_host: "https://us.i.posthog.com",
-      person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
-    });
-    console.log("sending this event ")
-  }, []);
+  // useEffect(() => {
+  //   posthog.init("phc_plHrpcMhzRVmnsI4YSLuN5kMOyIEInIx63gpDQrxz63", {
+  //     api_host: "https://us.i.posthog.com",
+  //     person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
+  //   });
+  //   console.log("sending this event ")
+  // }, []);
 
   return (
     <BrowserRouter>

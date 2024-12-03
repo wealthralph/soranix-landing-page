@@ -3,6 +3,7 @@ import {
   Box,
   ColorSwatch,
   Container,
+  em,
   Group,
   NumberFormatter,
   Progress,
@@ -14,13 +15,14 @@ import { useEffect, useState } from "react";
 import styles from "./NetworthSection.module.css";
 import { IconPlus, IconSettingsAutomation } from "@tabler/icons-react";
 import SlotCounter from "react-slot-counter";
+import { useMediaQuery } from "@mantine/hooks";
 
 const NetWorthSection = () => {
   const [netWorthData, setNetWorthData] = useState([
     {
       id: 1,
       value: 500,
-      label: "Cash",
+      label: "Deposit",
       color: "orange",
       striped: false,
     },
@@ -49,12 +51,14 @@ const NetWorthSection = () => {
 
   const [graphData, setGraphData] = useState([]);
 
-  const TARGET_NET_WORTH = 10000;
+  const TARGET_NET_WORTH = 5000000;
   const newNetWorth = graphData[graphData.length - 1]?.netWorth || 5000;
 
   const percentageDiff = (newNetWorth / TARGET_NET_WORTH) * 100;
 
   const formattedNetworth = Number(newNetWorth).toLocaleString("en-NG");
+    const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -184,11 +188,16 @@ const NetWorthSection = () => {
                     Target
                   </Text>
                   <Title fz={{ base: 25, xs: "h1", sm: "h1", md: 40 }}>
-                    <NumberFormatter
+                    {
+                    isMobile ?   <NumberFormatter
                       prefix="₦"
                       value={TARGET_NET_WORTH}
                       thousandSeparator
-                    />
+                      
+                    /> : "5M"
+                    }
+                  
+
                   </Title>
                 </Box>
               </Group>
@@ -222,7 +231,7 @@ export default NetWorthSection;
 
 const generateRandomValue = (
   currentValue,
-  range = 1000,
+  range = 10000,
   allowNegative = false
 ) => {
   const change = Math.floor(Math.random() * range * 2 - range);
@@ -241,9 +250,9 @@ const generateNetWorthData = (previousNetWorth, currentValues) => {
 
 const updateNetWorthData = (currentValues, setNetWorthData, setGraphData) => {
   const newValues = {
-    deposit: generateRandomValue(currentValues.deposit, 1000, false),
-    savings: generateRandomValue(currentValues.savings, 1000, false),
-    investment: generateRandomValue(currentValues.investment, 1000, false),
+    deposit: generateRandomValue(currentValues.deposit, 100000, false),
+    savings: generateRandomValue(currentValues.savings, 50000, false),
+    investment: generateRandomValue(currentValues.investment, 70000, false),
     debts: generateRandomValue(currentValues.debts, 1000, true),
   };
 

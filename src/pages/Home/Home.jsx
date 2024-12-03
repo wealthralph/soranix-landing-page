@@ -17,7 +17,7 @@ const Home = () => {
     <Container fluid p={0}>
       {/* <Stack gap={50} w={'100%'}> */}
       <HeroSection />
-      <OsSection />
+      {/* <OsSection /> */}
       <IntroSection
         part={1}
         title={"See the full Picture"}

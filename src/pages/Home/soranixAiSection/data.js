@@ -122,7 +122,7 @@ export const  chatQuestions = [
   },
   {
     id: 3,
-    question: "What are my income sources this month?",
+    question: "What are my biggest opportunites for reducing cost?",
     agentResponse: "Your income sources this month are: 1) Salary - $3,000, 2) Freelance Projects - $1,200, and 3) Investment Dividends - $300. Let me know if you'd like a breakdown of recurring income vs one-time earnings.",
     tools: [
       {

@@ -11,6 +11,7 @@ import {
   Kbd,
   Paper,
   SimpleGrid,
+  Skeleton,
   Space,
   Stack,
   Text,
@@ -20,7 +21,7 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import { testVideo } from "../../../assets/images";
 import styles from "./SoranixAiSection.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MatrixRainCanvas from "../../../components/matrixRain/MatrixRain";
 import { IconPlus, IconSearch } from "@tabler/icons-react";
 import { useGSAP } from "@gsap/react";
@@ -127,7 +128,7 @@ const ChatWithSoranix = () => {
           <Box className={styles.ai_chat_text_box}>
             <Title order={3} fw={"bold"}>
               {/* Chat with Soranix AI */}
-              Ask questions across all your data
+              Ask questions across your data
             </Title>
             <Text>
               Soranix AI leverages your financial data, web knowledge and
@@ -315,7 +316,6 @@ const SemanticSearchDisplay = () => {
         setRecent([]);
       }
 
-      // let's check if the query already exist in the recent array
       const alreadyExist = recent.find((i) => i === query[queryIndex].title);
 
       if (!alreadyExist)
@@ -467,10 +467,16 @@ const SemanticSearchDisplay = () => {
 
 const SoranixAiChatDisplay = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const promptRef = useRef(null);
+  const humanTextRef = useRef(null)
+  const aiTextRef = useRef(null)
+  const loadingRef = useRef(null)
+  const [isRefReady, setIsRefReady] = useState(false);
+  const [showLoading, setShowLoading] = useState(true)
 
   const renderQuestions = chatQuestions.map((i) => (
     <BoxMotion
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.99 }}
       key={i.id}
       className={styles.chat_question}
@@ -480,14 +486,15 @@ const SoranixAiChatDisplay = () => {
     </BoxMotion>
   ));
 
+
   const questionsView = (
     <Stack className={styles.chat_question_cont}>
       <Marquee>{renderQuestions}</Marquee>
-      <Marquee speed={65} direction="right">
+      <Marquee speed={25} direction="right">
         {renderQuestions}
       </Marquee>
       <Marquee>{renderQuestions}</Marquee>
-      <Marquee speed={65} direction="right">
+      <Marquee speed={25} direction="right">
         {renderQuestions}
       </Marquee>
     </Stack>
@@ -495,20 +502,122 @@ const SoranixAiChatDisplay = () => {
 
   const agentView = (
     <Box className={styles.agent_view_wrapper}>
-      <Text>{selectedQuestion && selectedQuestion.question}</Text>
-      <AiChatInput/>
+      {/* Message display */}
+      <Box className={styles.agent_view_message_display}>
+        {/* human message */}
+        {selectedQuestion && (
+          <Text p={'xs'}  size="sm" component="span" ref={humanTextRef} className={styles.text_bubble}>
+            {selectedQuestion.question}
+          </Text>
+        )}
+
+        {/* loading */}
+          <Box maw={400} w={"100%"} ref={loadingRef}>
+            <Skeleton height={8} radius="xl" />
+            <Skeleton height={8} mt={6} radius="xl" />
+          </Box>
+
+        {/* Ai message */}
+        {selectedQuestion && (
+          <Text p={'xs'} size="sm" component="span" ref={aiTextRef} className={styles.text_bubble}></Text>
+        )}
+      </Box>
+      <Box className={styles.agent_view_chat}>
+        <AiChatInput
+          prompt={selectedQuestion ? selectedQuestion.question : " "}
+          promptRef={promptRef}
+          onMount={() => setIsRefReady(true)} // Notify readiness
+        />
+      </Box>
     </Box>
   );
 
   useEffect(() => {
-    if (!selectedQuestion?.id) return;
+    setIsRefReady(false);
+  }, [selectedQuestion]);
 
-    const timeout = setTimeout(() => {
-      setSelectedQuestion(null);
-    }, 3000);
+useGSAP(() => {
+  if (!isRefReady || !selectedQuestion?.question) return; // Ensure readiness and a selected question
 
-    return () => clearTimeout(timeout);
-  }, [selectedQuestion?.id]);
+  // Initial setup: hide all elements
+  gsap.set([humanTextRef.current, aiTextRef.current, loadingRef.current], {
+    visibility: "hidden",
+    display: "none",
+    opacity: 0,
+    y: 20,
+  });
+
+  // GSAP timeline
+  const tl = gsap.timeline({ onComplete: () => setSelectedQuestion(null) });
+
+  // Prompt text animation
+  tl.to(promptRef.current, {
+    delay: 0.4,
+    duration: 3,
+    text: {
+      value: selectedQuestion.question,
+      delimiter: "",
+    },
+  });
+
+  // Hide the prompt after it's displayed
+  tl.to(promptRef.current, {
+    delay: 0.5,
+    visibility: "hidden",
+    display: "none",
+  });
+
+  // Human text animation
+  tl.to(humanTextRef.current, {
+    opacity: 1,
+    visibility: "visible",
+    display: "block",
+    y: 0,
+    ease: "power1.inOut",
+  });
+
+  // Show loading animation
+  tl.to(loadingRef.current, {
+    opacity: 1,
+    visibility: "visible",
+    display: "block",
+    y: 0,
+    ease: "power1.inOut",
+    delay: 0.5,
+  });
+
+  // Animate out and hide the loading animation
+  tl.to(loadingRef.current, {
+    opacity: 0,
+    visibility: "hidden",
+    y: -20,
+    ease: "power1.inOut",
+    display: "none", // Ensure it's completely removed from layout
+    delay: 1, // Add delay to keep it visible for a while
+  });
+
+  // AI text animation
+  tl.to(aiTextRef.current, {
+    opacity: 1,
+    visibility: "visible",
+    y: 0,
+    ease: "power1.inOut",
+    display: "block",
+  });
+
+  tl.to(aiTextRef.current, {
+    display: "block",
+    delay: 0.5,
+    duration: 3,
+    text: {
+      value: selectedQuestion.agentResponse,
+      delimiter: "",
+    },
+    y: 0,
+  });
+  tl.add(() => {}, "+=3"); // Adds a 3-second gap
+}, [isRefReady, selectedQuestion?.question]);
+
 
   return (
     <Box h={"100%"} pos={"relative"} className={styles.chat_question_wrapper}>

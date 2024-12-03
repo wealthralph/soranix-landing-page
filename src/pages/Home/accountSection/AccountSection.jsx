@@ -820,7 +820,7 @@ const AccountCustomizationGraphics = () => {
       description: "Manage your account settings",
     },
     {
-      id: 3,
+      id: 4,
       title: "Alerts & Notifications",
       icon: <IconSettings size={18} />,
       description: "Manage your account settings",

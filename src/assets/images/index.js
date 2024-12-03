@@ -37,6 +37,7 @@ import portfolioWatchlist from "./portfolio_watchlist.png"
 import portfolioTargetvalue from "./portfolio-target-value.png"
 import budgetui from "./budget-ui.png"
 import testVideo from "./features-breakout.mp4"
+import ai from "./ai.gif"
 
 export {
     budgetui,
@@ -77,5 +78,6 @@ export {
     portfolioWatchlist,
     portfolioTargetvalue,
     euro,
-    testVideo
+    testVideo,
+    ai
 }

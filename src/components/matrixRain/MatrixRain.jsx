@@ -67,7 +67,7 @@ class MatrixRain {
       gradient.addColorStop(0.5, "purple");
       gradient.addColorStop(1, "blue");
 
-      this.ctx.fillStyle = gradient;
+      this.ctx.fillStyle = "gray";
       this.ctx.font = `${this.fontSize}px monospace`;
       this.ctx.textAlign = "center";
 

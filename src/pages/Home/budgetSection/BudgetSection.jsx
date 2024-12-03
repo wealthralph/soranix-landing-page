@@ -41,9 +41,7 @@ const BudgetSection = () => {
               <Text size="xs" ff={"monospace"}>
                 Smart Budgets
               </Text>
-              <Title
-                tt={"capitalize"}
-order={1}              >
+              <Title tt={"capitalize"} order={1}>
                 Budgeting Built for Real-Life Needs{" "}
               </Title>
             </Box>
@@ -204,14 +202,18 @@ const BudgetingTrackingDisplay = () => {
       .reduce((acc, curr) => acc + curr.amount, 0),
   }));
 
-  const budgetAlertActions = ["Adjust Budget", "View Spending Insight", "Lock Spend" ];
+  const budgetAlertActions = [
+    "Adjust Budget",
+    "View Spending Insight",
+    "Lock Spend",
+  ];
 
   return (
     <Box w={"100%"} h={"100%"} pos={"relative"}>
       <Box className={styles.budget_display_wrapper}>
         <Box className={styles.budget_display_outer}>
           <Box className={styles.budget_display_inner}>
-            <Box maw={{base: "100%", sm: 450}}>
+            <Box maw={{ base: "100%", sm: 450 }}>
               {/* Header */}
               <Stack gap={"xs"}>
                 <Group gap={2} align="baseline">
@@ -404,7 +406,7 @@ const BudgetingTrackingDisplay = () => {
                 style={{ height: rem("14px"), width: rem("14px") }}
               />
               <Title fw={400} fz={"h6"} c={"red.7"}>
-               Budget overrun fix this issue by taking action.
+                Budget overrun fix this issue by taking action.
               </Title>
             </Group>
             {/* <Text size="xs">You've exceeded your budget.</Text> */}
@@ -417,7 +419,7 @@ const BudgetingTrackingDisplay = () => {
                     color="gray"
                     radius={"sm"}
                     size="compact-xs"
-                    c={'dark.6'}
+                    c={"dark.6"}
                   >
                     {i}
                   </Button>
