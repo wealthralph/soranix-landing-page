@@ -134,7 +134,7 @@ const InsightAlertScreen = () => {
               9:36pm
             </Text>
           </Group>
-          <Text lineClamp={2} size="xs" c={"dimmed"}>
+          <Text lineClamp={2} size="xs" c={"gray.2"}>
             {snapChatNotification?.description}
           </Text>
         </Box>
@@ -234,7 +234,7 @@ const NotificationCard = ({
               9:3{index + 1}pm
             </Text>
           </Group>
-          <Text lineClamp={2} size="xs" c={"dimmed"}>
+          <Text lineClamp={2} size="xs" c={"gray.2"}>
             {item?.description}
           </Text>
         </Box>
