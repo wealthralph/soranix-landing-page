@@ -31,6 +31,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import Marquee from "react-fast-marquee";
 import { chatQuestions, query } from "./data";
 import AiChatInput from "../../../components/AiChatInput/AiChatInput";
+import IPhoneMockup from "../../../components/iphoneMockup/IphoneMockup";
+import InsightAlertScreen from "../../../components/mockupScreens/insightScreen/InsightAlertScreen";
 
 gsap.registerPlugin(TextPlugin, useGSAP);
 
@@ -83,7 +85,7 @@ const SoranixAiSection = () => {
           </video>
         </Box>
         <ChatWithSoranix />
-        <RealTimeInsights />
+        <AiPulse />
         <AiCreate />
       </Box>
     </Container>
@@ -143,29 +145,44 @@ const ChatWithSoranix = () => {
   );
 };
 
-const RealTimeInsights = () => {
+const AiPulse = () => {
   const isMobile = useMediaQuery(`(max-width: ${em(768)})`);
 
   const accordionData = [
     {
-      id: 1,
-      title: "Real-Time Ai Insights ",
+      id: "1",
+      title: "Real-Time Ai Alerts ",
       content:
         "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+      display: RealTimeAiInsights,
     },
     {
-      id: 2,
+      id: "2",
       title: "Real-time aerts",
       content:
         "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+      display: RealTimeAiInsights,
     },
     {
-      id: 3,
+      id: "3",
       title: "Real-time alers",
       content:
         "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+      display: RealTimeAiInsights,
+    },
+    {
+      id: "4",
+      title: "Real-time lers",
+      content:
+        "Get alerts on spending, budgets, and investments, plus actions to keep you on track",
+      display: RealTimeAiInsights,
     },
   ];
+
+  const [value, setValue] = useState(accordionData[0].id);
+
+  const Display = accordionData.find((item) => item.id === value)?.display;
+  const selectedId = accordionData.find((item) => item.id === value)?.id;
 
   return (
     <Box>
@@ -180,19 +197,27 @@ const RealTimeInsights = () => {
         }
       />
       <Grid className={styles.ai_grid} gutter={0}>
-        <Grid.Col span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}>
-          <Box className={styles.ai_accordion_container}>
+        <Grid.Col
+          span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          order={{ base: 2, sm: 2, md: 1 }}
+        >
+          <Stack justify="center" align="center" h={"100%"}>
             <Box maw={500} w={"100%"}>
-              <Accordion>
+              <Accordion
+                defaultValue={accordionData[0]?.id}
+                variant={isMobile ? "default" : "separated"}
+                value={value}
+                onChange={setValue}
+              >
                 {accordionData.map((item) => (
-                  <Accordion.Item key={item.id} value={item.title}>
+                  <Accordion.Item key={item.id} value={item.id}>
                     <Accordion.Control>{item.title}</Accordion.Control>
                     <Accordion.Panel>{item.content}</Accordion.Panel>
                   </Accordion.Item>
                 ))}
               </Accordion>
             </Box>
-          </Box>
+          </Stack>
         </Grid.Col>
         <Grid.Col
           styles={{
@@ -206,12 +231,21 @@ const RealTimeInsights = () => {
             },
           }}
           span={{ base: 12, xs: 12, sm: 6, md: 6, lg: 6 }}
+          order={{ base: 1, sm: 1, md: 2 }}
+          h={500}
         >
-          <Box
-            w={"100%"}
-            h={"100%"}
-            className={styles.ai_chat_features_display}
-          ></Box>
+          <AnimatePresence mode="wait">
+            <BoxMotion
+              key={selectedId ? selectedId : " " }
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -50, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              h={'100%'}
+            >
+              <Display />
+            </BoxMotion>
+          </AnimatePresence>
         </Grid.Col>
       </Grid>
       <Divider />
@@ -350,14 +384,27 @@ const SemanticSearchDisplay = () => {
 
   const searchView = (
     <Box>
-      {/* <Text weight="bold">{activeQuery.title}</Text> */}
-      <Stack spacing="xs">
-        {query[queryIndex]?.transactions?.map((txn) => (
-          <Box key={txn.id}>
-            <Text size="sm">
-              {txn.date}: {txn.merchant} - ${txn.amount} ({txn.category})
-            </Text>
-          </Box>
+      <Stack gap={0}>
+        {query[queryIndex]?.transactions?.map((txn, index) => (
+          <>
+            <BoxMotion
+              key={txn.id}
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+                delay: index * 0.1,
+              }}
+              p={"xs"}
+            >
+              <Text size="sm">
+                {txn.date}: {txn.merchant} - ${txn.amount} ({txn.category})
+              </Text>
+            </BoxMotion>
+            <Divider />
+          </>
         ))}
       </Stack>
     </Box>
@@ -468,11 +515,10 @@ const SemanticSearchDisplay = () => {
 const SoranixAiChatDisplay = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const promptRef = useRef(null);
-  const humanTextRef = useRef(null)
-  const aiTextRef = useRef(null)
-  const loadingRef = useRef(null)
+  const humanTextRef = useRef(null);
+  const aiTextRef = useRef(null);
+  const loadingRef = useRef(null);
   const [isRefReady, setIsRefReady] = useState(false);
-  const [showLoading, setShowLoading] = useState(true)
 
   const renderQuestions = chatQuestions.map((i) => (
     <BoxMotion
@@ -485,7 +531,6 @@ const SoranixAiChatDisplay = () => {
       <Text size="sm">{i.question}</Text>
     </BoxMotion>
   ));
-
 
   const questionsView = (
     <Stack className={styles.chat_question_cont}>
@@ -506,20 +551,26 @@ const SoranixAiChatDisplay = () => {
       <Box className={styles.agent_view_message_display}>
         {/* human message */}
         {selectedQuestion && (
-          <Text p={'xs'}  size="sm" component="span" ref={humanTextRef} className={styles.text_bubble}>
+          <Text
+            p={"xs"}
+            size="sm"
+            component="span"
+            ref={humanTextRef}
+            className={styles.text_bubble}
+          >
             {selectedQuestion.question}
           </Text>
         )}
 
         {/* loading */}
-          <Box maw={400} w={"100%"} ref={loadingRef}>
-            <Skeleton height={8} radius="xl" />
-            <Skeleton height={8} mt={6} radius="xl" />
-          </Box>
+        <Box maw={400} w={"100%"} ref={loadingRef}>
+          <Skeleton height={8} radius="xl" />
+          <Skeleton height={8} mt={6} radius="xl" />
+        </Box>
 
         {/* Ai message */}
         {selectedQuestion && (
-          <Text p={'xs'} size="sm" component="span" ref={aiTextRef} className={styles.text_bubble}></Text>
+          <Text p={"xs"} size="sm" component="span" ref={aiTextRef}></Text>
         )}
       </Box>
       <Box className={styles.agent_view_chat}>
@@ -536,88 +587,79 @@ const SoranixAiChatDisplay = () => {
     setIsRefReady(false);
   }, [selectedQuestion]);
 
-useGSAP(() => {
-  if (!isRefReady || !selectedQuestion?.question) return; // Ensure readiness and a selected question
+  useGSAP(() => {
+    if (!isRefReady || !selectedQuestion?.question) return; // Ensure readiness and a selected question
 
-  // Initial setup: hide all elements
-  gsap.set([humanTextRef.current, aiTextRef.current, loadingRef.current], {
-    visibility: "hidden",
-    display: "none",
-    opacity: 0,
-    y: 20,
-  });
+    gsap.set([humanTextRef.current, aiTextRef.current, loadingRef.current], {
+      visibility: "hidden",
+      display: "none",
+      opacity: 0,
+      y: 20,
+    });
 
-  // GSAP timeline
-  const tl = gsap.timeline({ onComplete: () => setSelectedQuestion(null) });
+    const tl = gsap.timeline({ onComplete: () => setSelectedQuestion(null) });
 
-  // Prompt text animation
-  tl.to(promptRef.current, {
-    delay: 0.4,
-    duration: 3,
-    text: {
-      value: selectedQuestion.question,
-      delimiter: "",
-    },
-  });
+    tl.to(promptRef.current, {
+      delay: 0.4,
+      duration: 3,
+      text: {
+        value: selectedQuestion.question,
+        delimiter: "",
+      },
+    });
 
-  // Hide the prompt after it's displayed
-  tl.to(promptRef.current, {
-    delay: 0.5,
-    visibility: "hidden",
-    display: "none",
-  });
+    tl.to(promptRef.current, {
+      delay: 0.5,
+      visibility: "hidden",
+      display: "none",
+    });
 
-  // Human text animation
-  tl.to(humanTextRef.current, {
-    opacity: 1,
-    visibility: "visible",
-    display: "block",
-    y: 0,
-    ease: "power1.inOut",
-  });
+    tl.to(humanTextRef.current, {
+      opacity: 1,
+      visibility: "visible",
+      display: "block",
+      y: 0,
+      ease: "power1.inOut",
+    });
 
-  // Show loading animation
-  tl.to(loadingRef.current, {
-    opacity: 1,
-    visibility: "visible",
-    display: "block",
-    y: 0,
-    ease: "power1.inOut",
-    delay: 0.5,
-  });
+    tl.to(loadingRef.current, {
+      opacity: 1,
+      visibility: "visible",
+      display: "block",
+      y: 0,
+      ease: "power1.inOut",
+      delay: 0.5,
+    });
 
-  // Animate out and hide the loading animation
-  tl.to(loadingRef.current, {
-    opacity: 0,
-    visibility: "hidden",
-    y: -20,
-    ease: "power1.inOut",
-    display: "none", // Ensure it's completely removed from layout
-    delay: 1, // Add delay to keep it visible for a while
-  });
+    tl.to(loadingRef.current, {
+      opacity: 0,
+      visibility: "hidden",
+      y: -20,
+      ease: "power1.inOut",
+      display: "none",
+      delay: 1,
+    });
 
-  // AI text animation
-  tl.to(aiTextRef.current, {
-    opacity: 1,
-    visibility: "visible",
-    y: 0,
-    ease: "power1.inOut",
-    display: "block",
-  });
+    tl.to(aiTextRef.current, {
+      opacity: 1,
+      visibility: "visible",
+      y: 0,
+      ease: "power1.inOut",
+      display: "block",
+    });
 
-  tl.to(aiTextRef.current, {
-    display: "block",
-    delay: 0.5,
-    duration: 3,
-    text: {
-      value: selectedQuestion.agentResponse,
-      delimiter: "",
-    },
-    y: 0,
-  });
-  tl.add(() => {}, "+=3"); // Adds a 3-second gap
-}, [isRefReady, selectedQuestion?.question]);
-
+    tl.to(aiTextRef.current, {
+      display: "block",
+      delay: 0.5,
+      duration: 4,
+      text: {
+        value: selectedQuestion.agentResponse,
+        delimiter: "",
+      },
+      y: 0,
+    });
+    tl.add(() => {}, "+=3"); // Adds a 3-second gap
+  }, [isRefReady, selectedQuestion?.question]);
 
   return (
     <Box h={"100%"} pos={"relative"} className={styles.chat_question_wrapper}>
@@ -634,6 +676,14 @@ useGSAP(() => {
           </BoxMotion>
         </AnimatePresence>
       </Stack>
+    </Box>
+  );
+};
+
+const RealTimeAiInsights = () => {
+  return (
+    <Box h={"100%"} style={{ overflow: "hidden" }} pos={"relative"}>
+      <InsightAlertScreen/>
     </Box>
   );
 };

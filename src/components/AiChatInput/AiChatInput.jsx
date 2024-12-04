@@ -1,14 +1,13 @@
-import { Box, Flex, Group, Image, Text, ThemeIcon } from "@mantine/core";
+import { Box, Flex, Group, Text, ThemeIcon } from "@mantine/core";
 import styles from "./AiChatInput.module.css";
 import { IconAt, IconCircleArrowUp, IconPaperclip } from "@tabler/icons-react";
-import { useGSAP } from "@gsap/react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/all";
 
 gsap.registerPlugin(TextPlugin);
 
-const AiChatInput = ({ prompt, promptRef, onMount }) => {
+const AiChatInput = ({ promptRef, onMount }) => {
   useEffect(() => {
     if (onMount) onMount();
   }, []);

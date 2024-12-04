@@ -37,7 +37,10 @@ import portfolioWatchlist from "./portfolio_watchlist.png"
 import portfolioTargetvalue from "./portfolio-target-value.png"
 import budgetui from "./budget-ui.png"
 import testVideo from "./features-breakout.mp4"
-import ai from "./ai.gif"
+import iphoneBg from "./screen-here.png"
+import iphoneBg2 from "./iphone-bg-2.png"
+import snapchat from "./snapchat.png"
+
 
 export {
     budgetui,
@@ -79,5 +82,7 @@ export {
     portfolioTargetvalue,
     euro,
     testVideo,
-    ai
+    iphoneBg,
+    iphoneBg2,
+    snapchat
 }
